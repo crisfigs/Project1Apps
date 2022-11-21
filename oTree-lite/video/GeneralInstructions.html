@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Consent
+{% endblock %}
+
+{% block content %}
+
+
+<div class="card"><div class="card-body">
+
+       <p> In this research we will collect some data.
+    <p>Besides your Prolific ID, you will not be asked to provide any personally identifying information.
+    Your information and responses will only be used for the purpose of this study and the data will be
+    treated as highly confidential and analyzed on the aggregate. By participating in this study,
+    you consent to the data being used for this purpose. </p>
+
+<p>Your participation in this research is entirely voluntary and you have the right to
+    withdraw consent at any time by closing your browser. </p>
+
+<label for="prolific_id">Please enter your Prolific ID and press "Next" to start:</label>
+<input required type="text" style="max-width:600px" class="form-control" id="prolific_id" name="prolific_id" autocomplete="off">
+
+</div>
+</div> <br>
+    {% next_button %}
+
+{% endblock %}
+
+
