@@ -47,5 +47,10 @@ class DT(Page):
     form_model = 'player'
     #form_fields = ['erq_1','erq_2', 'erq_3','erq_4','erq_5','erq_6','erq_7','erq_8','erq_9','erq_10']
 
+class Payment(Page):
+    form_model = 'player'
+  #  form_fields = ['erq_1','erq_2', 'erq_3','erq_4','erq_5','erq_6','erq_7','erq_8','erq_9','erq_10']
 
-page_sequence = [ERQ, DT]
+
+page_sequence = [ERQ, DT, Payment
+                 ]
