@@ -4,9 +4,13 @@ from os import environ
 SESSION_CONFIGS = [
     dict(
         name='video',
-        app_sequence=['video','survey'],
-        num_demo_participants=100,
-        #treatment='videoA',
+        app_sequence=['video'],
+        num_demo_participants=10,
+    ),
+    dict(
+        name='survey',
+        app_sequence=['SAM'],
+        num_demo_participants=10,
     ),
 
 ]

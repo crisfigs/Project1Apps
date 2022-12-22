@@ -15,6 +15,7 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
+    treatment = models.CharField(initial='survey')
     erq_1 = models.StringField(label="When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
                                 choices=["(Strongly disagree) 1", "2", "3", "4", "5"," 6", "(Strongly Agree) 7"] ,widget=widgets.RadioSelectHorizontal)
     erq_2 = models.StringField(label="I keep my emotions to myself.",
