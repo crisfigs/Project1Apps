@@ -1,0 +1,81 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block styles %}
+<style>
+div1 {
+  padding-left:100px;
+}
+
+div2{
+  padding-left: 120px;
+}
+
+</style>
+{% endblock %}
+
+    {% block scripts %}
+<script>
+    // Add this script with the rest of the javascript for your page
+
+//This bit creates 2 variables, one will function as a timer, the other will hold the timer output. They are set to 0 and -1 here to initialise them, these will not be the final outputs.
+var pageTimeElapsed = 0;
+var pageTimerID = -1;
+
+//This function captures the timer output. When the timer starts it will increase 'pageTimeElapsed' every second and send this value to the 'timeSpent' variable that will be saved
+//When a person moves to the next page, or the page times out, the final value that the timer was on will be saved. The value resets each round/page.
+function pageTick() {
+  pageTimeElapsed++
+  document.getElementById("timeSpent").value = pageTimeElapsed;
+}
+
+//This function automatically starts the timer when the page loads. In this case I want seconds so the interval is set to 1000, but I believe if you set it to 1 then it will count milliseconds - you will need to test this
+window.onload = function() {
+  if(pageTimerID == -1){
+    pageTimerID = setInterval(pageTick, 1000);
+  }
+};
+</script>
+{% endblock %}
+
+{% block title %}
+    Task 3
+{% endblock %}
+
+
+{% block content %}
+<input type="hidden" name="timeSpent" id="timeSpent"/>
+Imagine you had to make a choice between the following to options where in A you get ...and the charity gets ... and where in B you get ....and the charity gets ... . Which choice would you make?
+
+    <div class="card">
+  <div class="card-body">
+
+<div class="mx-auto" style="width: 200px;">
+
+          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static 'img.png' %}"/>
+
+</div>
+
+
+<div class="clearfix">
+
+</div>
+
+      <p> Please make your choice here:</p>
+<br>
+
+
+<div1><button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button></div1>
+
+<div2><button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button></div2>     <p> </p>
+
+
+
+
+
+
+  </div>
+    </div>
+
+{% endblock %}

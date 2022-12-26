@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{%  block title %}Final Survey{% endblock %}
+
+
+
+{% block content %}
+Before receiving your payment please answer the following questions:
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}
+
+

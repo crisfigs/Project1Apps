@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{{block styles }}
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+{{ endblock }}
+
+{{ block title }}Scale 3{{ endblock }}
+
+{{ block content }}
+
+ <div class="card">
+     On a scale from dependent to independent how do you feel regarding the situation in the video?
+  <div class="card-body">
+          <img class = "width:500%; center" style="max-width:500px" src="{% static 'SAM_dominance.png' %}"/>
+ <br>
+
+
+
+      <p>The first picture shows a person who feels dependent and with no control,
+          the last one shows a person who feels independent and in full control.
+
+</div>
+     </div>
+
+{{ formfields }}
+
+    {{ next_button }}
+
+{{ endblock }}

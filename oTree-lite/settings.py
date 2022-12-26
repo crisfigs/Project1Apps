@@ -8,8 +8,8 @@ SESSION_CONFIGS = [
         num_demo_participants=10,
     ),
     dict(
-        name='survey',
-        app_sequence=['SAM'],
+        name='Video1',
+        app_sequence=['video','SAM','Empathy','End'], #first: instructions+video, last:choice
         num_demo_participants=10,
     ),
 
