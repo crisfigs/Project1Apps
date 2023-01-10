@@ -18,7 +18,7 @@ class Player(BasePlayer):
     treatment = models.CharField(initial='survey')
     valence = models.StringField(label="Please, make your selection below:",
                                 choices=["1", "2", "3", "4", "5"," 6", "7", "8","9"] ,widget=widgets.RadioSelectHorizontal)
-    arousal = models.StringField(label="Please, make your selection below:",
+    arousal = models.StringField(label="",
                                 choices=["1", "2", "3", "4", "5"," 6", "7","8","9"] ,widget=widgets.RadioSelectHorizontal)
     dominance = models.StringField(label="Please, make your selection below:",
                                 choices=["1", "2", "3", "4", "5"," 6", "7","8","9"] ,widget=widgets.RadioSelectHorizontal)

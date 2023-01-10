@@ -40,41 +40,28 @@ window.onload = function() {
 {% endblock %}
 
 {% block title %}
-    Task 3
+    Final Task
 {% endblock %}
 
 
 {% block content %}
-<input type="hidden" name="timeSpent" id="timeSpent"/>
-Imagine you had to make a choice between the following to options where in A you get 10 pounds and the charity gets 0 pounds and where in B you get 3 pounds and the charity gets 15 pounds. Which choice would you make?
 
     <div class="card">
-  <div class="card-body">
-
+        <div class="card-body">
+        Imagine you had to make a choice between the following to options where in A, you get &pound10 and the charity gets &pound0 and where in B, you get &pound3 and the charity gets &pound5. Which choice would you make?
+<br>
 <div class="mx-auto" style="width: 200px;">
-
-          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static 'img.png' %}"/>
-
+          <img style="max-width:200px" src="{% static 'img.png' %}"/>
 </div>
 
 
-<div class="clearfix">
-
-</div>
 <br>
-      <p> Please make your choice here:</p>
+     <div class=“parent”>  <p> Please make your choice here:</p>
 <br>
 
+ <div class=“child”><div style="position:absolute;left:50px;right: 0px;bottom: 10px"><div1><button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button></div1> </div> </div>
 
-<div1><button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button></div1>
-
-<div2><button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button></div2>     <p> </p>
-
-
-
-
-
-
+ <div class=“child”><div style="position:absolute;left:200px;right: 0px;bottom: 10px"><div2><button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button></div2> </div> </div>
   </div>
     </div>
 

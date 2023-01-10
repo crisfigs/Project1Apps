@@ -16,15 +16,19 @@ img {
 {{ block content }}
 
  <div class="card">
-     Sympathy means you can understand what the person is feeling. For example, you feel sorry for others pain or celebratory for others happiness.
-    <br>
-    With the video that you just saw in mind, please state how much you relate, in a scale from 0 to 10, with the following statement:
-  <div class="card-body">
-    I feel sympathetic. (0 = Not sympathetic at all, 10 = very sympathetic)
-{{ formfields }}
+     <div class="card-body">
 
-</div>
+         <p>Sympathy means you can understand what the person is feeling. For example, you feel sorry for others pain or celebratory for others happiness.
+</p>
+
+         <p>With the video that you just saw in mind, please state how much you relate with the following statement:</p>
+
+        <div class=“parent”> <div style="text-align:center">{{ formfields }}</div>
+            <div class=“child”><div style="position:absolute;left: 50px;bottom: 10px">I do not relate at all.</div> </div>
+            <div class=“child”><div style="position:absolute;right: 60px;bottom: 10px">I completely relate.</div> </div>
+        </div>
      </div>
+ </div>
 
     {{ next_button }}
 

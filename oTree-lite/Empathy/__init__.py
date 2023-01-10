@@ -16,15 +16,14 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     treatment = models.CharField(initial='survey')
-    empathyq = models.StringField(
-        label="Make your selection:",
-        choices=["1", "2", "3", "4", "5"," 6", "7", "8","9"] ,widget=widgets.RadioSelectHorizontal)
+    empathyq = models.StringField(label="I feel empathic.",
+        choices=["0","1", "2", "3", "4", "5"," 6", "7", "8","9","10"] ,widget=widgets.RadioSelectHorizontal)
     sympathyq = models.StringField(
-        label="Make your selection:",
-        choices=["1", "2", "3", "4", "5"," 6", "7","8","9"] ,widget=widgets.RadioSelectHorizontal)
+        label="I feel sympathetic.",
+        choices=["0","1", "2", "3", "4", "5"," 6", "7", "8","9","10"] ,widget=widgets.RadioSelectHorizontal)
     compassionq = models.StringField(
-        label="Make your selection:",
-        choices=["1", "2", "3", "4", "5", " 6", "7", "8", "9"], widget=widgets.RadioSelectHorizontal)
+        label="I feel compassionate.",
+        choices=["0","1", "2", "3", "4", "5"," 6", "7", "8","9","10"], widget=widgets.RadioSelectHorizontal)
 
     #compassion (sympathy)
     #pity  (sympathy)

@@ -14,17 +14,21 @@ img {
 {{ block title }}Question 3{{ endblock }}
 
 {{ block content }}
-
  <div class="card">
-     Compassion is the willingness to relieve the suffering of another.
-     <br>
-    With the video that you just saw in mind, please state how much you relate, in a scale from 0 to 10, with the following statement:
-  <div class="card-body">
-    I feel compassionate. (0 = Not compassionate at all, 10 = Very compassionate)
-{{ formfields }}
+     <div class="card-body">
 
-</div>
+         <p>Compassion is the willingness to relieve the suffering of another.</p>
+
+         <p>With the video that you just saw in mind, please state how much you relate with the following statement:</p>
+
+        <div class=“parent”> <div style="text-align:center">{{ formfields }}</div>
+            <div class=“child”><div style="position:absolute;left: 50px;bottom: 10px">I do not relate at all.</div> </div>
+            <div class=“child”><div style="position:absolute;right: 60px;bottom: 10px">I completely relate.</div> </div>
+        </div>
      </div>
+ </div>
+
+
 
     {{ next_button }}
 

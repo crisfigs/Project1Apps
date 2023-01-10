@@ -20,7 +20,7 @@ class Subsession(BaseSubsession):
 class Player(BasePlayer):
     prolific_id = models.StringField()
     treatment = models.CharField(initial='video1')
-    infoq = models.IntegerField(label="Did the video provide any new information than the information proided in the description?", choices = [[1,"Yes"],[0,"No"]])
+    infoq = models.IntegerField(label="Did the video provide any new information other than the one previously provided in the video description?", choices = [[1,"Yes"],[0,"No"]])
     controlq = models.IntegerField( label="Control question1",choices = [[1,"Option1"],[2, "Option2"], [ 3, "Option3"]], widget=widgets.RadioSelect)
     openq = models.LongStringField(label="Explain in the space below your thoughts and feelings after the video ")
 
