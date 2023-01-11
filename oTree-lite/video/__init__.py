@@ -19,10 +19,20 @@ class Subsession(BaseSubsession):
 
 class Player(BasePlayer):
     prolific_id = models.StringField()
+    task1 = models.StringField(blank=True)
     treatment = models.CharField(initial='video1')
     infoq = models.IntegerField(label="Did the video provide any new information other than the one previously provided in the video description?", choices = [[1,"Yes"],[0,"No"]])
     controlq = models.IntegerField( label="Control question1",choices = [[1,"Option1"],[2, "Option2"], [ 3, "Option3"]], widget=widgets.RadioSelect)
     openq = models.LongStringField(label="Explain in the space below your thoughts and feelings after the video ")
+    happy = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    sad = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    fear = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    disgust = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    anger = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    compassion = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    guilt = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    boredom = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+
 
 class Welcome(Page):
     form_model = 'player'
@@ -79,6 +89,10 @@ class Info_q(Page):
     form_model = 'player'
   #  form_fields = ['erq_1','erq_2', 'erq_3','erq_4','erq_5','erq_6','erq_7','erq_8','erq_9','erq_10']
 
+class Survey1(Page):
+    form_model = 'player'
+    form_fields = ["happy","sad", "fear", "disgust","anger", "compassion", "guilt", "boredom"]
+
 class Task(Page):
     form_model = 'player'
   #  form_fields = ['erq_1','erq_2', 'erq_3','erq_4','erq_5','erq_6','erq_7','erq_8','erq_9','erq_10']
@@ -87,6 +101,16 @@ class InstructionsTask1(Page):
     form_model = 'player'
   #  form_fields = ['erq_1','erq_2', 'erq_3','erq_4','erq_5','erq_6','erq_7','erq_8','erq_9','erq_10']
 
+class Survey2(Page):
+    form_model = 'player'
+    form_fields = ["happy","sad", "fear", "disgust","anger", "compassion", "guilt", "boredom"]
 
-page_sequence = [Welcome, GeneralInstructions, Desc, Video, Openq, Control]
-#page_sequence = [Welcome, GeneralInstructions, Desc, Video,Video2 Info_q,  InstructionsTask1, Task]
+class Choice(Page):
+    form_model = 'player'
+    form_fields = ["happy","sad", "fear", "disgust","anger", "compassion", "guilt", "boredom"]
+
+class Hypo_choice(Page):
+    form_model = 'player'
+    form_fields = ['task1']
+
+page_sequence = [Welcome, GeneralInstructions, Desc, Survey1, Video, Openq, Control]

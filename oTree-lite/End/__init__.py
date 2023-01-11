@@ -15,7 +15,6 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    task1 = models.StringField(blank=True)
     q_feedback = models.LongStringField(label="This is the end of the survey. "
                                             "In case you have comments, please leave them here.",
                                       blank=True)
@@ -26,9 +25,7 @@ class Player(BasePlayer):
 # PAGES
 
 
-class Hypo_choice(Page):
-    form_model = 'player'
-    form_fields = ['task1']
+
 
 class FinalSurvey(Page):
     form_model = 'player'
