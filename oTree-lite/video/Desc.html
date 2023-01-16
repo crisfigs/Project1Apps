@@ -1,9 +1,16 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
-
+{% load otree%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
 
 {% block title %}
-   Instructions
+   Video Description
 {% endblock %}
 
 {% block styles %}
@@ -14,12 +21,11 @@
 {% block content %}
     <div class="card">
   <div class="card-body">
-     <p>   In the next page we will show you a video and then ask you some questions about it.
-        </p>
-     <p>    Before doing so, we will provide a description of what you will see in the video. </p>
+     <p> Before showing you the video, we would like to briefly describe what you will see.</p>
+     <p> Please read the video description and the script carefully. </p>
 
 
- <p>  DESC</p>
+ <p>  DESC </p>
 
 
 <br>
@@ -27,12 +33,11 @@
        <em> SCRIPT </em>
     </p>
 
+Once you have read the video description and script, please, press "Next".
 
-       <p>    The video will provide no new narrative information apart from the provided script.</p>
       </div></div>
-
-
-{% next_button %}
+<br>
+<div class="center"> {{ next_button }}</div>
 
 {% endblock %}
 

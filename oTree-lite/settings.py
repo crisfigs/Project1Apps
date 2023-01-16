@@ -5,12 +5,14 @@ SESSION_CONFIGS = [
     dict(
         name='video',
         app_sequence=['video'],
-        num_demo_participants=10,
+        num_demo_participants=10
+
     ),
     dict(
         name='Video1',
-        app_sequence=['video','SAM','Empathy','End'], #first: instructions+video, last:choice
+        app_sequence=['video'], #first: instructions+video, last:choice
         num_demo_participants=10,
+        error_code="",
     ),
 
 ]

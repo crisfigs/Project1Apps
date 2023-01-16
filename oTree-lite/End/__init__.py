@@ -33,4 +33,4 @@ class FinalSurvey(Page):
 
 
 
-page_sequence = [Hypo_choice, FinalSurvey]
+page_sequence = [ FinalSurvey]

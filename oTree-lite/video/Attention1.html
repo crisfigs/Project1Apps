@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+{% block title %}Attention check{% endblock %}
+
+{% block content %}
+  <div class="card">
+  <div class="card-body">
+     <p> Attention is important for this experiment. Before continuing to the video
+         and to guarantee that you followed instructions and read the video script and description,
+         please answer the following question. An incorrect answer
+         will display an error message, and you will be sent back to Prolific. </p>
+
+       {{formfields}}
+      </div></div>
+
+<br>
+ <p>Please, press "Next" to continue to the video. Make sure you have your computer's sound activated. </p>
+<div class="center">{% next_button %}</div>
+{% endblock %}
+
+
+
+
