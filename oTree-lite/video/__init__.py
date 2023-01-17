@@ -31,15 +31,22 @@ class Player(BasePlayer):
             label=label,
             widget=widgets.RadioSelect,
         )
-    happy = make_field(label="Happy")
-    sad = make_field(label="Sad")
-    fear = make_field(label="Fear")
-    disgust = make_field(label="Disgust")
-    anger = make_field(label="Anger")
-    compassion = make_field(label="Compassion")
-    guilt = make_field(label="Guilt")
-    boredom = make_field(label="Boredom")
-
+    happy1 = make_field(label="Happy")
+    sad1 = make_field(label="Sad")
+    fear1 = make_field(label="Fear")
+    disgust1 = make_field(label="Disgust")
+    anger1 = make_field(label="Anger")
+    compassion1 = make_field(label="Compassion")
+    guilt1 = make_field(label="Guilt")
+    boredom1 = make_field(label="Boredom")
+    happy2 = make_field(label="Happy")
+    sad2 = make_field(label="Sad")
+    fear2 = make_field(label="Fear")
+    disgust2 = make_field(label="Disgust")
+    anger2 = make_field(label="Anger")
+    compassion2 = make_field(label="Compassion")
+    guilt2 = make_field(label="Guilt")
+    boredom2 = make_field(label="Boredom")
     q_number = models.IntegerField(
         choices=[1,2,3,4,5],
         label="Control question",
@@ -93,7 +100,7 @@ class FailedAttention(Page):
 
 class Survey1(Page):
     form_model = 'player'
-    form_fields = ["happy","sad", "fear", "disgust","anger", "compassion", "guilt", "boredom"]
+    form_fields = ["happy1","sad1", "fear1", "disgust1","anger1", "compassion1", "guilt1", "boredom1"]
 
 class Video(Page):
     form_model = 'player'
@@ -130,7 +137,7 @@ class Video2(Page):
 class Survey2(Page):
     form_model = 'player'
 
-    form_fields = ["happy","sad", "fear", "disgust","anger", "compassion", "guilt", "boredom"]
+    form_fields = ["happy2","sad2", "fear2", "disgust2","anger2", "compassion2", "guilt2", "boredom2"]
 
 
 class Openq(Page):
