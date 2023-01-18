@@ -1,0 +1,111 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{{block styles }}
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.center {
+  text-align: center;
+}
+#header{
+    display:block;
+    width: 100%;
+    height:50px;
+    background: #ddff00;
+}
+
+#header.fixed{
+    position:fixed;
+    top: 0;
+    z-index: 110;
+}
+
+</style>
+{{ endblock }}
+
+{% block scripts %}
+        <script>
+              //by default, the static menu is hidden
+  var showStaticMenuBar = false;
+
+  //when scrolling...
+  $(window).scroll(function () {
+
+      //if the static menu is not yet visible...
+      if (showStaticMenuBar == false) {
+          //if I scroll more than 200px, I show it
+          if ($(window).scrollTop() >= 500) {
+              //showing the static menu
+              $('#header').addClass('fixed');
+
+              showStaticMenuBar = true;
+
+          } }        //if the static menu is already visible...
+      else {
+          if ($(window).scrollTop() < 500) {
+              $('#header').removeClass('fixed');
+
+              //I define it as hidden
+              showStaticMenuBar = false;
+          }
+      }
+  });
+
+  </script>
+{% endblock %}
+
+{{ block title }} Final Survey{{ endblock }}
+
+{{ block content }}
+
+ <div class="card">
+     <div class="card-body">
+<p>Below is a list of statements. Please read each statement carefully and rate how strongly you agree or disagree with it by selecting the circle under your answer. There are no right or wrong answers, or trick questions. Please answer each question as honestly as you can.</p>
+
+<p></p>
+<br>
+         <br>
+          <table class="table table-striped">
+    {{ for field in form }}
+        <tr>
+            <th>{{ field.label }}</th>
+            {{ for choice in field }}
+                <td>{{ choice }}<td></td><td></td><td> </td><td> </td><td> </td></td>
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+<div style=" width: 35%; background: white;border: 1px solid black; position:fixed;left: 600px;top: 210px">
+    Definitely&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Slightly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Slightly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Definitely
+    <br>&nbsp;Disagree&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Disagree&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Agree&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Agree
+   </div>
+
+            <!--   <div class=“child”><div style="position:absolute;left: 580px;top: 100px">Slightly</div> </div>--
+             <div class=“child”><div style="position:absolute;left: 580px;top: 120px">Disagree</div> </div>
+
+             <div class=“child”><div style="position:absolute;left: 700px;top: 100px">Slightly</div> </div>
+             <div class=“child”><div style="position:absolute;left: 700px;top: 120px">Agree</div> </div>
+
+             <div class=“child”><div style="position:absolute;left:810px;top: 100px">Definitely</div> </div>
+             <div class=“child”><div style="position:absolute;left:810px;top: 120px">Agree</div> </div>
+-->
+
+
+
+Once you have filled in this survey, please, press "Next" to continue.
+
+     </div></div>
+<br>
+  <div class="center">{{ next_button }}</div>
+
+{{ endblock }}

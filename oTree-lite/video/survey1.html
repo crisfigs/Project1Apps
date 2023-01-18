@@ -20,11 +20,20 @@ img {
 
  <div class="card">
      <div class="card-body">
-<p>After reading the video description and script, how do you expect that the video will make you feel? </p>
+<p>After reading the video description, how do you expect that the video will make you feel? </p>
 
-<p>Please evaluate below how intense you expect to experience the following emotions.</p>
-<br>
+
+
+         <p>Please evaluate below how intensely you expect to experience the following emotions while watching the video.</p>
+
+                   <div class="card">
+     <div class="card-body">
+          <p> Recall the video description: <em> The video that you will see will depicts the struggles of little girl in a city where war explodes.</em></p>
+
+         </div> </div>
          <br>
+         <br>
+
          <div class=“parent”> <table class="table table-striped">
     {{ for field in form }}
         <tr>
@@ -35,12 +44,13 @@ img {
         </tr>
     {{ endfor }}
 </table>
-             <div class=“child”><div style="position:absolute;left: 350px;top: 120px">No emotion.</div> </div>
-             <div class=“child”><div style="position:absolute;left: 490px;top: 120px">Mild</div> </div>
-             <div class=“child”><div style="position:absolute;left: 580px;top: 120px">Moderate</div> </div>
-             <div class=“child”><div style="position:absolute;left: 710px;top: 120px">High</div> </div>
-            <div class=“child”><div style="position:absolute;right: 40px;top: 120px">Very high emotion.</div> </div>
-
+             <div class=“child”><div style="position:absolute;left: 360px;top: 170px">Very weak</div> </div>
+             <div class=“child”><div style="position:absolute;left: 370px;top: 190px">emotion.</div> </div>
+             <div class=“child”><div style="position:absolute;left: 490px;top: 190px">Mild</div> </div>
+             <div class=“child”><div style="position:absolute;left: 580px;top: 190px">Moderate</div> </div>
+             <div class=“child”><div style="position:absolute;left: 710px;top: 190px">High</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 170px">Very high</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 190px">emotion.</div> </div>
 
          </div>
 
