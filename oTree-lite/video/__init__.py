@@ -140,7 +140,7 @@ class FailedAttention(Page):
                  )
         pass
 
-class Survey1(Page):
+class survey1(Page):
     form_model = 'player'
     form_fields = ["happy1","sad1", "fear1", "disgust1","anger1", "compassion1", "guilt1", "boredom1"]
 
@@ -176,7 +176,7 @@ class Video2(Page):
     def is_displayed(player: Player):
         return player.participant.treatment == 0
 
-class Survey2(Page):
+class survey2(Page):
     form_model = 'player'
 
     form_fields = ["happy2","sad2", "fear2", "disgust2","anger2", "compassion2", "guilt2", "boredom2"]
@@ -207,5 +207,5 @@ class Feedback(Page):
     form_fields = ['q_feedback', 'q_feedback_pilot']
 
 
-page_sequence = [Welcome, Desc, Survey1, Video, Survey2, Openq, Attention1,FailedAttention, Hypo_choice,Hypo_choiceq, EQ, Feedback]
+page_sequence = [Welcome, Desc, survey1, Video, survey2, Openq, Attention1,FailedAttention, Hypo_choice,Hypo_choiceq, EQ, Feedback]
 
