@@ -26,7 +26,7 @@ class Player(BasePlayer):
     sum_correct = models.IntegerField()
     task1 = models.StringField(blank=True)
     treatment = models.CharField(initial='video1')
-    infoq = models.IntegerField(label="Did the video provide any new information other than the one previously provided in the video description?", choices = [[1,"Yes"],[0,"No"]])
+
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
     def make_field(label):
         return models.IntegerField(
@@ -64,14 +64,14 @@ class Player(BasePlayer):
     compassion2 = make_field(label="Compassion")
     guilt2 = make_field(label="Guilt")
     boredom2 = make_field(label="Boredom")
-    controlq_cake = make_field3(label="A girl blowing some candles")
-    controlq_flute = make_field3(label="A flute")
-    controlq_star = make_field3(label="A star firework")
+    controlq_cake = make_field3(label="...a girl blowing some candles.")
+    controlq_flute = make_field3(label="...a flute.")
+    controlq_star = make_field3(label="...a firework.")
     controlq_airplane = models.IntegerField(
             choices=[
                 [1, 'False'],
                 [0, 'True']],
-            label="A girl on an airplane",
+            label="...a girl on an airplane.",
             widget=widgets.RadioSelect)
 
     qemp1 = make_field2(label="I can easily tell if someone else wants to enter a conversation.")
@@ -102,6 +102,10 @@ class Player(BasePlayer):
                                       blank=True)
     q_feedback_pilot = models.LongStringField(label="If you found any instructions unclear or confusing, please let us know here.",
                                             blank=True)
+    donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
+    donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
+    charityq = models.IntegerField(label="Do you think Save the Children is a good charity?", choices = [[1,"Yes"],[0,"No"]])
+
 
 
 class Welcome(Page):
@@ -186,16 +190,22 @@ class Hypo_choice(Page):
     form_model = 'player'
     form_fields = ['task1']
 
+class Hypo_choiceq(Page):
+    form_model = 'player'
+    form_fields = ['donationq','donationqother','charityq']
+
 class EQ(Page):
     form_model='player'
     form_fields = ["qemp1", "qemp3", "qemp4","qemp8",
                    "qemp9" , "qemp11", "qemp12","qemp13",
-                   "qemp14","qemp15","qemp18","qemp21","qemp22",
-                   "qemp26","qemp28","qemp29","qemp31","qemp34",
-                   "qemp35","qemp36","qemp38","qemp39"]
+                   "qemp14","qemp15","qemp18","qemp21", "qemp22",
+                   "qemp26", "qemp28", "qemp29", "qemp31", "qemp34",
+                    "qemp35", "qemp36", "qemp38", "qemp39"]
 
 class Feedback(Page):
     form_model = 'player'
     form_fields = ['q_feedback', 'q_feedback_pilot']
 
-page_sequence = [Welcome, Desc, Survey1, Video, Survey2, Openq, Attention1,FailedAttention, Hypo_choice, EQ, Feedback]
+
+page_sequence = [Welcome, Desc, Survey1, Video, Survey2, Openq, Attention1,FailedAttention, Hypo_choice,Hypo_choiceq, EQ, Feedback]
+
