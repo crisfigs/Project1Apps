@@ -5,7 +5,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'video'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    link1 = "https://www.dropbox.com/s/ea7kwk5wowrqse9/mostshocking2day.mp4?raw=1"
+    link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
     link2 = "https://www.dropbox.com/s/ik6xpzehvmef0qb/loveyou_video.mp4?raw=1"
     correct_answers = {"controlq_cake": 1,
                        "controlq_flute": 1,
@@ -104,7 +104,7 @@ class Player(BasePlayer):
                                             blank=True)
     donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
     donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
-    charityq = models.IntegerField(label="Do you think Save the Children is a good charity?", choices = [[1,"Yes"],[0,"No"]])
+    charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices = [[1,"Yes"],[0,"No"]])
 
 
 
