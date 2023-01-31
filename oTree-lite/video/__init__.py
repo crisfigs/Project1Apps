@@ -142,7 +142,13 @@ class FailedAttention(Page):
 
 class survey1(Page):
     form_model = 'player'
-    form_fields = ["happy1","sad1", "fear1", "disgust1","anger1", "compassion1", "guilt1", "boredom1"]
+
+    def get_form_fields(player):
+        import random
+        e = ["happy1","sad1", "fear1", "disgust1","anger1", "compassion1", "guilt1", "boredom1"]
+        random.shuffle(e)
+        return e
+
 
 class Video(Page):
     form_model = 'player'
@@ -179,8 +185,11 @@ class Video2(Page):
 class survey2(Page):
     form_model = 'player'
 
-    form_fields = ["happy2","sad2", "fear2", "disgust2","anger2", "compassion2", "guilt2", "boredom2"]
-
+    def get_form_fields(player):
+        import random
+        e = ["happy2","sad2", "fear2", "disgust2","anger2", "compassion2", "guilt2", "boredom2"]
+        random.shuffle(e)
+        return e
 
 class Openq(Page):
     form_model = 'player'
