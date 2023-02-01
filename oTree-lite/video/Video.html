@@ -1,6 +1,6 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
-
+{% load otree static %}
 
 {% block styles %}
 <style>
@@ -30,21 +30,24 @@
 {% endblock %}
 
 {{ block title }}
-<div class="alert alert-warning text-center lead">
-    Watch this video before to proceed to the next page.
-    </div>
 
 {{ endblock }}
 
 
 {{ block content }}
 
-
-	<video  id="vid"  width="500px" height="500px" autoplay >
+   	<video  id="vid"  width="100px" height="450px" >
 		<source src="{{link}}" type="video/mp4">
     </video>
 
 
+
+
+
+<button id="show" style="visibility: hidden;"> NEXT </button>
+
+{{ endblock }}
+{% block scripts %}
 <script>
 vid=document.getElementById("vid")
 vid.disablePictureInPicture = true //dont allow for picture in picture feature
@@ -53,10 +56,16 @@ vid.addEventListener("ended", BtnVisible);
             var btnVisible = document.getElementById("show");
             btnVisible.style.visibility = "visible";
    };
+ var video = document.getElementById("vid");
+  video.addEventListener("click", function(event) {
+
+             video.play();
+
+  });
 
 
 </script>
 
-<button id="show" style="visibility: hidden;"> NEXT </button>
+    <script src="{{ static 'global/startButtonOverlay.js' }}"></script>
 
-{{ endblock }}
+{% endblock %}

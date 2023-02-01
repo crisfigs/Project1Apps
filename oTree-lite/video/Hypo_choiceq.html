@@ -24,7 +24,35 @@
 
     <div class="card">
         <div class="card-body">
-            {{formfields}}
+            {{form.donationq.label}}
+            {{form.donationq}}
+            <br>
+            <br>
+            {{form.donationqother.label}}
+            {{form.donationqother}}
+<br>
+     <table>
+    <tr>
+
+        <th>
+        </th>
+    </tr>
+<tr>
+    <br>
+            {{form.charityq.label}}
+    <br>
+    <br>
+
+    {{ for choice in form.charityq }}
+
+    {{ choice }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    {{ endfor }}
+    <br/>
+            Not at all &nbsp &nbsp &nbsp Only a little &nbsp &nbsp To some extent &nbsp &nbsp Rather much &nbsp &nbsp &nbsp &nbsp Very much
+
+</tr>
+
+             </table>
           </div>
     </div>
 <br>

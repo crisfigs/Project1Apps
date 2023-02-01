@@ -27,7 +27,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 
-PARTICIPANT_FIELDS = ['treatment']
+PARTICIPANT_FIELDS = ['number']
 
 SESSION_FIELDS = []
 

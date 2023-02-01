@@ -1,6 +1,6 @@
 from otree.api import *
 
-
+import random
 class C(BaseConstants):
     NAME_IN_URL = 'video'
     PLAYERS_PER_GROUP = None
@@ -9,9 +9,8 @@ class C(BaseConstants):
     link2 = "https://www.dropbox.com/s/ik6xpzehvmef0qb/loveyou_video.mp4?raw=1"
     correct_answers = {"controlq_cake": 1,
                        "controlq_flute": 1,
-                       "controlq_star": 1,
                        "controlq_airplane": 0}
-
+   # number = random.choices([1,0], weights=(50, 50), k=1)[0]
 
 class Group(BaseGroup):
     pass
@@ -21,12 +20,13 @@ class Subsession(BaseSubsession):
     pass
 
 
+
 class Player(BasePlayer):
     prolific_id = models.StringField()
     sum_correct = models.IntegerField()
+    number = models.IntegerField()
     task1 = models.StringField(blank=True)
     treatment = models.CharField(initial='video1')
-
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
     def make_field(label):
         return models.IntegerField(
@@ -66,7 +66,6 @@ class Player(BasePlayer):
     boredom2 = make_field(label="Boredom")
     controlq_cake = make_field3(label="...a girl blowing some candles.")
     controlq_flute = make_field3(label="...a flute.")
-    controlq_star = make_field3(label="...a firework.")
     controlq_airplane = models.IntegerField(
             choices=[
                 [1, 'False'],
@@ -104,7 +103,10 @@ class Player(BasePlayer):
                                             blank=True)
     donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
     donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
-    charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices = [[1,"Yes"],[0,"No"]])
+    charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
+
+
+
 
 
 
@@ -112,24 +114,31 @@ class Welcome(Page):
     form_model = 'player'
     form_fields = ['prolific_id']
 
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        import random
+        player.number = random.choices([1,0], weights=(1, 100), k=1)[0]
+
+
+
 class Desc(Page):
     form_model = 'player'
 
 class Attention1(Page):
     form_model = 'player'
-    form_fields = ["controlq_cake", "controlq_flute", "controlq_star","controlq_airplane"]
+    form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute + player.controlq_star + player.controlq_airplane
+        player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
 
 class FailedAttention(Page):
         form_model = 'player'
-        form_fields = ["controlq_cake", "controlq_flute", "controlq_star","controlq_airplane"]
+        form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
 
         @staticmethod
         def is_displayed(player: Player):
-            return player.sum_correct <= 3
+            return player.sum_correct <= 2 and player.number==1
 
 
         def js_vars(player):
@@ -144,12 +153,12 @@ class survey1(Page):
     form_model = 'player'
 
     def get_form_fields(player):
-        import random
         e = ["happy1","sad1", "fear1", "disgust1","anger1", "compassion1", "guilt1", "boredom1"]
         random.shuffle(e)
         return e
 
-
+class Video_alert(Page):
+    pass
 class Video(Page):
     form_model = 'player'
 
@@ -160,20 +169,7 @@ class Video(Page):
             link = link
          )
 
-    #def is_displayed(player: Player):
-     #   return player.participant.treatment == 1
 
-
-
-    #def vars_for_template(player: Player):
-        #if player.participant.treatment == True:
-        #if player.participant.treatment == True:
-        #    link = C.link1
-        #else:
-        #   link = C.link2
-        #return dict(
-        #    link = link
-        #)
 
 class Video2(Page):
     form_model = 'player'
@@ -186,7 +182,6 @@ class survey2(Page):
     form_model = 'player'
 
     def get_form_fields(player):
-        import random
         e = ["happy2","sad2", "fear2", "disgust2","anger2", "compassion2", "guilt2", "boredom2"]
         random.shuffle(e)
         return e
@@ -216,5 +211,6 @@ class Feedback(Page):
     form_fields = ['q_feedback', 'q_feedback_pilot']
 
 
-page_sequence = [Welcome, Desc, survey1, Video, survey2, Openq, Attention1,FailedAttention, Hypo_choice,Hypo_choiceq, EQ, Feedback]
+##page_sequence = [ Video_alert, Video]
 
+page_sequence = [Welcome, Desc, survey1, Video_alert, Video, survey2, Openq, Attention1,FailedAttention, Hypo_choice,Hypo_choiceq, EQ, Feedback]

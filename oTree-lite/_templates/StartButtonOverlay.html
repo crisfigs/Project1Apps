@@ -1,0 +1,20 @@
+<!--
+This overlay's purpose is to trigger a user event (click on button).
+It is needed e.g. for a page with audio instructions,
+because autoplay does only start if an interaction happened.
+Further information: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+-->
+
+{% load otree %}
+
+{{ block styles }}
+    <link href= "{{ static 'global/startButtonOverlay.css' }}" rel="stylesheet" />
+{{ endblock }}
+
+{{ block content }}
+
+<div id="start_button_overlay">
+    <img id="start_button_img" src= "{{ static 'startButton.png' }}" />
+</div>
+
+{{ endblock }}
