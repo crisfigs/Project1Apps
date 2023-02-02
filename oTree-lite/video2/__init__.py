@@ -26,7 +26,7 @@ class Player(BasePlayer):
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     task1 = models.StringField(blank=True)
-    treatment = models.CharField(initial='video1')
+    treatment = models.CharField(initial='video2')
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
     def make_field(label):
         return models.IntegerField(

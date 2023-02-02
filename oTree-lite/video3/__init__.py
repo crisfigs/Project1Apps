@@ -10,8 +10,6 @@ class C(BaseConstants):
                        "controlq_mandela": 1,
                        "controlq_rainbow": 0}
 
-   # number = random.choices([1,0], weights=(50, 50), k=1)[0]
-
 class Group(BaseGroup):
     pass
 
@@ -26,7 +24,7 @@ class Player(BasePlayer):
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     task1 = models.StringField(blank=True)
-    treatment = models.CharField(initial='video1')
+    treatment = models.CharField(initial='video3')
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
     def make_field(label):
         return models.IntegerField(
