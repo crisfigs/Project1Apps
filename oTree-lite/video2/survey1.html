@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{{block styles }}
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.center {
+  text-align: center;
+}
+
+
+</style>
+{{ endblock }}
+
+{{ block title }} Video Description: Survey  {{ endblock }}
+
+{{ block content }}
+
+ <div class="card">
+     <div class="card-body">
+<p>After reading the video description, how do you expect to feel watching the video? </p>
+
+
+
+         <p>Please evaluate below how intensely you expect to experience the following emotions while watching the video.</p>
+
+
+
+         <div class="alert alert-warning" role="alert">
+          <p> Video's description:  "The video is an excerpt from a promotional video by "Lawn Solutions Australia" explaining how grass grows and why it is green. The excerpt explains the parts of the grass plant and how grass transforms energy into sugar via photosynthesis. ”</p>
+</div>
+
+         <br>
+         <br>
+
+         <div class=“parent”> <table class="table table-striped">
+    {{ for field in form }}
+        <tr>
+            <th>{{ field.label }}</th>
+            {{ for choice in field }}
+                <td>{{ choice }}</td>
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+             <div class=“child”><div style="position:absolute;left: 360px;top: 240px">Very weak</div> </div>
+             <div class=“child”><div style="position:absolute;left: 370px;top: 260px">emotion.</div> </div>
+             <div class=“child”><div style="position:absolute;left: 490px;top: 260px">Mild</div> </div>
+             <div class=“child”><div style="position:absolute;left: 580px;top: 260px">Moderate</div> </div>
+             <div class=“child”><div style="position:absolute;left: 710px;top: 260px">High</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 240px">Very high</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 260px">emotion.</div> </div>
+
+         </div>
+
+
+Once you have filled in this survey, please, press "Next" to continue.
+
+     </div></div>
+<br>
+  <div class="center">{{ next_button }}</div>
+
+{{ endblock }}

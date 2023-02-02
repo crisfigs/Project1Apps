@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    Instructions Task 5
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+      {% include 'snippets/../snippets/Instr1Task1.html' %}
+
+<div class="mx-auto" style="width: 200px;">
+<img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static '11pounds.png' %}"/>
+</div>
+
+<div class="clearfix">
+
+</div>
+
+      <div class="clearfix">
+
+</div>
+
+ <p>One in every ten participants will be randomly selected to receive payment in this task.</p>
+
+ <p>When you finish reading the instructions, press “Next” to continue to the task. </p>
+
+  </div></div>
+    <br>
+
+{% next_button %}
+
+{% endblock %}

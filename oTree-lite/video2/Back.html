@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% block scripts%}
+<script>
+
+        let completionlink = js_vars.completionlink;
+        function completed() {
+            console.log("clicking the button")
+            window.location.href =completionlink;
+        }
+
+</script>
+{% endblock %}
+
+{%  block title %}{% endblock %}
+
+
+
+{% block content %}
+
+
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="completed()" > Back to Prolific </button>
+
+{% endblock %}
+
+

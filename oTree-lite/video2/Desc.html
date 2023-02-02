@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+{% block title %}
+   Video Description
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+     <p> Before showing you the video, we would like to briefly describe what you will see.</p>
+     <p> Please read carefully the short video description below. </p>
+
+
+       <div class="alert alert-warning" role="alert">
+          <p>  "The video is an excerpt from a promotional video by "Lawn Solutions Australia" explaining how grass grows and why it is green. The excerpt explains the parts of the grass plant and how grass transforms energy into sugar via photosynthesis. ”</p>
+</div>
+
+
+<br>
+
+
+Please, press "Next" when you finish reading the description.
+
+      </div></div>
+<br>
+<div class="center"> {{ next_button }}</div>
+
+{% endblock %}
+
+

@@ -2,15 +2,14 @@ from otree.api import *
 
 import random
 class C(BaseConstants):
-    NAME_IN_URL = 'video'
+    NAME_IN_URL = 'video4'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
-    link2 = "https://www.dropbox.com/s/ik6xpzehvmef0qb/loveyou_video.mp4?raw=1"
-    correct_answers = {"controlq_cake": 1,
-                       "controlq_flute": 1,
-                       "controlq_airplane": 0}
-   # number = random.choices([1,0], weights=(50, 50), k=1)[0]
+    link1 = "https://www.dropbox.com/s/isvpvxxi0luq3zr/Save%20The%20Children%20-%20Kayembe.mp4?raw=1"
+    correct_answers = {"controlq_jeep": 1,
+                       "controlq_crying": 1,
+                       "controlq_storm": 0}
+
 
 class Group(BaseGroup):
     pass
@@ -64,13 +63,13 @@ class Player(BasePlayer):
     compassion2 = make_field(label="Compassion")
     guilt2 = make_field(label="Guilt")
     boredom2 = make_field(label="Boredom")
-    controlq_cake = make_field3(label="...a girl blowing some candles.")
-    controlq_flute = make_field3(label="...a flute.")
-    controlq_airplane = models.IntegerField(
+    controlq_jeep = make_field3(label="...a jeep.")
+    controlq_crying = make_field3(label="...a child crying.")
+    controlq_storm = models.IntegerField(
             choices=[
                 [1, 'False'],
                 [0, 'True']],
-            label="...a girl on an airplane.",
+            label="...a heavy storm.",
             widget=widgets.RadioSelect)
 
     qemp1 = make_field2(label="I can easily tell if someone else wants to enter a conversation.")
@@ -126,15 +125,15 @@ class Desc(Page):
 
 class Attention1(Page):
     form_model = 'player'
-    form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+    form_fields = ["controlq_jeep", "controlq_crying","controlq_storm"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
+        player.sum_correct = player.controlq_jeep + player.controlq_crying + player.controlq_storm
 
 class FailedAttention(Page):
         form_model = 'player'
-        form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+        form_fields = ["controlq_jeep", "controlq_crying","controlq_storm"]
 
         @staticmethod
         def is_displayed(player: Player):
@@ -170,15 +169,6 @@ class Video(Page):
             link = link
          )
 
-
-
-class Video2(Page):
-    form_model = 'player'
-
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.participant.treatment == 0
-
 class survey2(Page):
     form_model = 'player'
 
@@ -211,7 +201,6 @@ class Feedback(Page):
     form_model = 'player'
     form_fields = ['q_feedback', 'q_feedback_pilot']
 
-
 class Back(Page):
     form_model = 'player'
     form_fields = []
@@ -222,8 +211,7 @@ class Back(Page):
         return dict(
             completionlink=link
         )
+        pass
 
-    pass
-
-
-page_sequence = [Welcome, Desc, survey1, Video_alert, Video, survey2, Openq, Attention1, FailedAttention, Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
+page_sequence = [Welcome, Desc, survey1, Video_alert, Video, survey2, Openq, Attention1, FailedAttention,
+                     Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]

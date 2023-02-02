@@ -2,17 +2,35 @@ from os import environ
 
 
 SESSION_CONFIGS = [
+
     dict(
-        name='video',
+        name='Video1',
         app_sequence=['video'],
-        num_demo_participants=10
+        num_demo_participants=100,
+        cc_code="CCCODE",
+        error_code="ECODE",
 
     ),
     dict(
-        name='Video1',
-        app_sequence=['video'], #first: instructions+video, last:choice
-        num_demo_participants=10,
-        error_code="",
+        name='Video2',
+        app_sequence=['video2'],
+        num_demo_participants=100,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
+    dict(
+        name='Video3',
+        app_sequence=['video3'],
+        num_demo_participants=100,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
+    dict(
+        name='Video4',
+        app_sequence=['video4'],
+        num_demo_participants=100,
+        cc_code="CCCODE",
+        error_code="ECODE",
     ),
 
 ]
@@ -54,3 +72,4 @@ SECRET_KEY = '{{ secret_key }}'
 INSTALLED_APPS = ['otree']
 
 DEBUG = False
+

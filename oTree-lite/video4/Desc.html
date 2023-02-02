@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+{% block title %}
+   Video Description
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+     <p> Before showing you the video, we would like to briefly describe what you will see.</p>
+     <p> Please read carefully the short video description below. </p>
+
+
+       <div class="alert alert-warning" role="alert">
+          <p>  "The video is an advertisement by "Save the Children" showing the battle with malnutrition that many children face every day in the Democratic Republic of Congo. In particular, the video portrays the survival story of 21 months old Kayembe, who is struggling with a case of severe malnutrition.”</p>
+</div>
+
+
+<br>
+
+
+Please, press "Next" when you finish reading the description.
+
+      </div></div>
+<br>
+<div class="center"> {{ next_button }}</div>
+
+{% endblock %}
+
+

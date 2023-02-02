@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+   Task 5
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+
+{% block content %}
+<input type="hidden" name="timeSpent" id="timeSpent"/>
+Now, you can choose between the following options:
+
+    <div class="card">
+  <div class="card-body">
+
+<div class="mx-auto" style="width: 200px;">
+
+          <img class="col-md-12 float-sm-end mb-12 ms-md-12" style="max-width:250px" src="{% static 'img.png' %}"/>
+</div>
+
+<div class="clearfix">
+
+</div>
+
+
+      <p> Please make your choice here:</p>
+
+
+<div1><button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button></div1>
+
+<div2><button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button></div2>     <p> </p>
+
+
+
+
+
+  </div>
+    </div>
+
+{% endblock %}
