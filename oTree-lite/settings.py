@@ -9,7 +9,6 @@ SESSION_CONFIGS = [
         num_demo_participants=100,
         cc_code="CCCODE",
         error_code="ECODE",
-
     ),
     dict(
         name='Video2',
@@ -32,7 +31,6 @@ SESSION_CONFIGS = [
         cc_code="CCCODE",
         error_code="ECODE",
     ),
-
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

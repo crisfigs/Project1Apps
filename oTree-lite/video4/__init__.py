@@ -33,9 +33,15 @@ class Player(BasePlayer):
             label=label,
             widget=widgets.RadioSelect,
         )
-    def make_field2(label):
+    def make_field2agree(label):
         return models.IntegerField(
-            choices=[1, 2, 3, 4],
+            choices=[0, 0, 1, 2],
+            label=label,
+            widget=widgets.RadioSelect,
+        )
+    def make_field2disagree(label):
+        return models.IntegerField(
+            choices=[2, 1, 0, 0],
             label=label,
             widget=widgets.RadioSelect,
         )
@@ -72,28 +78,28 @@ class Player(BasePlayer):
             label="...a heavy storm.",
             widget=widgets.RadioSelect)
 
-    qemp1 = make_field2(label="I can easily tell if someone else wants to enter a conversation.")
-    qemp3 = make_field2(label="I really enjoy caring for other people.")
-    qemp4 = make_field2(label="I find it hard to know what to do in a social situation.")
-    qemp8 = make_field2(label="I often find it difficult to judge if something is rude or polite.")
-    qemp9 = make_field2(label="In a conversation, I tend to focus on my own thoughts rather than on what my listener might be thinking.")
-    qemp11 = make_field2(label="I can pick up quickly if someone says one thing but means another.")
-    qemp12 = make_field2(label="It is hard for me to see why some things upset people so much.")
-    qemp13 = make_field2(label="I find it easy to put myself in somebody else’s shoes.")
-    qemp14 = make_field2(label="I am good at predicting how someone will feel.")
-    qemp15 = make_field2(label="I am quick to spot when someone in a group is feeling awkward or uncomfortable.")
-    qemp18 = make_field2(label="I can’t always see why someone should have felt offended by a remark.")
-    qemp21 = make_field2(label="I don’t tend to find social situations confusing.")
-    qemp22 = make_field2(label="Other people tell me I am good at understanding how they are feeling and what they are thinking.")
-    qemp26 = make_field2(label="I can easily tell if someone else is interested or bored with what I am saying.")
-    qemp28 = make_field2(label="Friends usually talk to me about their problems as they say that I am very understanding.")
-    qemp29 = make_field2(label="I can sense if I am intruding, even if the other person doesn’t tell me.")
-    qemp31 = make_field2(label="Other people often say that I am insensitive, though I don’t always see why.")
-    qemp34 = make_field2(label="I can tune into how someone else feels rapidly and intuitively.")
-    qemp35 = make_field2(label="I can easily work out what another person might want to talk about.")
-    qemp36 = make_field2(label="I can tell if someone is masking their true emotion.")
-    qemp38 = make_field2(label="I am good at predicting what someone will do.")
-    qemp39 = make_field2(label="I tend to get emotionally involved with a friend’s problems.")
+    qemp1 = make_field2agree(label="I can easily tell if someone else wants to enter a conversation.")
+    qemp3 = make_field2agree(label="I really enjoy caring for other people.")
+    qemp4 = make_field2disagree(label="I find it hard to know what to do in a social situation.")
+    qemp8 = make_field2disagree(label="I often find it difficult to judge if something is rude or polite.")
+    qemp9 = make_field2disagree(label="In a conversation, I tend to focus on my own thoughts rather than on what my listener might be thinking.")
+    qemp11 = make_field2agree(label="I can pick up quickly if someone says one thing but means another.")
+    qemp12 = make_field2disagree(label="It is hard for me to see why some things upset people so much.")
+    qemp13 = make_field2agree(label="I find it easy to put myself in somebody else’s shoes.")
+    qemp14 = make_field2agree(label="I am good at predicting how someone will feel.")
+    qemp15 = make_field2agree(label="I am quick to spot when someone in a group is feeling awkward or uncomfortable.")
+    qemp18 = make_field2disagree(label="I can’t always see why someone should have felt offended by a remark.")
+    qemp21 = make_field2agree(label="I don’t tend to find social situations confusing.")
+    qemp22 = make_field2agree(label="Other people tell me I am good at understanding how they are feeling and what they are thinking.")
+    qemp26 = make_field2agree(label="I can easily tell if someone else is interested or bored with what I am saying.")
+    qemp28 = make_field2agree(label="Friends usually talk to me about their problems as they say that I am very understanding.")
+    qemp29 = make_field2agree(label="I can sense if I am intruding, even if the other person doesn’t tell me.")
+    qemp31 = make_field2disagree(label="Other people often say that I am insensitive, though I don’t always see why.")
+    qemp34 = make_field2agree(label="I can tune into how someone else feels rapidly and intuitively.")
+    qemp35 = make_field2agree(label="I can easily work out what another person might want to talk about.")
+    qemp36 = make_field2agree(label="I can tell if someone is masking their true emotion.")
+    qemp38 = make_field2agree(label="I am good at predicting what someone will do.")
+    qemp39 = make_field2agree(label="I tend to get emotionally involved with a friend’s problems.")
 
     q_feedback = models.LongStringField(label="This is the end of the survey. "
                                             "In case you have comments, please leave them here.",
