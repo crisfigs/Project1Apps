@@ -1,0 +1,251 @@
+<style>
+.overallContainer {
+    height:500px;
+    width: 790px;
+    padding: 10px;
+    background-color: lightgray;
+    border: 2px darkgray solid;
+    margin-bottom: 10px;
+}
+
+.buttonsSelectedContainer {
+  width: 370px;
+  height:480px;
+  overflow-y: auto;
+  position:static;
+  left:100px;
+  margin: 0 auto;
+}
+
+.buttonsAvailableContainer {
+    width: 370px;
+    float: left;
+  overflow-y: auto;
+    margin: 0 auto;
+}
+
+.buttonsAvailable {
+overflow-y: auto;
+max-height: 400px
+}
+
+.buttonsSelected {
+width:131px;
+max-height: 400px;
+float:left;
+position:relative;
+top:0px;
+}
+
+.itemButton {
+    width: 100px;
+    height: 50px;
+    margin: 5px;
+    border-radius:4px;
+    border:1px black solid;
+}
+
+.panelTitle {
+  width:100%;
+  text-align: center;
+  padding: 15px;
+  background-color: none;
+}
+
+#rankNumbers_{{ field.auto_id }} {
+width:31px;
+float:left;
+}
+</style>
+
+<div class="overallContainer">
+  <div class="buttonsAvailableContainer">
+    <div id="titleButtonsAvailable_{{ field.auto_id }}" class="panelTitle"><b>Options Available</b></div>
+    <div id="buttonsAvailable_{{ field.auto_id }}"  class="buttonsAvailable"></div>
+  </div>
+
+  <div class="buttonsSelectedContainer">
+    <div id="titleSelectedButtons_{{ field.auto_id }}" class="panelTitle"><b>Your Preference Ranking</b><br><b>Max: {{choices.maxNumOptions}}</b></div>
+    <div style="width: 50%; margin: auto; text-align: center;">
+      <div id="rankNumbers_{{ field.auto_id }}"></div>
+      <div id="selectedButtons_{{ field.auto_id }}"  class="buttonsSelected"></div>
+    </div>
+  </div>
+</div>
+
+<div style="width: 790px;;  display: flex; align-items: center; justify-content: center;">
+<button type="button" onclick="startButtonForm_{{ field.auto_id }}();" class="otree-btn-next btn btn-primary next-button otree-next-button">Reset</button>
+</div>
+
+<input type="text" name="{{ name }}" id="{{ field.auto_id }}" class="form-control" style="display:none;">
+
+<br>
+
+<span id="debugText_{{ field.auto_id }}" style="display:none;"></span>
+
+<script>
+
+ var dictButtons_{{ field.auto_id }} = {};
+ var orderedButtons_{{ field.auto_id }} = {};
+
+ function startButtonForm_{{ field.auto_id }}()
+ {
+                 selectedButtonsDiv=document.getElementById('selectedButtons_{{ field.auto_id }}');
+                 panelOfButtonsAvailable=document.getElementById('buttonsAvailable_{{ field.auto_id }}');
+                 rankNumbers=document.getElementById('rankNumbers_{{ field.auto_id }}');
+
+                 while (selectedButtonsDiv.hasChildNodes()) {
+                  selectedButtonsDiv.removeChild(selectedButtonsDiv.lastChild);
+                  }
+
+                while (rankNumbers.hasChildNodes()) {
+                   rankNumbers.removeChild(rankNumbers.lastChild);
+                   }
+                   while (panelOfButtonsAvailable.hasChildNodes()) {
+                      panelOfButtonsAvailable.removeChild(panelOfButtonsAvailable.lastChild);
+                      }
+
+                   {% for valButton, labelButton, color in choices.itemsToChoose %}
+
+                    dictButtons_{{ field.auto_id }}['{{labelButton}}']= ['{{valButton}}','id_Button_{{forloop.counter}}_{{ field.auto_id }}','{{color}}'];
+                    orderedButtons_{{ field.auto_id }}[{{forloop.counter}}]='id_Button_{{forloop.counter}}_{{ field.auto_id }}';
+                   {% endfor %}
+
+                for (var butName in dictButtons_{{ field.auto_id }})
+                {
+                  var button = document.createElement("button");
+                      button.className="itemButton"
+                      button.type="button";
+                      button.style.backgroundColor=dictButtons_{{ field.auto_id }}[butName][2];
+                      button.innerHTML = butName;
+                      buttonElementID=dictButtons_{{ field.auto_id }}[butName][1]
+                      button.id=buttonElementID
+                      button.value=dictButtons_{{ field.auto_id }}[butName][0]
+                      button.addEventListener('click', moveButton_{{ field.auto_id }}, false);
+                      button.addEventListener('dragstart', dragButtonStart_{{ field.auto_id }}, false);
+                      button.addEventListener('dragover', dragButtonOver_{{ field.auto_id }}, false);
+                      button.addEventListener('drop', switchButton_{{ field.auto_id }}, false);
+                      panelOfButtonsAvailable.appendChild(button);
+                }
+
+                updateSubmitValue_{{ field.auto_id }}();
+
+ }
+
+ function dragButtonStart_{{ field.auto_id }}(evt) {
+   evt.dataTransfer.setData("idSourceButton", evt.target.id);
+ }
+
+function dragButtonOver_{{ field.auto_id }}(evt) {
+ evt.preventDefault();
+ }
+
+ function changeNodes_{{ field.auto_id }}(node1, node2) {
+
+   node1Y=node1.getBoundingClientRect().top;
+   node2Y=node2.getBoundingClientRect().top;
+
+   if(node1Y>node2Y)
+   {
+      node1.parentNode.insertBefore(node1,node2);
+    }
+    else {
+      node1.parentNode.insertBefore(node1,node2.nextSibling);
+    }
+
+}
+
+ function switchButton_{{ field.auto_id }}(evt) {
+   buttonSource=document.getElementById(evt.dataTransfer.getData("idSourceButton"));
+   buttonTarget=evt.target;
+   selectedButtonsDiv=document.getElementById('selectedButtons_{{ field.auto_id }}');
+   if(evt.target.parentElement==selectedButtonsDiv)
+   {
+     changeNodes_{{ field.auto_id }}(buttonSource, buttonTarget)
+     reorderAvailableButtons_{{ field.auto_id }}();
+     writeRankNumbers_{{ field.auto_id }}();
+     updateSubmitValue_{{ field.auto_id }}();
+  }
+ }
+
+ function moveButton_{{ field.auto_id }}(evt) {
+             selectedButtonsDiv=document.getElementById('selectedButtons_{{ field.auto_id }}');
+             panelOfButtonsAvailable=document.getElementById('buttonsAvailable_{{ field.auto_id }}');
+             numItemsSelected=selectedButtonsDiv.children.length;
+
+             if(evt.target.parentElement==selectedButtonsDiv)
+             {
+               evt.target.draggable=false;
+                panelOfButtonsAvailable.appendChild(evt.target);
+
+             }
+             else if(numItemsSelected<{{choices.maxNumOptions}}) {
+               evt.target.draggable=true;
+                selectedButtonsDiv.appendChild(evt.target);
+                selectedButtonsDiv.parentElement.parentElement.scrollTop = selectedButtonsDiv.parentElement.parentElement.scrollHeight;
+             }
+              reorderAvailableButtons_{{ field.auto_id }}();
+              writeRankNumbers_{{ field.auto_id }}();
+              updateSubmitValue_{{ field.auto_id }}();
+ }
+
+function writeRankNumbers_{{ field.auto_id }}()
+{
+  rankingNumbersDiv=document.getElementById('rankNumbers_{{ field.auto_id }}');
+  selectedButtonsDiv=document.getElementById('selectedButtons_{{ field.auto_id }}');
+  var numchildren = selectedButtonsDiv.children.length;
+
+  while (rankingNumbersDiv.hasChildNodes()) {
+    rankingNumbersDiv.removeChild(rankingNumbersDiv.lastChild);
+  }
+
+ for (var i = 1; i <= numchildren; i++) {
+   var div = document.createElement("div");
+   div.style.width = "30px";
+   div.style.height = "55px";
+   div.style.margin = "5px";
+   div.style.lineHeight = "55px";
+   div.border="0"
+   div.style.background = "none";
+   div.style.boxShadow="none";
+   div.style.borderRadius="0px";
+   div.style.color = "black";
+   div.style.textAlign="center";
+   div.style.fontWeight="bold";
+   div.style.outline="none";
+   div.innerHTML = i;
+   rankingNumbersDiv.appendChild(div);
+ }
+
+}
+
+ function updateSubmitValue_{{ field.auto_id }}()
+ {
+                 selectedButtonsDiv=document.getElementById('selectedButtons_{{ field.auto_id }}');
+                 var children = selectedButtonsDiv.children;
+                 resultStr=[];
+                for (var i = 0; i < children.length; i++) {
+                  resultStr.push(children[i].value);
+                }
+                document.getElementById('{{ field.auto_id }}').value=resultStr.join();
+                document.getElementById('debugText_{{ field.auto_id }}').innerHTML=resultStr.join();
+ }
+
+ function reorderAvailableButtons_{{ field.auto_id }}()
+ {
+   numButtons=Object.keys(dictButtons_{{ field.auto_id }}).length;
+   panelOfButtonsAvailable=document.getElementById('buttonsAvailable_{{ field.auto_id }}');
+   for (i=1;i<=numButtons;i++)
+   {
+     currButton=document.getElementById(orderedButtons_{{ field.auto_id }}[i]);
+     if(currButton.parentElement==panelOfButtonsAvailable)
+     {
+        panelOfButtonsAvailable.appendChild(currButton)
+     }
+
+   }
+
+ }
+
+startButtonForm_{{ field.auto_id }}();
+</script>

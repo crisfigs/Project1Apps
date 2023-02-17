@@ -31,6 +31,13 @@ SESSION_CONFIGS = [
         cc_code="CCCODE",
         error_code="ECODE",
     ),
+dict(
+        name='menus_evideo',
+        app_sequence=['menus_evideo'],
+        num_demo_participants=100,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

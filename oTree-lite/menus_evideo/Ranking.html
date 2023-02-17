@@ -1,0 +1,96 @@
+{{ block title }}
+Rank your options
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+.handle {
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+    .grid-container {
+  display: grid;
+  gap: 50px 100px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  padding: 20px;
+    text-align: center;
+  font-size: 30px;
+}
+.grid-item {
+  background-color: rgb(197, 197, 55);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+
+}
+
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card"><div class="card-body">
+Use your cursor to report your ranking of the three possibilities.
+  <div id= "grid1" class="grid-container">
+    <div   class="dot">1</div>
+      <div   class="dot">2</div>
+      <div   class="dot">3</div>
+
+  </div>
+
+  <div id= "grid" class="grid-container center" style="cursor: move">
+      {{ for choice in C.CHOICES }}
+  <div data-id="{{ choice }}"  class="grid-item handle highlight">{{ choice }}</div>
+      {{ endfor }}
+      </div>
+    </div>
+    </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<script>
+    let el = document.getElementById('grid');
+    let sortable = Sortable.create(el, {
+        direction: 'horizontal',
+          swap: true,
+        swapClass: "highlight",
+        swapThreshold: 1,
+         handle: '.handle',
+  animation: 1500,
+        onChange: function (evt) {
+            document.getElementById('ranking').value = sortable.toArray().join(',');
+        }
+    });
+</script>
+
+<input type="hidden" name="ranking" id="ranking">
+
+{{ formfield_errors 'ranking' }}
+
+<p>
+    {{ next_button }}
+
+</p>
+
+{{ endblock }}
