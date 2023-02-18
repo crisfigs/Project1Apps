@@ -1,7 +1,14 @@
 {{ block title }}
 Results
 {{ endblock }}
+{% block styles  %}
+<style>
 
+.center1 {
+  text-align: center;
+}
+</style>
+{% endblock %}
 {{ block content }}
 
 <p>
@@ -9,4 +16,7 @@ Results
     and failed {{ player.num_failed }}.
 </p>
 
+
+<br>
+<div class="center1">{% next_button %}</div>
 {{ endblock }}

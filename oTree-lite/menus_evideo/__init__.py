@@ -244,10 +244,11 @@ def creating_session(subsession: Subsession):
 
 
 
-
+class InstructionsGame(Page):
+    pass
 
 class Game(Page):
-    timeout_seconds = 60
+    timeout_seconds = 240
     live_method = play_game
 
     @staticmethod
@@ -276,4 +277,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Game, Results, Ranking]
+page_sequence = [InstructionsGame, Game, Results, Ranking]

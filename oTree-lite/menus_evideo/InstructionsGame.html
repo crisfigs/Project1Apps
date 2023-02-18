@@ -1,0 +1,35 @@
+
+{% block styles  %}
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.center1 {
+  text-align: center;
+}
+</style>
+{% endblock %}
+
+{{ block title }}
+Part 1 : Instructions
+{{ endblock }}
+
+{{ block content }}
+
+<div class="card">
+    <div class="card-body">
+        <p>In what follows you will see some puzzles. You will have to count the number of "->" in each puzzle and insert it in the required field. For example, the puzzle below has 7 occurences of ->.
+</p>
+        <img style="width:400px;height:400px;" class="center" src="{{static 'grid.png' }}">
+
+
+ <p>Payment:  If you solve 10 puzzles, you get 5 pounds. You get 0 pounds otherwise. You  have 4 minutes to complete this task.</p>
+    </div>
+
+</div>
+<br>
+<div class="center1">{% next_button %}</div>
+{{ endblock }}
