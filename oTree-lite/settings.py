@@ -34,7 +34,7 @@ SESSION_CONFIGS = [
 dict(
         name='menus_evideo',
         app_sequence=['menus_evideo'],
-        num_demo_participants=100,
+        num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
     ),
@@ -76,5 +76,4 @@ SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
 
-DEBUG = False
-
+DEBUG = True

@@ -1,0 +1,86 @@
+{{ block title }}
+Part 2: Rank your options
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+
+    .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card"><div class="card-body">
+Your two top choices are:
+  <div id= "grid1" class="grid-container">
+    <div  class="">1st</div>
+      <div  class="">2nd</div>
+  </div>
+
+
+<div id="oldDiv" class="here" style="display: block">
+<div id = "grid" class="grid-container center">
+  <div class="grid-item card">{{ ranking2_1  }}</div>
+      <div class="grid-item card">{{ranking2_2 }}</div>
+      </div>
+</div>
+
+<div id="newDiv" class="here" style="display: none" >
+    <div id = "grid" class="grid-container center">
+  <div class="grid-item card">{{ ranking2_2 }}</div>
+      <div  class="grid-item card">{{ranking2_1 }}</div>
+      </div>
+
+</div>
+
+    <p style="text-align:center"> Would you be willing to accept an extra 0.10 pence for substituting your top 1st choice with your top 2nd?</p>
+<br>
+  <p style="text-align:center">
+    <button  name ="q_ranking2"  id="q_ranking2" value="Yes" onclick="newDivHere()" class="btn btn-outline-primary"> Yes </input>
+    <button  name ="q_ranking2"  id="q_ranking2" value="No" onclick="" class="btn btn-outline-primary"> No </button>
+</p>
+    </div>
+    </div>
+
+
+<script>
+function newDivHere() {
+    document.getElementById("oldDiv").style.display="none";
+    document.getElementById("newDiv").style.display="block";
+    document.getElementById('q2_ranking').value  = "Yes";
+}
+</script>
+
+{{ endblock }}
+
+
+
+

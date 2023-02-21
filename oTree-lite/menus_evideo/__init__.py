@@ -13,7 +13,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'rank_widget'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    CHOICES = ['Choose A and  I watch the video after', 'Choose B and  I watch the video after. ', 'Watch the video and decide between A and B after.' ]
+    CHOICES = ['Choose A and  I watch the video after.', 'Choose B and  I watch the video after. ', 'Watch the video and decide between A and B after.' ]
     captcha_length = 3
 
 class Subsession(BaseSubsession):
@@ -30,6 +30,37 @@ class Player(BasePlayer):
     num_trials = models.IntegerField(initial=0)
     num_correct = models.IntegerField(initial=0)
     num_failed = models.IntegerField(initial=0)
+    #Comprehension questions
+    q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
+    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
+    q_change = models.IntegerField(label="3. After watching the I can still change my choice in:",
+                                   choices=[[0, 'Case 1'], [1, 'Case 2'], [2, 'Case 3']])
+    q_imp = models.IntegerField(label="4. Select the correct answer. My choice is implemented:",
+                                   choices=[[0, 'Always'], [2, 'with a 40% chance and the computer chooses option three with 60%'],  [1, 'with a 60% chance and the computer chooses option three with 40%'],[3, 'Never']])
+
+    q_video = models.IntegerField(label="5. Comprehension question on the video. ", choices=[[0, 'X'], [1, 'Y'], [2, 'Z']])
+    ranking2 = models.StringField()
+    ranking2_1 = models.StringField()
+    ranking2_2 = models.StringField()
+    ranking2_3 = models.StringField()
+    q_ranking2 = models.StringField(blank=True)
+    task2 = models.IntegerField(label="Would you be willing to accept an extra 0.10 pence for substituting your top 1st  choice with your top 2nd?",
+                                   choices=[[0, 'No'], [1, 'Yes']])
+    task1 = models.StringField(blank=True)
+
+    def set_error_message(player, value):
+        correct_answers = {
+                        'q1A': 1,
+                        'q1B': 1,
+                        'q_change': 2,
+                        'q_imp': 1,
+                        'q_video': 0}
+        list_answers = list(value.items())[0:]
+        list_correct_answers = list(correct_answers.items())
+        if list_answers != list_correct_answers:
+            Text = 'You did not answer all questions correctly. Please read the instructions again and correct your answers.'
+            return Text
+
 
 
 def get_task_module(player):
@@ -243,12 +274,12 @@ def creating_session(subsession: Subsession):
 
 
 
-
+###PAGES
 class InstructionsGame(Page):
     pass
 
 class Game(Page):
-    timeout_seconds = 240
+    timeout_seconds = 90
     live_method = play_game
 
     @staticmethod
@@ -268,13 +299,73 @@ class Game(Page):
             raise RuntimeError("malicious page submission")
 
 
-class Ranking(Page):
-    form_model = 'player'
-    form_fields = ['ranking']
+class Part2_Instruction_Page(Page):
+  form_model = 'player'
+  form_fields = ['q1A', 'q1B', 'q_change', 'q_imp', 'q_video']
+
+  def error_message(player,value):
+      return player.set_error_message(value)
 
 
-class Results(Page):
+
+class ResultsGame(Page):
     pass
 
 
-page_sequence = [InstructionsGame, Game, Results, Ranking]
+class Ranking1(Page):
+    form_model = 'player'
+    form_fields = ['ranking']
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        a = list(player.ranking.split(","))
+        player.ranking2_1 = a[0]
+        player.ranking2_2 = a[1]
+        player.ranking2_3 = a[2]
+
+class Ranking2(Page):
+    form_model = 'player'
+    form_fields = ['q_ranking2']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+                     ranking2_1= player.ranking2_1,
+                     ranking2_2= player.ranking2_2,
+                     ranking2_3=player.ranking2_3)
+
+
+class Ranking2_switch(Page):
+    form_model = 'player'
+    form_fields = []
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.q_ranking2 == "Yes"
+
+    def vars_for_template(player: Player):
+        return dict(
+                     ranking2_1 = player.ranking2_1,
+                     ranking2_2 = player.ranking2_2,
+                     ranking2_3 = player.ranking2_3)
+
+class Ranking2_noswitch(Page):
+    form_model = 'player'
+    form_fields = ['q_ranking2']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.q_ranking2 == "No"
+
+    def vars_for_template(player: Player):
+        return dict(
+                     ranking2_1 = player.ranking2_1,
+                     ranking2_2 = player.ranking2_2,
+                     ranking2_3 = player.ranking2_3)
+
+class Hypo_choice(Page):
+    form_model = 'player'
+    form_fields = ['task1']
+
+page_sequence = [ Ranking1, Ranking2, Ranking2_noswitch, Ranking2_switch]
+#InstructionsGame, Game, ResultsGame, Part2_Instruction_Page,

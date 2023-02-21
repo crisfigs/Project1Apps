@@ -1,5 +1,5 @@
 {{ block title }}
-Rank your options
+Part 2: Rank your options
 {{ endblock }}
 {{block styles }}
 <style>
@@ -24,15 +24,7 @@ Rank your options
   place-items: center;
 }
 
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  padding: 20px;
-    text-align: center;
-  font-size: 10px;
-}
+
 .grid-item {
   background-color: rgba(55, 197, 112, 0.62);
   border: 1px solid rgba(0, 0, 0, 0.8);
@@ -43,14 +35,12 @@ Rank your options
   width: 250px;
 
 }
-
-
 </style>
 {{ endblock }}
 
 
 {{ block content }}
-<div class="card" style="width: 150%;"><div class="card-body">
+<div class="card"><div class="card-body">
 Use your cursor to report your ranking of the three possibilities.
   <div id= "grid1" class="grid-container">
     <div   class="">1st</div>
@@ -70,26 +60,31 @@ Use your cursor to report your ranking of the three possibilities.
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.js"></script>
 
 <script>
     let el = document.getElementById('grid');
     let sortable = Sortable.create(el, {
         direction: 'horizontal',
-          swap: true,
+        swap: true,
         swapClass: "highlight",
         swapThreshold: 1,
-         handle: '.handle',
-  animation: 1500,
-        onChange: function (evt) {
+        handle: '.handle',
+        animation: 1500,
+        onEnd: function (evt) {
             document.getElementById('ranking').value = sortable.toArray().join(',');
         }
     });
 </script>
+<script>
+var ul = document.getElementById('grid');
+for (var i = ul.children.length; i >= 0; i--) {
+    ul.appendChild(ul.children[Math.random() * i | 0]);
+}</script>
 
-<input type="hidden" name="ranking" id="ranking">
 
-{{ formfield_errors 'ranking' }}
+<input name="ranking" id="ranking">
 
 <p>
     {{ next_button }}

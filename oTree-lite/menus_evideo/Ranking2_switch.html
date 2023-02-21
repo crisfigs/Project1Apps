@@ -1,0 +1,75 @@
+{{ block title }}
+Part 2: Rank your options
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+
+    .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card"><div class="card-body">
+You switched.
+<br>
+    Your ranking is now:
+  <div id= "grid1" class="grid-container">
+    <div  class="">1st</div>
+      <div  class="">2nd</div>
+      <div  class="">3rd</div>
+  </div>
+
+
+
+    <div id = "grid" class="grid-container center">
+  <div class="grid-item card">{{ ranking2_2 }}</div>
+      <div  class="grid-item card">{{ranking2_1 }}</div>
+        <div  class="grid-item card">{{ranking2_3}}</div>
+      </div>
+
+
+
+    </div>
+    </div>
+
+
+
+<p>
+    {{ next_button }}
+
+</p>
+
+{{ endblock }}
+
+
+
+

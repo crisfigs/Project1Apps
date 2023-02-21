@@ -1,0 +1,81 @@
+{{ block title }}
+Part2 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+
+
+Later in the experiment you will have to make a decision between the following two options:
+<br>
+    <br>
+            <ul>
+                <li><b>Option A</b>: keep the &pound5 for yourself and the charity "Save the Children" gets &pound0.</li>
+                <li><b>Option B</b>: keep &pound1 and the charity "Save the Children" gets &pound8. </li>
+            </ul>
+<br>
+
+In addition, you will have to see a video. Below, we provide you with a description of the video that you will see:
+<br>
+    <br>
+       <div class="alert alert-warning" role="alert">
+          <p>  "The video is part of a campaign by "Save the Children" showing the struggles of a nine-year-old girl when her city becomes a warzone. As the political conflict escalates, the girl and her family experience increasingly traumatic hardships and perils. ”</p>
+</div>
+<br>
+How can you choose between Option A and Option B? There are three possibilities:
+
+
+  <div id= "grid" class="grid-container center" >
+      {{ for choice in C.CHOICES }}
+  <div data-id="{{ choice }}"  class="grid-item handle highlight card">{{ choice }}</div>
+      {{ endfor }}
+      </div>
+    <br>
+You choose one of these three and your choice will be implemented with a 60% probability. You should choose what is your preferred option  ecause this will be implemented most of the time.
+
+    </div>
+    </div>
+
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+<script>
+var ul = document.getElementById('grid');
+for (var i = ul.children.length; i >= 0; i--) {
+    ul.appendChild(ul.children[Math.random() * i | 0]);
+}</script>
+{{ endblock }}
+

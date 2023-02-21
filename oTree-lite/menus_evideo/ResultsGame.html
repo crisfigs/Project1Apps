@@ -1,0 +1,33 @@
+{{ block title }}
+Part 1: Results
+{{ endblock }}
+{% block styles  %}
+<style>
+
+.center1 {
+  text-align: center;
+}
+</style>
+{% endblock %}
+{{ block content }}
+<div class="card" ><div class="card-body">
+<p>
+    You have tried {{ player.num_trials }} puzzles, successfully solved {{ player.num_correct }},
+    and failed {{ player.num_failed }}.
+</p>
+
+
+
+        {{ if player.num_correct >= 10 }}
+        <div class="alert alert-info" >
+        <b> You earn &pound 5. </b>
+        </div><br>
+         {{ elif player.num_correct < 10 }}<div class="alert alert-info" role="alert">
+        <b>You earn &pound 0. </b>
+        </div>
+        {{ endif }}
+ </div> </div>
+
+<br>
+<div class="center1">{% next_button %}</div>
+{{ endblock }}
