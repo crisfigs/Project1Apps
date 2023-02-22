@@ -2,6 +2,7 @@ from otree import settings
 from otree.api import *
 import time
 from .image_utils import encode_image
+import random
 
 doc = """
 The sortable ranking based on: "Widget to rank/reorder items". See http://sortablejs.github.io/Sortable/
@@ -25,7 +26,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    ranking = models.StringField()
+    finalRanking = models.StringField()
     iteration = models.IntegerField(initial=0)
     num_trials = models.IntegerField(initial=0)
     num_correct = models.IntegerField(initial=0)
@@ -47,6 +48,9 @@ class Player(BasePlayer):
     task2 = models.IntegerField(label="Would you be willing to accept an extra 0.10 pence for substituting your top 1st  choice with your top 2nd?",
                                    choices=[[0, 'No'], [1, 'Yes']])
     task1 = models.StringField(blank=True)
+    q_beliefs = models.StringField(blank=True)
+    favopt = models.StringField()
+    impopt = models.StringField()
 
     def set_error_message(player, value):
         correct_answers = {
@@ -314,11 +318,25 @@ class ResultsGame(Page):
 
 class Ranking1(Page):
     form_model = 'player'
-    form_fields = ['ranking']
+    form_fields = ['finalRanking']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        menu = [
+                { "text": C.CHOICES[0], "id": "Choose A and  I watch the video after." },
+                {"text": C.CHOICES[1], "id": "Choose B and  I watch the video after."},
+                {"text": C.CHOICES[2], "id": "Watch the video and decide between A and B after."}
+            ]
+        random.shuffle(menu)
+       # print(menu)
+        return dict(
+            CHOICES = menu,
+
+        )
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        a = list(player.ranking.split(","))
+        a = list(player.finalRanking.split(","))
         player.ranking2_1 = a[0]
         player.ranking2_2 = a[1]
         player.ranking2_3 = a[2]
@@ -344,10 +362,14 @@ class Ranking2_switch(Page):
         return player.q_ranking2 == "Yes"
 
     def vars_for_template(player: Player):
-        return dict(
-                     ranking2_1 = player.ranking2_1,
-                     ranking2_2 = player.ranking2_2,
+        return dict(ranking_expost = f"{player.ranking2_2},{player.ranking2_1},{player.ranking2_3}",
+                     ranking2_1 = player.ranking2_2,
+                     ranking2_2 = player.ranking2_1,
                      ranking2_3 = player.ranking2_3)
+
+    def before_next_page(player, timeout_happened):
+        player.favopt = player.ranking2_2
+        player.impopt = random.choices([player.favopt,C.CHOICES[2]], weights=(1,0), k=1)[0]
 
 class Ranking2_noswitch(Page):
     form_model = 'player'
@@ -361,11 +383,26 @@ class Ranking2_noswitch(Page):
         return dict(
                      ranking2_1 = player.ranking2_1,
                      ranking2_2 = player.ranking2_2,
-                     ranking2_3 = player.ranking2_3)
+                     ranking2_3 = player.ranking2_3,
+                     ranking_expost= f"{player.ranking2_1},{player.ranking2_2},{player.ranking2_3}",)
+
+    def before_next_page(player, timeout_happened):
+        player.favopt = player.ranking2_1
+        player.impopt = random.choices([player.favopt,C.CHOICES[2]], weights=(0,1), k=1)[0]
+
+
+class Part3_Intro(Page):
+    form_model = 'player'
+    form_fields = []
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict( favopt = player.favopt,
+                     impopt = player.impopt)
+
 
 class Hypo_choice(Page):
     form_model = 'player'
     form_fields = ['task1']
 
-page_sequence = [ Ranking1, Ranking2, Ranking2_noswitch, Ranking2_switch]
+page_sequence = [ Ranking1, Ranking2, Ranking2_noswitch, Ranking2_switch, Part3_Intro]
 #InstructionsGame, Game, ResultsGame, Part2_Instruction_Page,

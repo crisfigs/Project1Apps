@@ -1,0 +1,67 @@
+{{ block title }}
+Part 3 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+
+
+Your favorite option was:
+      <div id= "grid" class="grid-container center" >
+  <div class="grid-item handle highlight card">{{favopt}}</div>
+      </div>
+
+<br>
+    <br>
+
+    The computer has selected the following option for implementation:
+
+
+
+  <div id= "grid" class="grid-container center" >
+  <div class="grid-item handle highlight card">{{impopt}}</div>
+      </div>
+    <br>
+
+    </div>
+    </div>
+
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+{{ form.errors }}
+{{ endblock }}
+

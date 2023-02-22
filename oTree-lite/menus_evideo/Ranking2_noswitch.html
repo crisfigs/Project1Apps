@@ -39,9 +39,10 @@ Part 2: Rank your options
 
 {{ block content }}
 <div class="card"><div class="card-body">
-You did not switched.
-<br>
-    Your ranking is as before:
+
+
+    <div class="card">  <div class="card-body">
+    You did not switched. Your ranking is as before:
   <div id= "grid1" class="grid-container">
     <div  class="">1st</div>
       <div  class="">2nd</div>
@@ -55,18 +56,31 @@ You did not switched.
       <div  class="grid-item card">{{ranking2_2 }}</div>
         <div  class="grid-item card">{{ranking2_3}}</div>
       </div>
+     </div> </div>
+        <br>
+    <br>
+    <br>
 
+Suppose that there is someone that provided the same ranking as you did and who is then faced with this option:
+     <br>
+    <br>
 
+    <div id = "grid" class=" center"><div class="grid-item card">'Watch the video and decide between A and B after.'</div></div>
 
+<br>
+    <div style="text-align: center">
+    What do you think this person will do?<br>If there is another person with your ranking, we will match you with this person and if your guess is correct, we will give you 0.10 pence.
+        <br><br><br>
+    Make your guess here:
+    <br>
+        <button name="q_beliefs" id="q_beliefs" value="A" class="btn btn-outline-primary">(S)he will choose Option A</button>
+        <button name="q_beliefs" id="q_beliefs" value="B" class="btn btn-outline-primary">(S)he will choose Option B</button>
+  </div></div>
     </div>
-    </div>
 
 
 
-<p>
-    {{ next_button }}
 
-</p>
 
 {{ endblock }}
 

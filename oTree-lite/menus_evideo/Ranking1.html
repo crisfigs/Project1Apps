@@ -14,9 +14,17 @@ Part 2: Rank your options
     .grid-container {
   display: grid;
   gap: 20px 0px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   padding: 10px;
         justify-items: center;
+
+}
+        .grid-container2 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-rows: auto auto auto;
+  padding: 10px;
+            justify-items: center;
 
 }
 .center {
@@ -35,6 +43,19 @@ Part 2: Rank your options
   width: 250px;
 
 }
+
+.grid-item1 {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+
+
 </style>
 {{ endblock }}
 
@@ -42,7 +63,7 @@ Part 2: Rank your options
 {{ block content }}
 <div class="card"><div class="card-body">
 Use your cursor to report your ranking of the three possibilities.
-  <div id= "grid1" class="grid-container">
+  <div id= "grid1" class="">
     <div   class="">1st</div>
       <div   class="">2nd</div>
       <div   class="">3rd</div>
@@ -50,10 +71,15 @@ Use your cursor to report your ranking of the three possibilities.
 
 
   <div id= "grid" class="grid-container center" style="cursor: move">
-      {{ for choice in C.CHOICES }}
-  <div data-id="{{ choice }}"  class="grid-item handle highlight card">{{ choice }}</div>
-      {{ endfor }}
+      {{ for choice in CHOICES}}
+
+
+        <div data-id="{{ choice.id }}"  class="grid-item handle highlight card">{{ choice.text }}</div>
+        <div data-id="{{ choice.id }}-empty"  class="grid-item1 handle highlight card "> 1</div>
+
+           {{ endfor }}
       </div>
+    <input id="finalRanking" name="finalRanking">
 
     </div>
     </div>
@@ -76,18 +102,33 @@ Use your cursor to report your ranking of the three possibilities.
             document.getElementById('ranking').value = sortable.toArray().join(',');
         }
     });
+    function submitForm(){
+        let iCount = 0;
+        let finalRanking = "";
+        for (let i=1;i<=5;i+=2){
+            let opt = document.getElementById("ranking").value.split(",")[i];
+            if (finalRanking=="") {
+                finalRanking += `${opt}`;
+            } else {
+                finalRanking += `,${opt}`;
+            }
+            iCount+=(opt.includes("empty"));
+        }
+        if (iCount==0){
+            document.getElementById("finalRanking").value = finalRanking;
+            document.getElementById("form").submit();
+        } else {
+            console.log("no funciono")
+            window.alert("Please rank your options.")
+        }
+    }
 </script>
-<script>
-var ul = document.getElementById('grid');
-for (var i = ul.children.length; i >= 0; i--) {
-    ul.appendChild(ul.children[Math.random() * i | 0]);
-}</script>
 
 
 <input name="ranking" id="ranking">
 
 <p>
-    {{ next_button }}
+    <button type="button" onclick="submitForm()">Proceed</button>
 
 </p>
 
