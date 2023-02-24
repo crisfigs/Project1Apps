@@ -24,6 +24,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     finalRanking = models.StringField()
+    sum_correct = models.IntegerField()
+    number = models.IntegerField()
 
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
@@ -177,6 +179,14 @@ class Ranking1(Page):
 class Part3_Intro(Page):
     form_model = 'player'
     form_fields = []
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if player.ranking2_1 == C.CHOICES[0]:
+            player.task1 ="A"
+        elif player.ranking2_1 == C.CHOICES[1]:
+            player.task1 ="B"
+        else:
+            pass
 
 
 
@@ -186,6 +196,7 @@ class Video_alert(Page):
 class Part3_Video(Page):
     form_model = 'player'
     form_fields = []
+    @staticmethod
 
     def vars_for_template(player):
        link = C.link1
@@ -213,6 +224,8 @@ class Attention1(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
+        player.number = random.choices([1,0], weights=(1, 100), k=1)[0]
+
 
 class FailedAttention(Page):
         form_model = 'player'
@@ -234,6 +247,10 @@ class Hypo_choice(Page):
     form_model = 'player'
     form_fields = ['task1']
 
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.ranking2_1 == C.CHOICES[2]
+
 class Hypo_choiceq(Page):
     form_model = 'player'
     form_fields = ['donationq','donationqother','charityq']
@@ -249,11 +266,6 @@ class EQ(Page):
 class Feedback(Page):
     form_model = 'player'
     form_fields = ['q_feedback', 'q_feedback_pilot']
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        import random
-        player.number = random.choices([1,0], weights=(1, 100), k=1)[0]
 
 
 
