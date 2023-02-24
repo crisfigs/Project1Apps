@@ -1,0 +1,66 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block styles %}
+<style>
+
+ul {
+    text-align: center;
+    list-style-position: inside;
+}
+
+</style>
+{% endblock %}
+
+    {% block scripts %}
+<script>
+    // Add this script with the rest of the javascript for your page
+
+//This bit creates 2 variables, one will function as a timer, the other will hold the timer output. They are set to 0 and -1 here to initialise them, these will not be the final outputs.
+var pageTimeElapsed = 0;
+var pageTimerID = -1;
+
+//This function captures the timer output. When the timer starts it will increase 'pageTimeElapsed' every second and send this value to the 'timeSpent' variable that will be saved
+//When a person moves to the next page, or the page times out, the final value that the timer was on will be saved. The value resets each round/page.
+function pageTick() {
+  pageTimeElapsed++
+  document.getElementById("timeSpent").value = pageTimeElapsed;
+}
+
+//This function automatically starts the timer when the page loads. In this case I want seconds so the interval is set to 1000, but I believe if you set it to 1 then it will count milliseconds - you will need to test this
+window.onload = function() {
+  if(pageTimerID == -1){
+    pageTimerID = setInterval(pageTick, 1000);
+  }
+};
+</script>
+{% endblock %}
+
+{% block title %}
+    Final Task
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+        Imagine you would have to make decision on how to divide money between yourself and the charity Save the Children. Further, imagine that you have the following two options:
+        <br>
+            <br>
+            <ul>
+                <li><b>Option A</b>: you get &pound10 and the charity gets &pound0.</li>
+                <li><b>Option B</b>: you get &pound3 and the charity gets &pound15. </li>
+            </ul>
+<br>
+     <div class=“parent”> <p style="text-align:center">Which choice would you make? Please make your choice here:</p>
+<br>
+
+ <div class=“child”><div style="position:absolute;left:300px;right: 0px;bottom: 10px"><button name="task1" id="task1" value="A" class="btn btn-outline-primary">Select option A</button></div> </div>
+
+ <div class=“child”><div style="position:absolute;left:500px;right: 0px;bottom: 10px"><button name="task1" id="task1" value="B" class="btn btn-outline-primary">Select option B</button> </div> </div>
+  </div>
+    </div>
+
+{% endblock %}
