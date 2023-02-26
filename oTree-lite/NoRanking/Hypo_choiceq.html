@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+
+{% block scripts %}
+
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="card">
+        <div class="card-body">
+
+            {{form.temptationqA.label}}
+            <input id="temptationqA" type="range" min="0" max="10" value="5" step="1">
+
+          </div>
+    </div>
+
+<div class="center"> {{ next_button }}</div>
+
+{% endblock %}
+

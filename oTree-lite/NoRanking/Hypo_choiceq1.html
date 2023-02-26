@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{{block styles }}
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+
+{% block scripts %}
+
+<script>
+var slider = document.getElementById("myRange");
+var slider2 = document.getElementById("d");
+slider.oninput = function() {
+
+  document.getElementById("temptationqA").value = this.value;
+}
+
+const output = document.querySelector('output')
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `intensity: ${percent}`
+    document.getElementById("temptationqA").value = `${value}`;
+}
+
+</script>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+<div class="slidecontainer">
+  <input id="myRange" type="range" min="1" max="100" value="50" >
+
+
+
+</div>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--label">How Spicy?</span>
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="32" min="0" max="100" oninput="doThings(event)" />
+	</span>
+</label>
+
+<output>change the slider</output>
+              <input  name="temptationqA" id="temptationqA">
+
+          </div>
+    </div>
+
+
+{{ formfield_errors "temptationqA"}}
+<br>
+<div class="center"> {{ next_button }}</div>
+
+{% endblock %}
+

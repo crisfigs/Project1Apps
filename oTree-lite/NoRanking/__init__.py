@@ -8,7 +8,7 @@ for more examples.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'SimpleRanking'
+    NAME_IN_URL = 'FChoice'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ['Choose A and watch the video after.', 'Choose B and watch the video after. ', 'Watch the video and decide between A and B after.' ]
@@ -23,26 +23,21 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    finalRanking = models.StringField()
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
     payment= models.IntegerField()
+
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q_change = models.IntegerField(label="3. After watching the I can still change my choice in:",
-                                   choices=[[0, 'Case 1'], [1, 'Case 2'], [2, 'Case 3']])
+
     q_video = models.IntegerField(label="5. Comprehension question on the video. ", choices=[[0, 'X'], [1, 'Y'], [2, 'Z']])
 
-    ranking2 = models.StringField()
-    ranking2_1 = models.StringField()
-    ranking2_2 = models.StringField()
-    ranking2_3 = models.StringField()
-    q_ranking2 = models.StringField(blank=True)
     task1 = models.StringField(blank=True)
 
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
+
     def make_field(label):
         return models.IntegerField(
             choices=[1, 2, 3, 4, 5],
@@ -69,14 +64,7 @@ class Player(BasePlayer):
             label=label,
             widget=widgets.RadioSelect,
         )
-    happy1 = make_field(label="Happy")
-    sad1 = make_field(label="Sad")
-    fear1 = make_field(label="Fear")
-    disgust1 = make_field(label="Disgust")
-    anger1 = make_field(label="Anger")
-    compassion1 = make_field(label="Compassion")
-    guilt1 = make_field(label="Guilt")
-    boredom1 = make_field(label="Boredom")
+
     happy2 = make_field(label="Happy")
     sad2 = make_field(label="Sad")
     fear2 = make_field(label="Fear")
@@ -128,13 +116,13 @@ class Player(BasePlayer):
     donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
     donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
     charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
-
-
+    temptationqA = models.IntegerField(label="How tempting did the video made Option A seem?")
+    temptationqB = models.IntegerField(label="How tempting did the video made Option B seem?", blank=True)
     def set_error_message(player, value):
         correct_answers = {
                         'q1A': 1,
                         'q1B': 1,
-                        'q_change': 2,
+
                         'q_video': 0}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
@@ -146,50 +134,13 @@ class Player(BasePlayer):
 
 class Part2_Instruction_Page(Page):
   form_model = 'player'
-  form_fields = ['q1A', 'q1B', 'q_change', 'q_video']
+  form_fields = ['q1A', 'q1B', 'q_video']
 
   def error_message(player,value):
       return player.set_error_message(value)
 
 
-class Ranking1(Page):
-    form_model = 'player'
-    form_fields = ['finalRanking']
 
-    @staticmethod
-    def vars_for_template(player: Player):
-        menu = [
-                { "text": C.CHOICES[0], "id": "Choose A and watch the video after." },
-                {"text": C.CHOICES[1], "id": "Choose B and watch the video after."},
-                {"text": C.CHOICES[2], "id": "Watch the video and decide between A and B after."}
-            ]
-        random.shuffle(menu)
-        return dict(
-            CHOICES = menu
-        )
-
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        a = list(player.finalRanking.split(","))
-        player.ranking2_1 = a[0]
-        player.ranking2_2 = a[1]
-        player.ranking2_3 = a[2]
-
-
-
-class Part3_Intro(Page):
-    form_model = 'player'
-    form_fields = []
-
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        if player.ranking2_1 == C.CHOICES[0]:
-            player.task1 = "A"
-            player.participant.vars["task1"] = "A"
-        elif player.ranking2_1 == C.CHOICES[1]:
-            player.task1 = "B"
-        else:
-            pass
 
 
 
@@ -250,13 +201,16 @@ class Hypo_choice(Page):
     form_model = 'player'
     form_fields = ['task1']
 
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.ranking2_1 == C.CHOICES[2]
+
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq']
+    form_fields = ['donationq','donationqother','charityq','temptationqA']
+
+
+class Hypo_choiceq1(Page):
+    form_model = 'player'
+    form_fields = ['temptationqA']
 
 class EQ(Page):
     form_model='player'
@@ -296,6 +250,9 @@ class Back(Page):
 
 
 
-page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, survey2, Openq, Attention1, FailedAttention,
-                     Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
+page_sequence = [Hypo_choiceq1]
+
+
+
+##[Part2_Instruction_Page,  Video_alert, Part3_Video, survey2, Openq, Attention1, FailedAttention,Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
 

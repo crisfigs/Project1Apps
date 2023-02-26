@@ -19,15 +19,39 @@ Part 1: Results
 
 
         {{ if player.num_correct >= 10 }}
-        <div class="alert alert-info" >
-        <b> You earn &pound 5. </b>
-        </div><br>
-         {{ elif player.num_correct < 10 }}<div class="alert alert-info" role="alert">
-        <b>You earn &pound 0. </b>
+        <div class="card body">
+        <b> You have earned &pound 5! </b>
+          <br>
+            Please click "Next" to proceed.
         </div>
-        {{ endif }}
- </div> </div>
+     </div> </div>
 
 <br>
 <div class="center1">{% next_button %}</div>
+
+<br>
+         {{ elif player.num_correct < 10 }}<div class="alert alert-secondary" >
+        <b>You have earned &pound 0... </b>
+      <br>
+            You cannot continue with this survey.
+        </div>
+ </div> </div>
+
+<br>
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="errorfct()" > Back to Prolific </button>
+        {{ endif }}
+
+
 {{ endblock }}
+
+{% block scripts%}
+<script>
+
+        let errorlink = js_vars.errorlink;
+        function errorfct() {
+            console.log("clicking the button")
+            window.location.href = errorlink;
+        }
+
+</script>
+{% endblock %}

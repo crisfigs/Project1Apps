@@ -283,7 +283,14 @@ class Game(Page):
             raise RuntimeError("malicious page submission")
 
 class ResultsGame(Page):
-    pass
+
+    def js_vars(player):
+        error_code = player.session.config["error_code"]
+        link = "https://app.prolific.co/submissions/complete?cc=" + str(error_code)
+        return dict(
+            errorlink=link
+        )
+
 
 
 
