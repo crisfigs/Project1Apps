@@ -32,7 +32,7 @@ class Player(BasePlayer):
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
 
-    q_video = models.IntegerField(label="5. Comprehension question on the video. ", choices=[[0, 'X'], [1, 'Y'], [2, 'Z']])
+    q_video = models.IntegerField(label="3. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
 
     task1 = models.StringField(blank=True)
 
@@ -113,22 +113,23 @@ class Player(BasePlayer):
                                       blank=True)
     q_feedback_pilot = models.LongStringField(label="If you found any instructions unclear or confusing, please let us know here.",
                                             blank=True)
-    donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
-    donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
-    charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
-    temptationqA = models.IntegerField(label="How tempting did the video made Option A seem?")
-    temptationqB = models.IntegerField(label="How tempting did the video made Option B seem?", blank=True)
+    donationq = models.IntegerField(label="1. Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
+    donationqother = models.IntegerField(label="2. Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
+    charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
+    temptationqA = models.IntegerField(label="4. How tempting did the video made Option A seem?",blank=True)
+    temptationqB = models.IntegerField(label="5. How tempting did the video made Option B seem?",blank=True)
+
     def set_error_message(player, value):
         correct_answers = {
                         'q1A': 1,
                         'q1B': 1,
-
-                        'q_video': 0}
+                        'q_video': 1}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
         if list_answers != list_correct_answers:
             Text = 'You did not answer all questions correctly. Please read the instructions again and correct your answers.'
             return Text
+
 
 ###PAGES
 
@@ -138,11 +139,6 @@ class Part2_Instruction_Page(Page):
 
   def error_message(player,value):
       return player.set_error_message(value)
-
-
-
-
-
 
 class Video_alert(Page):
     pass
@@ -177,7 +173,7 @@ class Attention1(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
+        player.sum_correct = player.controlq_cake + player.controlq_flute + player.controlq_airplane
         player.number = random.choices([1,0], weights=(1, 99), k=1)[0]
 
 
@@ -205,12 +201,11 @@ class Hypo_choice(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq','temptationqA']
+    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB']
 
 
-class Hypo_choiceq1(Page):
-    form_model = 'player'
-    form_fields = ['temptationqA']
+
+
 
 class EQ(Page):
     form_model='player'
@@ -219,6 +214,7 @@ class EQ(Page):
                    "qemp14","qemp15","qemp18","qemp21", "qemp22",
                    "qemp26", "qemp28", "qemp29", "qemp31", "qemp34",
                     "qemp35", "qemp36", "qemp38", "qemp39"]
+
 
 class Feedback(Page):
     form_model = 'player'
@@ -241,18 +237,14 @@ class Back(Page):
 
     def vars_for_template(player):
         #if selected for payment and chose A
-        if player.payment_number == 1 and player.task1 =="A":
+        if player.payment_number == 1 and player.task1 == "A":
             player.payment = 5
-        elif player.payment_number == 1 and player.task1 =="B":
+        elif player.payment_number == 1 and player.task1 == "B":
             player.payment = 1
         else:
-            pass
+            player.payment = 0
 
 
 
-page_sequence = [Hypo_choiceq1]
-
-
-
-##[Part2_Instruction_Page,  Video_alert, Part3_Video, survey2, Openq, Attention1, FailedAttention,Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page,  Video_alert, Part3_Video, survey2, Openq, Attention1, FailedAttention,Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
 

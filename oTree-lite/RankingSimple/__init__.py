@@ -30,10 +30,10 @@ class Player(BasePlayer):
     payment= models.IntegerField()
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
-    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
+    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
     q_change = models.IntegerField(label="3. After watching the I can still change my choice in:",
                                    choices=[[0, 'Case 1'], [1, 'Case 2'], [2, 'Case 3']])
-    q_video = models.IntegerField(label="5. Comprehension question on the video. ", choices=[[0, 'X'], [1, 'Y'], [2, 'Z']])
+    q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
 
     ranking2 = models.StringField()
     ranking2_1 = models.StringField()
@@ -125,9 +125,11 @@ class Player(BasePlayer):
                                       blank=True)
     q_feedback_pilot = models.LongStringField(label="If you found any instructions unclear or confusing, please let us know here.",
                                             blank=True)
-    donationq = models.IntegerField(label="Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
-    donationqother = models.IntegerField(label="Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
-    charityq = models.IntegerField(label="Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
+    donationq = models.IntegerField(label="1. Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
+    donationqother = models.IntegerField(label="2. Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
+    charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
+    temptationqA = models.IntegerField(label="4. How tempting did the video made Option A seem?",blank=True)
+    temptationqB = models.IntegerField(label="5. How tempting did the video made Option B seem?",blank=True)
 
 
     def set_error_message(player, value):
@@ -135,7 +137,7 @@ class Player(BasePlayer):
                         'q1A': 1,
                         'q1B': 1,
                         'q_change': 2,
-                        'q_video': 0}
+                        'q_video': 1}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
         if list_answers != list_correct_answers:
@@ -256,7 +258,7 @@ class Hypo_choice(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq']
+    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB']
 
 class EQ(Page):
     form_model='player'
@@ -287,9 +289,9 @@ class Back(Page):
 
     def vars_for_template(player):
         #if selected for payment and chose A
-        if player.payment_number == 1 and player.task1 =="A":
+        if player.payment_number == 1 and player.task1 == "A":
             player.payment = 5
-        elif player.payment_number == 1 and player.task1 =="B":
+        elif player.payment_number == 1 and player.task1 == "B":
             player.payment = 1
         else:
             pass

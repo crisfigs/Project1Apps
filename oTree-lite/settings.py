@@ -47,7 +47,7 @@ dict(
     ),
 dict(
         name='NoRanking',
-        app_sequence=['NoRanking'],
+        app_sequence=['RET','NoRanking'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",

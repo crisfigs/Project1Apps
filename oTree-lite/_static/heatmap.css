@@ -18,10 +18,10 @@
 }
  .heat-slider {
 	 --slider-base: #d8d8d8;
-	 --slider-red: #fc3770;
-	 --slider-orange: #ff7f36;
-	 --slider-yellow: #f6d866;
-	 --slider-green: #74c35a;
+	 --slider-red: #020a8d;
+	 --slider-orange: #1c26de;
+	 --slider-yellow: #2c35dd;
+	 --slider-green: #2c5edd;
 	 --slider-blue: #2c95dd;
 	 --slider-radius: 1em;
 	 --slider-handle-size: 1em;
@@ -74,7 +74,7 @@
 	 appearance: none;
 	 box-shadow: 0 0 0 0.2em #444;
 	 height: calc(var(--slider-handle-size) * 2);
-	 width:  500px ; /*var(--slider-handle-size) */
+	 width: var(--slider-handle-size)  ; /* 500px*/
 	 margin: calc(var(--slider-handle-size) * -1) 0;
 	 border-radius: var(--slider-radius, 1em);
 	 background: transparent;
