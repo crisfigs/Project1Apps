@@ -257,7 +257,9 @@ def creating_session(subsession: Subsession):
 
 ###PAGES
 class Welcome(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['prolific_id']
+
 
 class InstructionsGame(Page):
     pass
