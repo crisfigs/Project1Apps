@@ -197,6 +197,7 @@ class Part3_Intro(Page):
             player.participant.vars["task1"] = "A"
         elif player.ranking2_1 == C.CHOICES[1]:
             player.task1 = "B"
+            player.participant.vars["task1"] = "B"
         else:
             pass
 
