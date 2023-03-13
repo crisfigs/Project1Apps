@@ -11,7 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'SimpleRanking'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video. ', 'Watch the video first and then choose between A and B.' ]
+    CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.' ]
     link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
 
 
