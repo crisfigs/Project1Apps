@@ -8,7 +8,7 @@ for more examples.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'FChoice'
+    NAME_IN_URL = 'FChoice_g'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ['Choose A and watch the video after.', 'Choose B and watch the video after. ', 'Watch the video and decide between A and B after.' ]
