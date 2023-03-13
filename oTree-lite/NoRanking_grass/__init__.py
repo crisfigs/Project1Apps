@@ -30,7 +30,7 @@ class Player(BasePlayer):
 
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
-    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
+    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 8, charity: 1)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
 
     q_video = models.IntegerField(label="3. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
 
@@ -124,7 +124,7 @@ class Player(BasePlayer):
         correct_answers = {
                         'q1A': 1,
                         'q1B': 1,
-                        'q_video': 1}
+                        'q_video': 0}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
         if list_answers != list_correct_answers:
