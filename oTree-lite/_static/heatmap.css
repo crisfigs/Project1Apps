@@ -18,16 +18,29 @@
 }
  .heat-slider {
 	 --slider-base: #d8d8d8;
-	 --slider-red: #fc3770;
-	 --slider-orange: #ff7f36;
-	 --slider-yellow: #f6d866;
-	 --slider-green: #74c35a;
+	 --slider-red: #2c95dd;
+	 --slider-orange:#2c95dd;
+	 --slider-yellow: #2c95dd;
+	 --slider-green: #2c95dd;
 	 --slider-blue: #2c95dd;
 	 --slider-radius: 1em;
 	 --slider-handle-size: 1em;
 	 --p: 22.9%;
 	 width: 30em;
 }
+ /*
+  --slider-base: #d8d8d8;
+	 --slider-red: #fc3770;
+	 --slider-orange: #ff7f36;
+	 --slider-yellow: #f6d866;
+	 --slider-green: #74c35a;
+	 --slider-blue: #2c95dd;
+  */
+ /*--slider-red: #020a8d;
+	 --slider-orange: #1c26de;
+	 --slider-yellow: #2c35dd;
+	 --slider-green: #2c5edd;
+	 --slider-blue: #2c95dd;  */
  .heat-slider--input {
 	 position: relative;
 	 line-height: 0;

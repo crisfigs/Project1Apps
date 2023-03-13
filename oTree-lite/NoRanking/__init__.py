@@ -222,7 +222,7 @@ class Feedback(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.payment_number = random.choices([1,0], weights=(50, 50), k=1)[0]
+        player.payment_number = random.choices([1,0], weights=(20, 80), k=1)[0]
 
 class Back(Page):
     form_model = 'player'
@@ -246,5 +246,5 @@ class Back(Page):
 
 
 
-page_sequence = [Part2_Instruction_Page,  Video_alert, Part3_Video, survey2, Openq, Attention1, FailedAttention,Hypo_choice, Hypo_choiceq, EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page,  Video_alert, Part3_Video,Hypo_choice, Hypo_choiceq,  survey2, Openq, Attention1, FailedAttention, EQ, Feedback, Back]
 
