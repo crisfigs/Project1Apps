@@ -11,7 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'FChoice'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    CHOICES = ['Choose A and watch the video after.', 'Choose B and watch the video after. ', 'Watch the video and decide between A and B after.' ]
+    CHOICES = ['Choose A and watch the video after.', 'Choose B and watch the video after. ', 'Watch the video first and then choose between A and B.' ]
     link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
 
 class Subsession(BaseSubsession):

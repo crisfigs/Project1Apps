@@ -170,7 +170,7 @@ class Ranking1(Page):
         menu = [
                 { "text": C.CHOICES[0], "id": "Choose A and watch the video after." },
                 {"text": C.CHOICES[1], "id": "Choose B and watch the video after."},
-                {"text": C.CHOICES[2], "id": "Watch the video and decide between A and B after."}
+                {"text": C.CHOICES[2], "id": "Watch the video first and then choose between A and B."}
             ]
         random.shuffle(menu)
         return dict(
