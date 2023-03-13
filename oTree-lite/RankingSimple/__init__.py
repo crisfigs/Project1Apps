@@ -168,8 +168,8 @@ class Ranking1(Page):
     @staticmethod
     def vars_for_template(player: Player):
         menu = [
-                { "text": C.CHOICES[0], "id": "Choose A and watch the video after." },
-                {"text": C.CHOICES[1], "id": "Choose B and watch the video after."},
+                { "text": C.CHOICES[0], "id": 'Choose A and then watch the video.' },
+                {"text": C.CHOICES[1], "id":'Choose B and then watch the video.'},
                 {"text": C.CHOICES[2], "id": "Watch the video first and then choose between A and B."}
             ]
         random.shuffle(menu)
