@@ -167,7 +167,7 @@ class Part2_Instruction_Page(Page):
 
 class Ranking1(Page):
     form_model = 'player'
-    form_fields = ['finalRanking1','finalRanking2','finalRanking3']
+    form_fields = ['finalRanking1','finalRanking2','finalRanking3','impopt']
 
     @staticmethod
     def vars_for_template(player: Player):
