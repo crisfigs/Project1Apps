@@ -181,12 +181,15 @@ class Ranking1(Page):
             CHOICES = menu
         )
     def before_next_page(player, timeout_happened):
-        if player.finalRanking1.ndim == 1:
+        if len(player.finalRanking1[0]) == 1:
             player.impopt = random.choices([player.finalRanking1, C.CHOICES[2]], weights=(1, 0), k=1)[0]
-        if player.finalRanking1.ndim == 2:
-            finalRanking1_rand = random.choices([player.finalRanking1[1], player.finalRanking1[2]], weights=(50, 50), k=1)[0]
-            player.impopt = random.choices([finalRanking1_rand, C.CHOICES[2]], weights=(1, 0), k=1)[0]
+        elif len(player.finalRanking1[0]) == 2:
 
+            finalRanking1_rand = random.choices([player.finalRanking1[1], player.finalRanking1[2]], weights=(50, 50), k=1)[0]
+
+            player.impopt = random.choices([finalRanking1_rand, C.CHOICES[2]], weights=(1, 0), k=1)[0]
+        else:
+            pass
 
 # @staticmethod
     #def before_next_page(player: Player, timeout_happened):
@@ -206,10 +209,10 @@ class Part3_Intro(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        if player.ranking2_1 == C.CHOICES[0]:
+        if player.impopt == C.CHOICES[0]:
             player.task1 = "A"
             player.participant.vars["task1"] = "A"
-        elif player.ranking2_1 == C.CHOICES[1]:
+        elif player.impopt == C.CHOICES[1]:
             player.task1 = "B"
             player.participant.vars["task1"] = "B"
         else:
@@ -320,6 +323,6 @@ class Back(Page):
 
 
 
-page_sequence = [Part2_Instruction_Page, Ranking1, Back]
+page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro,]
 
 #page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
