@@ -30,7 +30,11 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    finalRanking = models.StringField()
+    finalRanking1 = models.StringField()
+    finalRanking2 = models.StringField(blank=True)
+    finalRanking3 = models.StringField(blank=True)
+    impopt = models.StringField()
+
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
@@ -163,7 +167,7 @@ class Part2_Instruction_Page(Page):
 
 class Ranking1(Page):
     form_model = 'player'
-    form_fields = ['finalRanking']
+    form_fields = ['finalRanking1','finalRanking2','finalRanking3']
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -176,14 +180,24 @@ class Ranking1(Page):
         return dict(
             CHOICES = menu
         )
+    def before_next_page(player, timeout_happened):
+        if player.finalRanking1.ndim == 1:
+            player.impopt = random.choices([player.finalRanking1, C.CHOICES[2]], weights=(1, 0), k=1)[0]
+        if player.finalRanking1.ndim == 2:
+            finalRanking1_rand = random.choices([player.finalRanking1[1], player.finalRanking1[2]], weights=(50, 50), k=1)[0]
+            player.impopt = random.choices([finalRanking1_rand, C.CHOICES[2]], weights=(1, 0), k=1)[0]
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        a = list(player.finalRanking.split(","))
-        player.ranking2_1 = a[0]
-        player.ranking2_2 = a[1]
-        player.ranking2_3 = a[2]
 
+# @staticmethod
+    #def before_next_page(player: Player, timeout_happened):
+     #    if (finalRanking1.ndim ==2)
+
+#Part3 Intro
+##Your top 1 option(s) was(were):
+#print row 1
+#Recall you will face option "" with a 40% chance and your preffered option (either of your preferred option) with  60%.
+#Following that rule, the option that is implemented is:
+# result from randmoization.
 
 
 class Part3_Intro(Page):
@@ -306,5 +320,6 @@ class Back(Page):
 
 
 
-page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, Ranking1, Back]
 
+#page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]

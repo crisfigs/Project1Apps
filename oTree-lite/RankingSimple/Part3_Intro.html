@@ -38,11 +38,11 @@ Part 3 : Instructions
 <p>The alternative you preferred the most is the following:</p>
 
       <div id= "grid" class="grid-container center" >
-  <div class="grid-item card center">{{ player.ranking2_1 }}</div>
+  <div class="grid-item card center">{{ player.finalRanking1 }}</div>
       </div>
     <br>
-{{if player.ranking2_1 == 'Choose A and then watch the video.'}} Thus, option A is chosen and you will see the video in what follows.
-    {{elif player.ranking2_1 == 'Choose B and then watch the video.'}} Thus, option B is chosen and you will see the video in what follows.
+{{if player.impopt == 'Choose A and then watch the video.'}} Thus, option A is chosen and you will see the video in what follows.
+    {{elif player.impopt == 'Choose B and then watch the video.'}} Thus, option B is chosen and you will see the video in what follows.
     {{else}} Thus, you will see the video in what follows and make a choice between option A or B afterwards.
     {{endif}}
     </div>
