@@ -176,20 +176,36 @@ If you rank one option over another it means you prefer the top option better.  
         let r2 = document.getElementById("ranking").value.split(",")[4];
         let r3 = document.getElementById("ranking").value.split(",")[8];
         let iCount = (r1.includes("empty"))+(r2.includes("empty"))+(r3.includes("empty"))
-        let row1 = [];
-        let row2 = [];
-        let row3 = [];
+        let row1 = "";
+        let row2 = "";
+        let row3 = "";
         for (let i=1; i < 4 ; i++) {
             if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
-            row1.push(document.getElementById("ranking").value.split(",")[i])}
-        }
+                op1 = document.getElementById("ranking").value.split(",")[i]
+                if (row1=="") {
+                row1 += `'${op1}'`;
+                } else {
+                row1 += `,'${op1}'`;
+            }
+            }}
         for (let i=5; i < 8 ; i++) {
             if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
-            row2.push(document.getElementById("ranking").value.split(",")[i])}
-        }
+                op2 = document.getElementById("ranking").value.split(",")[i]
+                if (row2=="") {
+                row2 += `'${op2}'`;
+                } else {
+                row2 += `,'${op2}'`;
+            }
+            }}
         for (let i=9; i < 12 ; i++) {
             if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
-            row3.push(document.getElementById("ranking").value.split(",")[i])}
+                op3 = document.getElementById("ranking").value.split(",")[i]
+                if (row3=="") {
+                    row3 += `'${op3}'`;
+                } else {
+                    row3 += `,'${op3}'`;
+                }
+            }
         }
             if (iCount == 3){
                 document.getElementById("finalRanking1").value = row1;

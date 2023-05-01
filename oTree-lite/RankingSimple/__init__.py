@@ -33,8 +33,11 @@ class Player(BasePlayer):
     finalRanking1 = models.StringField()
     finalRanking2 = models.StringField(blank=True)
     finalRanking3 = models.StringField(blank=True)
-    impopt = models.StringField()
-
+    pref1 = models.StringField()
+    pref2 = models.StringField(blank=True)
+    pref3 = models.StringField(blank=True)
+    imp = models.StringField()
+    length = models.IntegerField()
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
@@ -167,7 +170,31 @@ class Part2_Instruction_Page(Page):
 
 class Ranking1(Page):
     form_model = 'player'
-    form_fields = ['finalRanking1','finalRanking2','finalRanking3','impopt']
+    form_fields = ['finalRanking1','finalRanking2','finalRanking3']
+
+    def before_next_page(player: Player, timeout_happened):
+        li = list(player.finalRanking1.split(","))
+        player.length = len(list(player.finalRanking1.split(",")))
+        if len(li)==1:
+            player.pref1 = li[0]
+            #weights=(40, 60)
+            player.imp = random.choices([li[0], C.CHOICES[2]], weights=(1,0), k=1)[0]
+        elif len(li) == 2:
+            player.pref1 = li[0]
+            player.pref2 = li[1]
+            #weights=(30,30,40)
+            player.imp = random.choices([li[0],li[1], C.CHOICES[2]], weights=(0,1,0), k=1)[0]
+        elif len(li) == 3:
+            player.pref1 = li[0]
+            player.pref2 = li[1]
+            player.pref3 = li[2]
+            player.imp = random.choices([li[0],li[1],li[2], C.CHOICES[2]], weights=(0, 0, 1, 0), k=1)[0]
+        else:
+            player.pref1 = "Error"
+            player.imp= "Error"
+
+
+
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -180,16 +207,9 @@ class Ranking1(Page):
         return dict(
             CHOICES = menu
         )
-    def before_next_page(player, timeout_happened):
-        if len(player.finalRanking1[0]) == 1:
-            player.impopt = random.choices([player.finalRanking1, C.CHOICES[2]], weights=(1, 0), k=1)[0]
-        elif len(player.finalRanking1[0]) == 2:
 
-            finalRanking1_rand = random.choices([player.finalRanking1[1], player.finalRanking1[2]], weights=(50, 50), k=1)[0]
 
-            player.impopt = random.choices([finalRanking1_rand, C.CHOICES[2]], weights=(1, 0), k=1)[0]
-        else:
-            pass
+
 
 # @staticmethod
     #def before_next_page(player: Player, timeout_happened):
@@ -207,12 +227,18 @@ class Part3_Intro(Page):
     form_model = 'player'
     form_fields = []
 
-    @staticmethod
+
+    #def vars_for_template(player):
+     #   return dict(
+      #      pref1 = player.pref1,
+       #     pref2 =player.pref2,
+        #    pref3 = player.pref3)
+
     def before_next_page(player: Player, timeout_happened):
-        if player.impopt == C.CHOICES[0]:
+        if player.imp == C.CHOICES[0]:
             player.task1 = "A"
             player.participant.vars["task1"] = "A"
-        elif player.impopt == C.CHOICES[1]:
+        elif player.imp == C.CHOICES[1]:
             player.task1 = "B"
             player.participant.vars["task1"] = "B"
         else:
@@ -323,6 +349,6 @@ class Back(Page):
 
 
 
-page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro,]
+page_sequence = [Ranking1, Part3_Intro,]
 
 #page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]

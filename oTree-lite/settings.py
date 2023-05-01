@@ -40,7 +40,7 @@ dict(
     ),
 dict(
         name='SimpleRanking',
-        app_sequence=['RET','RankingSimple'],
+        app_sequence=['RankingSimple'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
