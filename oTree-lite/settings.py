@@ -39,7 +39,7 @@ dict(
         error_code="ECODE",
     ),
 dict(
-        name='SimpleRanking',
+        name='SimpleRanking_ties',
         app_sequence=['RET','RankingSimple'],
         num_demo_participants=2,
         cc_code="CCCODE",
