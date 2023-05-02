@@ -171,17 +171,17 @@ class Ranking1(Page):
         if len(li)==1:
             player.pref1_1 = li[0]
             #weights=(40, 60)
-            player.imp = random.choices([li[0], C.CHOICES[2]], weights=(40,60), k=1)[0]
+            player.imp = random.choices([li[0],"'Watch the video first and then choose between A and B.'"], weights=(0,100), k=1)[0]
         elif len(li) == 2:
             player.pref1_1 = li[0]
             player.pref1_2 = li[1]
             #weights=(30,30,40)
-            player.imp = random.choices([li[0],li[1], C.CHOICES[2]], weights=(30,30,40), k=1)[0]
+            player.imp = random.choices([li[0],li[1], "'Watch the video first and then choose between A and B.'"], weights=(30,30,40), k=1)[0]
         elif len(li) == 3:
             player.pref1_1 = li[0]
-            player.pref2_1 = li[1]
-            player.pref3_1 = li[2]
-            player.imp = random.choices([li[0],li[1],li[2], C.CHOICES[2]], weights=(20, 20, 20, 40), k=1)[0]
+            player.pref1_2 = li[1]
+            player.pref1_3 = li[2]
+            player.imp = random.choices([li[0],li[1],li[2], "'Watch the video first and then choose between A and B.'"], weights=(20,20,20,40), k=1)[0]
         else:
             player.pref1_1 = "Error"
             player.imp= "Error"
