@@ -99,24 +99,28 @@ transform: scale(2.7);
 <div class="card" style="height:  120%; width: 107%"><div class="card-body" style="
   height:  120%;
   width: 100%">
- We would like to know how you rank the three alternatives from the most to the least preferred. To rank an alternative you need to drag it to its respective ranking. Hover over the pictures below to see two examples.
+ We would like to know how you <b>rank the three alternatives</b> from the most to the least preferred. To rank an alternative you need to drag it to its respective ranking. Hover over the pictures below to see two examples.
     <br>
     <br>
 
     <div class="row">
         <div class="column">
-            <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img1" alt="Delete image" width="350" height="200" />
-If you rank one option over another it means you prefer the top option better.        </div>
+            <img src="https://www.dropbox.com/s/zea5wd5v202eop3/ranking_animation.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
+If you rank one option over another it means you  <b>prefer the top</b>  option better.        </div>
         <div class="column">
-            <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200" />
-        If you are indifferent between two options you rank them together in your preferred ranking.
+            <!-- <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200" />
+ -->
+
+            <img src="https://www.dropbox.com/s/eje844ud3hrdkmy/ties_animation.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
+
+            If you are <b>indifferent</b> between two options (or more) you <b>rank them together</b> in your preferred ranking.
         </div>
     </div>
 
     <br>
     <br>
     Please rank the options from the most to the least preferred by dragging them to the different positions below.
-    There is a 40% chance that you face the "Watch the video and then decide between A and B"  option and a 60% that you face your most preferred alternative (or alternatives in case your most top 1 is a tie).
+    There is a 40% chance that you face the "Watch the video and then decide between A and B"  option and a 60% that you face your most preferred alternative (or alternatives in case your top 1 includes more than one alternative).
 
 
  <br>
@@ -171,7 +175,6 @@ If you rank one option over another it means you prefer the top option better.  
     });
 
     function submitForm(){
-
         let r1 = document.getElementById("ranking").value.split(",")[0];
         let r2 = document.getElementById("ranking").value.split(",")[4];
         let r3 = document.getElementById("ranking").value.split(",")[8];
@@ -218,20 +221,24 @@ If you rank one option over another it means you prefer the top option better.  
             }
         }
 
+
+        /* .Hover image 1 and 2*/
     const states = {
-  'default': "{% static 'ties210.png' %}",
+  'default': "{% static 'ties0.png' %}",
   'hover': "https://www.dropbox.com/s/eje844ud3hrdkmy/ties_animation.gif?raw=1"
+  /*      'default2': "{% static 'ranking0.png' %}",
+  /*'hover2': "https://www.dropbox.com/s/zea5wd5v202eop3/ranking_animation.gif?raw=1",*/
 };
 
-let img = document.querySelector('#hover-img');
+    let img1 = document.querySelector('#hover-img');
+    /* let img2 = document.querySelector('#hover-img2'); */
 
-img.addEventListener('mouseenter', function(e) {
-  img.setAttribute('src', states.hover);
-});
-img.addEventListener('mouseleave', function(e) {
-  img.setAttribute('src', states.default);
-});
-
+    img1.addEventListener('mouseenter', function(e) {
+        img1.setAttribute('src', states.hover);
+    });
+    img1.addEventListener('mouseleave', function(e) {
+        img1.setAttribute('src', states.default);
+    });
 
 </script>
 

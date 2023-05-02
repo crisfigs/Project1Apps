@@ -11,7 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'SimpleRanking'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.' ]
+    CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
     link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
 
 
@@ -211,28 +211,9 @@ class Ranking1(Page):
 
 
 
-# @staticmethod
-    #def before_next_page(player: Player, timeout_happened):
-     #    if (finalRanking1.ndim ==2)
-
-#Part3 Intro
-##Your top 1 option(s) was(were):
-#print row 1
-#Recall you will face option "" with a 40% chance and your preffered option (either of your preferred option) with  60%.
-#Following that rule, the option that is implemented is:
-# result from randmoization.
-
-
 class Part3_Intro(Page):
     form_model = 'player'
     form_fields = []
-
-
-    #def vars_for_template(player):
-     #   return dict(
-      #      pref1 = player.pref1,
-       #     pref2 =player.pref2,
-        #    pref3 = player.pref3)
 
     def before_next_page(player: Player, timeout_happened):
         if player.imp == C.CHOICES[0]:
@@ -305,7 +286,7 @@ class Hypo_choice(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.ranking2_1 == C.CHOICES[2]
+      return player.imp == "'Watch the video first and then choose between A and B.'"
 
 class Hypo_choiceq(Page):
     form_model = 'player'
@@ -347,8 +328,5 @@ class Back(Page):
         else:
             pass
 
-
-
-page_sequence = [Ranking1, Part3_Intro,]
-
-#page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
+#page_sequence = [ Ranking1, Part3_Intro, Hypo_choice]
+page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
