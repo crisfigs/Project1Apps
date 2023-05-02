@@ -29,15 +29,6 @@ class Player(BasePlayer):
     num_failed = models.IntegerField(initial=0)
     prolific_id = models.StringField()
 
-    #Comprehension questions
-    q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
-    q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 1, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q_change = models.IntegerField(label="3. After watching the I can still change my choice in:",
-                                   choices=[[0, 'Case 1'], [1, 'Case 2'], [2, 'Case 3']])
-    q_imp = models.IntegerField(label="4. Select the correct answer. My choice is implemented:",
-                                   choices=[[0, 'Always'], [2, 'with a 40% chance and the computer chooses option three with 60%'],  [1, 'with a 60% chance and the computer chooses option three with 40%'],[3, 'Never']])
-
-    q_video = models.IntegerField(label="5. Comprehension question on the video. ", choices=[[0, 'X'], [1, 'Y'], [2, 'Z']])
 
     def set_error_message(player, value):
         correct_answers = {

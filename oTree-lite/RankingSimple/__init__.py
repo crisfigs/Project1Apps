@@ -34,15 +34,16 @@ class Player(BasePlayer):
     finalRanking1 = models.StringField()
     finalRanking2 = models.StringField(blank=True)
     finalRanking3 = models.StringField(blank=True)
-    pref1 = models.StringField()
-    pref2 = models.StringField(blank=True)
-    pref3 = models.StringField(blank=True)
+    pref1_1 = models.StringField()
+    pref1_2 = models.StringField(blank=True)
+    pref1_3 = models.StringField(blank=True)
     imp = models.StringField()
     length = models.IntegerField()
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
     payment= models.IntegerField()
+
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
@@ -50,11 +51,7 @@ class Player(BasePlayer):
                                    choices=[[0, 'In none of the alternatives.'], [1, 'In all of the alternatives.'], [2, 'In one of the alternatives.']])
     q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
 
-    ranking2 = models.StringField()
-    ranking2_1 = models.StringField()
-    ranking2_2 = models.StringField()
-    ranking2_3 = models.StringField()
-    q_ranking2 = models.StringField(blank=True)
+
     task1 = models.StringField(blank=True)
 
     openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
@@ -84,14 +81,9 @@ class Player(BasePlayer):
             label=label,
             widget=widgets.RadioSelect,
         )
-    happy1 = make_field(label="Happy")
-    sad1 = make_field(label="Sad")
-    fear1 = make_field(label="Fear")
-    disgust1 = make_field(label="Disgust")
-    anger1 = make_field(label="Anger")
-    compassion1 = make_field(label="Compassion")
-    guilt1 = make_field(label="Guilt")
-    boredom1 = make_field(label="Boredom")
+
+
+
     happy2 = make_field(label="Happy")
     sad2 = make_field(label="Sad")
     fear2 = make_field(label="Fear")
@@ -177,21 +169,21 @@ class Ranking1(Page):
         li = list(player.finalRanking1.split(","))
         player.length = len(list(player.finalRanking1.split(",")))
         if len(li)==1:
-            player.pref1 = li[0]
+            player.pref1_1 = li[0]
             #weights=(40, 60)
             player.imp = random.choices([li[0], C.CHOICES[2]], weights=(1,0), k=1)[0]
         elif len(li) == 2:
-            player.pref1 = li[0]
-            player.pref2 = li[1]
+            player.pref1_1 = li[0]
+            player.pref1_2 = li[1]
             #weights=(30,30,40)
             player.imp = random.choices([li[0],li[1], C.CHOICES[2]], weights=(0,1,0), k=1)[0]
         elif len(li) == 3:
-            player.pref1 = li[0]
-            player.pref2 = li[1]
-            player.pref3 = li[2]
+            player.pref1_1 = li[0]
+            player.pref2_1 = li[1]
+            player.pref3_1 = li[2]
             player.imp = random.choices([li[0],li[1],li[2], C.CHOICES[2]], weights=(0, 0, 1, 0), k=1)[0]
         else:
-            player.pref1 = "Error"
+            player.pref1_1 = "Error"
             player.imp= "Error"
 
 
