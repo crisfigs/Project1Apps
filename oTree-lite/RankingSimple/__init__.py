@@ -171,7 +171,7 @@ class Ranking1(Page):
         if len(li)==1:
             player.pref1_1 = li[0]
             #weights=(40, 60)
-            player.imp = random.choices([li[0],"'Watch the video first and then choose between A and B.'"], weights=(0,100), k=1)[0]
+            player.imp = random.choices([li[0],"'Watch the video first and then choose between A and B.'"], weights=(40,60), k=1)[0]
         elif len(li) == 2:
             player.pref1_1 = li[0]
             player.pref1_2 = li[1]
