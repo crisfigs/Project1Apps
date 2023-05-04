@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+{% block title %}Part 3: Attention check{% endblock %}
+
+{% block content %}
+  <div class="card">
+  <div class="card-body">
+     <p> Attention is important for this study. Before continuing and to guarantee that you followed instructions and saw the video,
+         please answer the following questions. You need to answer at least 2 questions correctly. If you do not, you have a chance of 1 in 100 to be sent back to Prolific.</p>
+
+<p> The following appeared in the video...</p>
+       {{formfields}}
+      </div></div>
+
+<br>
+ <p>Please, press "Next" to submit your answers. </p>
+<div class="center">{% next_button %}</div>
+{% endblock %}
+
+
+
+

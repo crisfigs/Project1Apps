@@ -2,13 +2,12 @@ from otree.api import *
 import random
 
 doc = """
-Many things. The sortable ranking is based on: "Widget to rank/reorder items". See http://sortablejs.github.io/Sortable/
-for more examples.
+Just to share a gif.
 """
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'SimpleRanking'
+    NAME_IN_URL = 'gifs'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
@@ -321,5 +320,5 @@ class Back(Page):
         else:
             pass
 
-#page_sequence = [ Ranking1, Part3_Intro, Hypo_choice]
-page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Ranking1]
+#page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]

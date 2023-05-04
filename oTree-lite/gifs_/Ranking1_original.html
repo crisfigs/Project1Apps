@@ -1,0 +1,166 @@
+{{ block title }}
+Part 2: Rank each situation
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+.handle {
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+    .grid-container {
+  display: grid;
+  gap: 20px 20px;
+  grid-template-columns: auto auto auto;
+  padding: 0px;
+        justify-items: center;
+
+        width: 700px;
+
+}
+.a {
+    padding: 8px 16px;
+     background-color:#1E90FF;
+     border-radius: 15%;
+     border: rgba(0, 0, 0, 0);
+     color: white;
+}
+
+.a:hover {
+  background-color:#4169E1;
+  color: white;
+
+}
+
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+    height: 150px;
+  width: 250px;
+
+}
+
+.grid-item1 {
+  background-color: rgba(0,0,0,0);
+  border: 1px rgba(1, 1, 1, 1);
+    border-top-style: solid;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+
+.my_text {
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+      text-decoration: underline;
+    text-underline-position: under;
+
+}
+
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card"><div class="card-body">
+ We would like to know how you rank the three alternatives from the most to the least preferred. Your most preferred alternative, the one that you rank 1st, is the one that will be implemented. Please rank the option from the most to the least preferred  by dragging them to the different positions.
+
+    <br>
+    <br>
+    <br>
+        <br>
+    <br>
+
+  <div id= "grid" class="grid-container center" style="cursor: move">
+      {{ for choice in CHOICES}}
+        <div data-id="{{ choice.id }}"  class="grid-item handle highlight card">{{ choice.text }}</div>
+      <!--<div data-id="{{ choice.id }}-empty"  class="grid-item1 handle highlight card "> </div>-->
+      <div data-id="-empty"  class="grid-item1 handle highlight "> </div>
+      <div data-id="-empty"  class="grid-item1 handle highlight "> </div>
+
+           {{ endfor }}
+  </div>
+<br>
+
+<div class="child">
+    <h1 style="position:absolute;top: 90px; left: 480px; right: 200px; bottom: 30px" class="my_text">      Your Ranking      </div>
+    <div style="position:absolute;top: 180px; left: 670px; right: 100px; bottom: 30px"><img width="100" height="480" src="{% static 'numbers.png' %}" ></div>
+
+<!-- <input type="hidden" id="finalRanking" name="finalRanking">-->
+    <input id="finalRanking" name="finalRanking">
+
+    </div>
+    </div>
+<!-- <input type="hidden" name="ranking" id="ranking">-->
+
+<input  name="ranking" id="ranking">
+<br>
+
+<p>
+    <div class="center"><button style="text-align:center"
+      type="button" class="btn btn-primary btn-right btn-lg" onclick="submitForm()">Next </button></div>
+</p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.js"></script>
+<link href="{% static 'custom.css' %}" rel="stylesheet">
+
+<script>
+    let el = document.getElementById('grid');
+    let sortable = Sortable.create(el, {
+        direction: 'horizontal',
+        swap: true,
+        swapClass: "highlight",
+        swapThreshold: 10,
+        handle: '.handle',
+        animation: 1500,
+        onEnd: function (evt) {
+            document.getElementById('ranking').value = sortable.toArray().join(',');
+        }
+    });
+    function submitForm(){
+        let iCount = 0;
+        let finalRanking = "";
+        for (let i=1;i<=5;i+=2){
+            let opt = document.getElementById("ranking").value.split(",")[i];
+            if (finalRanking=="") {
+                finalRanking += `${opt}`;
+            } else {
+                finalRanking += `,${opt}`;
+            }
+            iCount+=(opt.includes("empty"));
+        }
+        if (iCount==0){
+            document.getElementById("finalRanking").value = finalRanking;
+            document.getElementById("form").submit();
+        } else {
+            console.log("no funciono")
+            window.alert("Please rank your options.")
+        }
+    }
+</script>
+
+
+
+
+{{ endblock }}
