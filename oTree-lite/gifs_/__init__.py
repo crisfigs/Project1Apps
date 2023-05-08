@@ -208,10 +208,10 @@ class Part3_Intro(Page):
     form_fields = []
 
     def before_next_page(player: Player, timeout_happened):
-        if player.imp == C.CHOICES[0]:
+        if player.imp == "'Choose A and then watch the video.'":
             player.task1 = "A"
             player.participant.vars["task1"] = "A"
-        elif player.imp == C.CHOICES[1]:
+        elif player.imp == "'Choose B and then watch the video.'":
             player.task1 = "B"
             player.participant.vars["task1"] = "B"
         else:

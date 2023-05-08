@@ -1,0 +1,71 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+
+{% endblock %}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{{ endblock }}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+    <br>
+            {{form.qa.label}}
+    <br>
+<br>
+    {{ for choice in form.qa }}
+
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    {{ endfor }}
+    <br>Very unlikely &nbsp &nbsp &nbsp &nbsp&nbsp Quite unlikely &nbsp &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuite likely&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbspVery likely &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp
+
+
+    <br>
+    <br>
+
+
+
+  <div>
+    <p>Recall that your ranking was the following:</p>
+      <img src="{% static 'BopenA.png' %}" width="400" height="500">
+
+</div>
+
+
+
+  </div>
+</div>
+<br>
+<div class="center"> {{ next_button }}</div>
+
+{% endblock %}

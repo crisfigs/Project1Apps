@@ -40,7 +40,7 @@ dict(
     ),
 dict(
         name='SimpleRanking_ties',
-        app_sequence=['RET','RankingSimple'],
+        app_sequence=['RankingSimple'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
@@ -104,4 +104,4 @@ SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
 
-DEBUG = False
+DEBUG = True
