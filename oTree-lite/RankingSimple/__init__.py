@@ -102,7 +102,7 @@ class Player(BasePlayer):
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
 
     ##Beliefs
-    qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?",
+    ##qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?",
                                        choices=[0, 1, 2, 3], widget=widgets.RadioSelectHorizontal)
     ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
@@ -227,12 +227,12 @@ class Part3_Intro(Page):
         else:
             pass
 
-class qa(Page):
-    form_model = 'player'
-    form_fields = ['qa']
+##class qa(Page):
+    ##    form_model = 'player'
+    ##form_fields = ['qa']
 
-    def is_displayed(player: Player):
-        return player.finalRanking1 == "'Choose B and then watch the video.'" and player.finalRanking2 == "'Watch the video first and then choose between A and B.'" and player.finalRanking3 == "'Choose A and then watch the video.'"
+        ## def is_displayed(player: Player):
+##    return player.finalRanking1 == "'Choose B and then watch the video.'" and player.finalRanking2 == "'Watch the video first and then choose between A and B.'" and player.finalRanking3 == "'Choose A and then watch the video.'"
 
 
 
