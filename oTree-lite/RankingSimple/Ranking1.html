@@ -83,7 +83,8 @@ transform: scale(2.7);
 
 }
 .my_text {
-  font-size: 25px;
+  font-size: 50px;
+    width: 300px;
   font-family: "Times New Roman", Times, serif;
       text-decoration: underline;
     text-underline-position: under;
@@ -111,8 +112,7 @@ transform: scale(2.7);
             If you rank one option over another it means you  <b>prefer the top</b>  option better.        </div>
 
         <div class="column">
-            <!-- <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200" />
- -->
+            <!-- <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200"/> -->
             <img src="https://www.dropbox.com/s/enbzvl5e7bdo4ky/ties_animation2.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
        <!--   <img src="{% static 'ties210.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200" />-->
 
@@ -124,7 +124,9 @@ transform: scale(2.7);
     <br>
     <br>
     Please rank the options from the most to the least preferred by dragging them to the different positions below.
-    There is a 60% chance that you face your most preferred alternative. If more than one alternative is ranked at the top, then, with a 60% chance, you will face either alternative with equal likelihood. With the other 40% chance you will "Watch the video and decide between A and B after".
+    There is a 60% chance that you face your most preferred alternative.
+    If you have two equally most preferred alternatives then you will face each with a 30% chance and if you have three, then each with a 20% chance.
+    In any case, with the other 40% chance you will "Watch the video and decide between A and B after".
 
 
  <br>
