@@ -8,12 +8,13 @@ for more examples.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'SimpleRanking'
+    NAME_IN_URL = 'SimpleRanking_g'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
     #careful, elem in choices is without "".
-    link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
+    link1 = "https://www.dropbox.com/s/iebfy6fzuewtk34/grass.mp4?raw=1"
+
 
 
 
@@ -54,7 +55,7 @@ class Player(BasePlayer):
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
     q_change = models.IntegerField(label="3. After watching the video I can make a choice between A and B in:",
                                    choices=[[0, 'In none of the alternatives.'], [1, 'In all of the alternatives.'], [2, 'In one of the alternatives.']])
-    q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
+    q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video is an excerpt from a promotional video by 'Lawn Solutions Australia.'", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
 
     def make_field(label):
@@ -104,20 +105,20 @@ class Player(BasePlayer):
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
     random_q = models.IntegerField(label="6a. Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
-    random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
+    random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why? ")
 
     ##Beliefs
     qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?", blank=True)
 
     ##Attention questions video
-    controlq_cake = make_field3(label="...a girl blowing some candles.")
-    controlq_flute = make_field3(label="...a flute.")
-    controlq_airplane = models.IntegerField(
-            choices=[
-                [1, 'False'],
-                [0, 'True']],
-            label="...a girl on an airplane.",
-            widget=widgets.RadioSelect)
+    controlq_presenter = make_field3(label="...a male presenter.")
+    controlq_drawing = make_field3(label="...a drawing.")
+    controlq_woman = models.IntegerField(
+        choices=[
+            [1, 'False'],
+            [0, 'True']],
+        label="...a woman.",
+        widget=widgets.RadioSelect)
 
     ##Empathy questionaire
     qemp1 = make_field2agree(label="I can easily tell if someone else wants to enter a conversation.")
@@ -281,17 +282,17 @@ class survey2(Page):
 
 class Attention1(Page):
     form_model = 'player'
-    form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+    form_fields = ["controlq_presenter", "controlq_drawing","controlq_woman"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
+        player.sum_correct = player.controlq_presenter + player.controlq_drawing + player.controlq_woman
         player.number = random.choices([1,0], weights=(1, 99), k=1)[0]
 
 
 class FailedAttention(Page):
         form_model = 'player'
-        form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+        form_fields = ["controlq_presenter", "controlq_drawing", "controlq_woman"]
 
         @staticmethod
         def is_displayed(player: Player):

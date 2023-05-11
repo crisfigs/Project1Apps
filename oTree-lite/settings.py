@@ -46,8 +46,8 @@ dict(
         error_code="ECODE",
     ),
 dict(
-        name='gifs',
-        app_sequence=['RankingSimple'],
+        name='RankingSimple_ties_grass',
+        app_sequence=['RET','RankingSimple_grass'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
