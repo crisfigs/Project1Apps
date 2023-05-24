@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree static%}
+{{block styles }}
+<style>
+.center {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+
+{% block title %}Part 2: Comprehension check
+{% endblock %}
+
+{{ block content }}
+
+
+  <div class="card">
+  <div class="card-body">
+     <p> To make sure everything is clear, please answer the following questions correctly before proceeding.
+</p>
+
+{{formfields}}
+      </div></div>
+
+<br>
+
+ <p>Please, press "Next" to submit your answers. </p>
+<div class="center">{% next_button %}</div>
+{{ endblock }}
+
+
+
+

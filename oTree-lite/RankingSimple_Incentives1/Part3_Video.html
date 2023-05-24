@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree static %}
+
+{% block styles %}
+<style>
+    #vid {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+#show{
+    position:absolute;
+    transition: .5s ease;
+    top: 50%;
+    left: 50%;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    background-color: orange;
+    padding: 20px;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+</style>
+{% endblock %}
+
+{{ block title }}
+
+{{ endblock }}
+
+
+{{ block content }}
+
+   	<video  id="vid"  width="100px" height="450px" >
+		<source src="{{link}}" type="video/mp4">
+    </video>
+
+
+
+
+
+<button id="show" style="visibility: hidden;"> NEXT </button>
+
+{{ endblock }}
+{% block scripts %}
+<script>
+vid=document.getElementById("vid")
+vid.disablePictureInPicture = true //dont allow for picture in picture feature
+vid.addEventListener("ended", BtnVisible);
+   function BtnVisible(){
+            var btnVisible = document.getElementById("show");
+            btnVisible.style.visibility = "visible";
+   };
+ var video = document.getElementById("vid");
+  video.addEventListener("click", function(event) {
+
+             video.play();
+
+  });
+
+
+</script>
+
+
+{% endblock %}

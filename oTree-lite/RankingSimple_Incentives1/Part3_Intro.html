@@ -1,0 +1,80 @@
+{{ block title }}
+Part 3 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+
+
+<p>Your final ranking is the following:</p>
+      <div id= "grid" class="grid-container center" >
+          <div class="grid-item1 card center"></div>
+          <div class="grid-item card center">{{ player.pref1 }}</div>
+          <div class="grid-item1 card center"></div>
+          <div class="grid-item1 card center"></div>
+          <div class="grid-item card center">{{ player.pref2 }}</div>
+          <div class="grid-item1 card center"></div>
+          <div class="grid-item1 card center"></div>
+          <div class="grid-item card center">{{ player.pref3 }}</div>
+          <div class="grid-item1 card center"></div>
+                  <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers.png' %}" ></div>
+            </div>
+      </div>
+    <br>
+
+    <br>
+
+    Following your choices and the randomization, the following option has been selected:
+     <div id= "grid" class="grid-container center" >
+  <div class="grid-item card center">{{ player.imp }}</div>
+      </div>
+    <br>
+        {{if player.imp == "'Choose A and then watch the video.'"}} Thus, option A is chosen and you will see the video in what follows.
+        {{elif player.imp == "'Choose B and then watch the video.'"}} Thus, option B is chosen and you will see the video in what follows.
+        {{elif player.imp == "'Watch the video first and then choose between A and B.'"}} Thus, you will see the video in what follows and make a choice between option A or B afterwards.
+        {{else}} ERROR
+        {{endif}}
+
+
+    </div>
+    </div>
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+
+{{ endblock }}
+

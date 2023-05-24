@@ -1,0 +1,263 @@
+{{ block title }}
+Part 2: Rank each situation
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+.handle {
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+
+    .grid-container {
+  display: grid;
+  gap: 20px 20px ;
+  grid-template-columns: auto auto auto auto ;
+  padding: 10px;
+        justify-items: center;
+        width: 1000px;
+ grid-column-gap: 0px;
+}
+
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 18px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+
+}
+
+.grid-item1 {
+  background-color: rgba(0,0,0,0);
+  border: 1px rgba(1, 1, 1, 1);
+  padding: 0px;
+    margin: 0px;
+    display:inline-block;
+  font-size: 20px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+    gap: 20px 20px ;
+
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 50px;
+}
+
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.thumbnail {
+top:-50px;
+left:-35px;
+display:block;
+z-index:999;
+cursor: pointer;
+-webkit-transition-property: all;
+-webkit-transition-duration: 0.3s;
+-webkit-transition-timing-function: ease;
+}
+
+/*change the number below to scale to the appropriate size*/
+.thumbnail:hover {
+transform: scale(2);
+
+}
+.my_text {
+  font-size: 50px;
+    width: 30vw;
+    height: 10vh;
+  font-family: "Times New Roman", Times, serif;
+      text-decoration: underline;
+    text-underline-position: under;
+
+}
+
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" style="height:  120%; width: 107%"><div class="card-body" style="
+  height:  120%;
+  width: 100%">
+ We would like to know how you <b>rank the three alternatives</b> from the most to the least preferred. To rank an alternative you need to drag it to its respective ranking. Hover over the pictures below to see two examples.
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="column">
+            <img src="https://www.dropbox.com/s/23gearefyv62vgh/ranking_animation2.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
+                        <!--     <img src="{% static 'ranking210.png' %}"  class="thumbnail"  id="hover-img2" alt="Delete image" width="350" height="200" /> -->
+
+            If you rank one option over another it means you  <b>prefer the top</b>  option better.        </div>
+
+        <div class="column">
+            <!-- <img src="{% static 'ties0.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200"/> -->
+            <img src="https://www.dropbox.com/s/enbzvl5e7bdo4ky/ties_animation2.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
+       <!--   <img src="{% static 'ties210.png' %}"  class="thumbnail"  id="hover-img" alt="Delete image" width="350" height="200" />-->
+
+            If you <b>equally like</b> two options (or more) you <b>rank them in the same position</b>. If you put more than one alternative in the first place, they are equally likely to be selected.
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    Please rank the options from the most to the least preferred by dragging them to the different positions below.
+    Most of the time you will face your most preferred alternative and sometimes you will face the "Watch the video and decide between A and B after" alternative regardless of your preference.
+
+
+ <br>
+    <br>
+ <br>
+     <br>
+      <div id= "grid" class="grid-container parent" style="cursor: move">
+      {{ for choice in CHOICES}}
+        <div data-id="{{ choice.id }}"  class="grid-item handle highlight card">{{ choice.text }}</div>
+      <div data-id="-empty"  class="grid-item1 handle  highlight"> </div>
+      <div data-id="-empty"  class="grid-item1 handle  highlight"> </div>
+       <div data-id="-empty"  class="grid-item1 handle  highlight"> </div>
+           {{ endfor }}
+  </div>
+
+<div class="child">
+    <div style="position:absolute;top: 580px; left: 670px; right: 200px; bottom: 30px" class="my_text"> Your Ranking </div>
+    <div style="position:absolute;top: 690px; left: 1000px; right: 100px; bottom: 30px"><img width="100" height="480" src="{% static 'numbers.png' %}" ></div>
+        </div>
+    </div>
+
+
+
+<br>
+<input type="hidden" name="finalRanking1" id="finalRanking1">
+    <input  type="hidden" name="finalRanking2" id="finalRanking2">
+    <input type="hidden" name="finalRanking3" id="finalRanking3">
+<input type="hidden" name="ranking" id="ranking">
+<br>
+</div>
+</div>
+<p>
+    <div class="center"><button style="text-align:center"
+      type="button" class="btn btn-primary btn-right btn-lg" onclick="submitForm()">Next </button></div>
+</p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.js"></script>
+
+<script>
+    let el = document.getElementById('grid');
+    let sortable = Sortable.create(el, {
+        direction: 'horizontal',
+        swap: true,
+        swapClass: "highlight",
+        swapThreshold: 10,
+        handle: '.handle',
+        animation: 1500,
+        onEnd: function (evt) {
+            document.getElementById('ranking').value = sortable.toArray().join(',');
+        }
+    });
+
+    function submitForm(){
+        let r1 = document.getElementById("ranking").value.split(",")[0];
+        let r2 = document.getElementById("ranking").value.split(",")[4];
+        let r3 = document.getElementById("ranking").value.split(",")[8];
+        let iCount = (r1.includes("empty"))+(r2.includes("empty"))+(r3.includes("empty"))
+        let row1 = "";
+        let row2 = "";
+        let row3 = "";
+        for (let i=1; i < 4 ; i++) {
+            if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
+                op1 = document.getElementById("ranking").value.split(",")[i]
+                if (row1=="") {
+                row1 += `'${op1}'`;
+                } else {
+                row1 += `,'${op1}'`;
+            }
+            }}
+        for (let i=5; i < 8 ; i++) {
+            if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
+                op2 = document.getElementById("ranking").value.split(",")[i]
+                if (row2=="") {
+                row2 += `'${op2}'`;
+                } else {
+                row2 += `,'${op2}'`;
+            }
+            }}
+        for (let i=9; i < 12 ; i++) {
+            if (!(document.getElementById("ranking").value.split(",")[i].includes("empty"))){
+                op3 = document.getElementById("ranking").value.split(",")[i]
+                if (row3=="") {
+                    row3 += `'${op3}'`;
+                } else {
+                    row3 += `,'${op3}'`;
+                }
+            }
+        }
+            if (iCount == 3){
+                document.getElementById("finalRanking1").value = row1;
+                document.getElementById("finalRanking2").value = row2;
+                document.getElementById("finalRanking3").value = row3;
+                document.getElementById("form").submit();
+            } else {
+            console.log("no funciono");
+            window.alert("Please rank your options by dragging them from the leftmost column.")
+            }
+        }
+
+
+        /* .Hover image 1 and 2*/
+    const states = {
+  'default': "{% static 'ties210.png' %}",
+  'hover': "https://www.dropbox.com/s/eje844ud3hrdkmy/ties_animation.gif?raw=1"
+
+};
+        const states2 = {
+ 'default': "{% static 'ranking210.png' %}",
+  'hover': "https://www.dropbox.com/s/zea5wd5v202eop3/ranking_animation.gif?raw=1",
+
+};
+
+    let img1 = document.querySelector('#hover-img');
+    let img2 = document.querySelector('#hover-img2');
+
+    img1.addEventListener('mouseenter', function(e) {
+        img1.setAttribute('src', states.hover);
+    });
+    img1.addEventListener('mouseleave', function(e) {
+        img1.setAttribute('src', states.default);
+    });
+    img2.addEventListener('mouseenter', function(e) {
+        img2.setAttribute('src', states2.hover);
+    });
+    img2.addEventListener('mouseleave', function(e) {
+        img2.setAttribute('src', states2.default);
+    });
+
+</script>
+
+
+
+
+{{ endblock }}

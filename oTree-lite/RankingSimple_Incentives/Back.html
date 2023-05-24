@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% block scripts%}
+<script>
+
+        let completionlink = js_vars.completionlink;
+        function completed() {
+            console.log("clicking the button")
+            window.location.href =completionlink;
+        }
+
+</script>
+{% endblock %}
+
+{%  block title %}Payment{% endblock %}
+
+{% block content %}
+
+
+{{if player.payment_number == 1 and player.task1 == "A"}} You have been selected for payment. You chose Option A, thus, you get &pound 5 and Save the Children will get &pound 0.
+{{elif player.payment_number == 1 and player.task1 == "B" }} You have been selected for payment. You chose Option B, thus, you get &pound 1 and Save the Children will get &pound 8.
+{{else}} You have not been selected for payment.
+{{endif}}
+
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="completed()" > Back to Prolific </button>
+
+{% endblock %}
+
+

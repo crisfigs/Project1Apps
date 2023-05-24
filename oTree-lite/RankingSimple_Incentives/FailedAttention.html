@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load otree%}
+{% block title %}Failed Attention{% endblock %}
+
+{% block scripts%}
+<script>
+
+        let errorlink = js_vars.errorlink;
+        function errorfct() {
+            console.log("clicking the button")
+            window.location.href = errorlink;
+        }
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+
+You did not answer the questions correctly. It seems you did not watch the video.
+
+<br>
+<br>
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="errorfct()" > Back to Prolific </button>
+
+
+
+{% endblock %}

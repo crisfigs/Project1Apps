@@ -53,6 +53,20 @@ dict(
         error_code="ECODE",
     ),
 dict(
+        name='SimpleRanking_Incentives1',
+        app_sequence=['RankingSimple_Incentives1'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
+dict(
+        name='SimpleRanking_TiesIncentives',
+        app_sequence=['RankingSimple_tiesincentives'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
+dict(
         name='NoRanking',
         app_sequence=['RET','NoRanking'],
         num_demo_participants=2,
@@ -104,4 +118,4 @@ SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
 
-DEBUG = False
+DEBUG = True

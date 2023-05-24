@@ -1,0 +1,95 @@
+{{ block title }}
+Part 3 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+
+
+<p>The alternative(s) you preferred the most is(are) the following:</p>
+
+    {{if player.length == 1 and player.length2 == 1 and player.WTA1 == "Yes"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">{{ player.pref1_1 }}</div>
+    </div>
+    <br>
+    {{elif player.length == 2 and player.length2 == 1 and player.WTA1 == "Yes"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">{{ player.pref1_1 }}</div>
+    </div>
+    <br>
+    {{elif player.length == 2 and player.length2 == 1 and player.WTA1 == "No"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">{{ player.pref1_1 }}</div>
+    <div class="grid-item card center">{{ player.pref1_2 }}</div>
+    </div>
+    <br>
+    {{elif player.length == 1 and player.length2 == 2 and player.WTA1 == "No"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">{{ player.pref1_1 }}</div>
+        <div class="grid-item card center">{{ player.pref1_2 }}</div>
+    </div>
+    <br>
+    {{elif player.length == 3}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">{{ player.pref1_1i }}</div>
+        <div class="grid-item card center">{{ player.pref1_2i }}</div>
+        <div class="grid-item card center">{{ player.pref1_3i }}</div>
+    </div>
+    <br>
+    {{else}} ERROR
+    {{endif}}
+
+    Following your choices and the randomization, the following option has been selected:
+     <div id= "grid" class="grid-container center" >
+  <div class="grid-item card center">{{ player.imp }}</div>
+      </div>
+    <br>
+        {{if player.imp == "'Choose A and then watch the video.'"}} Thus, option A is chosen and you will see the video in what follows.
+        {{elif player.imp == "'Choose B and then watch the video.'"}} Thus, option B is chosen and you will see the video in what follows.
+        {{elif player.imp == "'Watch the video first and then choose between A and B.'"}} Thus, you will see the video in what follows and make a choice between option A or B afterwards.
+        {{else}} ERROR
+        {{endif}}
+
+
+    </div>
+    </div>
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+
+{{ endblock }}
+

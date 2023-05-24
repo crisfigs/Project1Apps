@@ -1,0 +1,154 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+
+{% endblock %}
+
+{{block styles }}
+
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+
+
+<style>
+
+   .grid-container1 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto ;
+  padding: 10px;
+        justify-items: center;
+
+}
+      .grid-container2 {
+  display: grid;
+  gap: 20px 20px;
+  grid-template-columns: 250px 250px;
+  padding: 10px;
+        justify-items: center;
+
+}
+            .grid-container3 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto ;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+.grid-item1 {
+  background-color: rgba(0,0,0,0);
+  border: 1px rgba(1, 1, 1, 1);
+  padding: 0px;
+    margin: 0px;
+    display:inline-block;
+  font-size: 20px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+    gap: 20px 20px ;
+
+}
+</style>
+
+{{ endblock }}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+        Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?
+            <br>
+            <br>
+            <div class="center">
+        <div type="hidden" class="slidecontainer">
+            <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
+        </div>
+        <label class="heat-slider heat-slider--v">
+	    <span class="heat-slider--input">
+            <input id = "d" type="range" value="22" min="0" max="100" oninput="doThings(event)" />
+	    </span>
+        </label>
+            <output id="output">change the slider</output>
+            <input   type="hidden" name="qa" id="qa">
+            </div>
+{{ formfield_errors "qa"}}
+
+
+
+    <p>Recall that your ranking was the following:</p>
+            <div id= "grid" class="grid-container1 center" >
+                <div class="grid-item card center">{{ player.pref1i }}</div>
+                <div class="grid-item card center">{{ player.pref2i }}</div>
+                <div class="grid-item card center">{{ player.pref3i }}</div>
+            </div>
+            <div class="child">
+                <div style="position:absolute;top: 230px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="480" src="{% static 'numbers.png' %}" ></div>
+            </div>
+    </div>
+{{if player.WTA1 == "No" and player.WTA2 == "No" }} And you did not accept any pence to alter it when given the opportunity.
+
+  {{elif player.WTA1 == "Yes" and player.WTA2 == "No" }}  And you accepted 0.10 pence to exchange your 1st with your 2nd alternative but you did not accept 0.10 pence to exchange your 3rd with your 2nd alternative.
+  {{elif player.WTA1 == "No" and player.WTA2 == "Yes" }}  And you did not accept 0.10 to exchange your 1st with your 2nd ranked alternative though you accepted 0.10 pence to exchange your 3rd with your 2nd alternative.
+  {{elif player.WTA1 == "Yes" and player.WTA2 == "Yes" }}  And you accepted 0.10 pence to exchange your 1st with your 2nd alternative and 0.10 pence to exchange your 3rd with your 2nd third option.
+
+  </div>
+</div>
+<br>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+<script>
+var slider = document.getElementById("myRange");
+
+slider.oninput = function() {
+  document.getElementById("qa").value = this.value;
+}
+const output = document.getElementById("output");
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `He/she is ${percent} likely to choose A`
+    document.getElementById("qa").value = `${value}`;
+
+}
+
+
+
+function submitForm(){
+            if (document.getElementById("qa").value =="") {
+                window.alert("Please fill in your answers.");
+                                        event.preventDefault();}
+             else  {
+            document.getElementById("form").submit();
+            }
+    }
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+

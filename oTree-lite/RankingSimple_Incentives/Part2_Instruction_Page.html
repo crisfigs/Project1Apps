@@ -1,0 +1,191 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   
+{% endblock %}
+
+{% block styles %}
+
+<link href="{% static 'custom.css' %}" rel="stylesheet">
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Tab navigation -->
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  
+
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1</a>
+  </li>
+
+    <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+    <li class="nav-item">
+    <a class="nav-link" id="part3-tab" data-toggle="tab" href="#part3" role="tab" aria-controls="part3" onclick="topFunction()">Tab 3</a>
+  </li>
+
+</ul>
+<br>
+<br>
+
+
+<!-- Tab content -->
+<div class="tab-content" id="myTabContent">
+
+
+    <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+
+
+<div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2: Instructions 1/2 </h3>
+  </div>
+<br>
+
+<div class="card" ><div class="card-body">
+
+
+In this part you will have to make a choice between two options. The options have consequences for your earnings and for the earnings of the charity "Save the Children".
+<br>
+    <br>
+            <ul>
+                <li><b>Option A</b>: you keep the &pound5 earned in Part 1 and no donation is made to "Save the Children".</li>
+                <li><b>Option B</b>: you keep £1 from your earnings in Part 1 and £8 are donated to "Save the Children".</li>
+            </ul>
+<br> You and the charity will be paid according to your choice at the end of the survey with a 1 in 5 chance.
+<br><br>
+
+In addition, you will see a video. Below, we provide you with a description of the video that you will see:
+<br>
+    <br>
+       <div class="alert alert-warning" role="alert">
+          <p>  "The video is part of a campaign by "Save the Children" showing the struggles of a nine-year-old girl when her city becomes a warzone. As the political conflict escalates, the girl and her family experience increasingly traumatic hardships and perils. ”</p>
+</div>
+
+
+
+    </div>
+    </div>
+
+
+<button onclick="topFunction()" type="button" class="nexttab btn-primary btn next">Next</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+
+
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2: Instructions 2/2</h3>
+  </div>
+<br>
+    <div class="card" ><div class="card-body">
+    How can you choose between Option A (me: &pound5, charity: &pound0) and Option B (me: &pound1, charity: &pound8)? There are <b>three alternatives</b>. You can either:
+<br>
+        <br>
+        <br>
+
+  <div id= "grid" class="grid-container center" >
+      {{ for choice in C.CHOICES }}
+  <div data-id="{{ choice }}"  class="grid-item handle highlight card">{{ choice }}</div>
+      {{ endfor }}
+      </div>
+
+<br>
+        <br>
+        <br>
+
+
+
+    </div>
+    </div>
+
+
+    <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+    <button onclick="topFunction()" type="button" class="nexttab btn-primary btn next">Next</button>
+  </div>
+
+
+
+
+
+  <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
+
+<div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold">Part 2: Comprehension Check</h3>
+  </div>
+<br>
+      <div class="card">
+  <div class="card-body">
+     <p> To make sure everything is clear, please answer the following questions correctly before proceeding.</p>
+
+       {{ formfields }}
+
+      </div></div>
+        <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+    <button class="nexttab btn-primary btn next">Next</button>
+  </div>
+
+
+</div>
+
+</body>
+
+{% block scripts %}
+
+<script src="{% static 'prev_next_button.js' %}"></script>
+<script>
+var ul = document.getElementById('grid');
+for (var i = ul.children.length; i >= 0; i--) {
+    ul.appendChild(ul.children[Math.random() * i | 0]);
+}</script>
+{% endblock %}
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,83 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+
+{% endblock %}
+
+
+{{block styles }}
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+
+
+{% block content %}
+
+
+
+  <div class="card">
+        <div class="card-body">
+<br>
+
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
+</div>
+
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--label"> {{form.emotions_ant.label}}</span>
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings(event)" />
+	</span>
+</label>
+            <output id="output">change the slider</output>
+            <input   type="hidden" name="emotions_ant" id="emotions_ant">
+
+
+<br><br>
+
+                 {{form.openq.label}}
+               <div id="openq">{{form.openq}}</div>
+          </div>
+    </div>
+            <br>
+            <br>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+
+
+
+<script>
+var slider = document.getElementById("myRange");
+slider.oninput = function() {
+  document.getElementById("emotions_ant").value = this.value;
+}
+
+
+const output = document.getElementById("output");
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `Extent: ${percent}`
+    document.getElementById("emotions_ant").value = `${value}`;
+}
+
+function submitForm(){
+            if (document.getElementById("emotions_ant").value =="") {
+                window.alert("Please answer all the questions.");
+                                        event.preventDefault();}
+             else  {
+            document.getElementById("form").submit();
+            }
+    }
+
+    </script>
+
+
+
+{{endblock}}

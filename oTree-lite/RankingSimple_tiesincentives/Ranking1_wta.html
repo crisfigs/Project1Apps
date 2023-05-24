@@ -1,0 +1,167 @@
+{{ block title }}
+Part 2: Rank your options
+{{ endblock }}
+{{block styles }}
+<style>
+    .highlight {
+  background-color: #f9c7c8;
+}
+
+
+    .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 18px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+
+}
+
+.grid-item1 {
+  background-color: rgba(0,0,0,0);
+  border: 1px rgba(0, 0, 0, 0);
+  padding: 0px;
+    margin: 0px;
+    display:inline-block;
+  font-size: 20px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+    gap: 20px 20px ;
+
+}
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card"><div class="card-body">
+Your two top choices are:
+
+{{if player.length == 1 and player.length2 == 1}}
+    <div id="oldDiv" class="here" style="display: block">
+        <div id = "grid" class="grid-container center">
+            <div  class="grid-item1 handle highlight "> </div>
+            <div class="grid-item card">{{ player.pref1_1i}}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+            <div  class="grid-item1 handle highlight "> </div>
+            <div class="grid-item card">{{ player.pref2_1i }}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+        </div>
+        <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+        </div>
+        </div>
+        <div id="newDiv" class="here" style="display: none" >
+            <div id = "grid" class="grid-container center">
+                <div  class="grid-item1 handle highlight "> </div>
+                <div class="grid-item card">{{ player.pref2_1i}}</div>
+                <div  class="grid-item1 handle highlight "> </div>
+                <div  class="grid-item1 handle highlight "> </div>
+                <div class="grid-item card">{{ player.pref1_1i }}</div>
+                <div  class="grid-item1 handle highlight "> </div>
+            </div>
+            <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+            </div>
+        </div>
+{{elif player.length == 2 and player.length2 == 1}}
+    <div id="oldDiv" class="here" style="display: block">
+        <div id = "grid" class="grid-container center">
+            <div class="grid-item card">{{ player.pref1_1i}}</div>
+            <div class="grid-item card">{{ player.pref1_2i}}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+            <div  class="grid-item1 handle highlight "> </div>
+            <div class="grid-item card">{{ player.pref2_1i }}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+        </div>
+        <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+        </div>
+        </div>
+        <div id="newDiv" class="here" style="display: none" >
+            <div id = "grid" class="grid-container center">
+                <div  class="grid-item1 handle highlight "> </div>
+                <div class="grid-item card">{{ player.pref2_1i}}</div>
+                <div  class="grid-item1 handle highlight "> </div>
+                <div class="grid-item card">{{ player.pref1_1i }}</div>
+                <div class="grid-item card">{{ player.pref1_2i }}</div>
+                <div  class="grid-item1 handle highlight "> </div>
+            </div>
+            <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+            </div>
+        </div>
+
+    {{elif player.length == 1 and player.length2 == 2}}
+        <div id="oldDiv" class="here" style="display: block">
+        <div id = "grid" class="grid-container center">
+            <div  class="grid-item1 handle highlight "> </div>
+            <div class="grid-item card">{{ player.pref1_1i}}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+            <div class="grid-item card">{{ player.pref2_1i }}</div>
+            <div class="grid-item card">{{ player.pref2_2i }}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+
+        </div>
+        <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+        </div>
+        </div>
+        <div id="newDiv" class="here" style="display: none" >
+            <div id = "grid" class="grid-container center">
+                <div class="grid-item card">{{ player.pref2_1i}}</div>
+                <div class="grid-item card">{{ player.pref2_2i}}</div>
+                <div  class="grid-item1 handle highlight "> </div>
+                <div  class="grid-item1 handle highlight "> </div>
+                <div class="grid-item card">{{ player.pref1_1i }}</div>
+            <div  class="grid-item1 handle highlight "> </div>
+            </div>
+            <div class="child">
+                <div style="position:absolute;top: 40px; left: 600px; right: 100px; bottom: 30px"><img width="100" height="350" src="{% static 'numbers_toptwo.png' %}" ></div>
+            </div>
+        </div>
+{{elif player.length == 3}} Not
+    {{else}} ERROR
+    {{endif}}
+    <br>
+    <p style="text-align:center"> Would you be willing to accept an extra 0.10 pence for substituting your top 1st choice(s) with your top 2nd choice(s)?</p>
+<br>
+  <p style="text-align:center">
+    <button   name ="WTA1"  id="WTA1" value="Yes" onclick="newDivHere()" class="btn btn-outline-primary"> Yes </input>
+    <button   name ="WTA1"  id="WTA1" value="No" onclick="" class="btn btn-outline-primary"> No </button>
+</p>
+    </div>
+    </div>
+
+{{ formfield_errors 'WTA1' }}
+<script>
+function newDivHere() {
+    document.getElementById("oldDiv").style.display="none";
+    document.getElementById("newDiv").style.display="block";
+    document.getElementById('WTA1').value  = "Yes";
+}
+</script>
+
+{{ endblock }}
+
+
+
