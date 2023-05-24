@@ -8,7 +8,7 @@ for more examples.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'SimpleRanking_Incentives'
+    NAME_IN_URL = 'RankingSimple_Incentives1'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
