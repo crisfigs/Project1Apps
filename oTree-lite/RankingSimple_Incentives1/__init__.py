@@ -3,7 +3,7 @@ import random
 
 doc = """
 Many things. The sortable ranking is based on: "Widget to rank/reorder items". See http://sortablejs.github.io/Sortable/
-for more examples.
+for more examples. Copy of RanknigSimple_Incentives without prefs.
 """
 
 
@@ -14,6 +14,7 @@ class C(BaseConstants):
     CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
     #careful, elem in choices is without "".
     link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
+
 
 
 
@@ -351,5 +352,27 @@ class Back(Page):
             player.payment = 1
         else:
             pass
+class info(Page):
+    pass
+page_sequence = [ info, Ranking, Ranking_,Ranking__,Openq]
 
-page_sequence = [ Ranking, Ranking_,Ranking__,Openq]
+#     <p><a href = 'linked.html'>'linked.html'</a></p>
+#         <p><a href = 'Openq.html'>'Openq.html'</a></p>
+#         <p><a href = 'linked.html'>'linked.html'</a></p>
+#<p><a href = './linked.html'>'./linked.html'</a></p>
+#<p><a href = '../linked.html'>'../linked.html'</a></p>
+#<p><a href = 'oTree-lite/linked.html'>oTree-lite/linked.html</a></p>#
+
+#<p><a href = "{% 'linked.html' %}">"{% 'linked.html' %}"</a></p>
+
+#        <p><a href = 'Openq.html'>'Openq.html'</a></p>
+#<p><a href = "{% 'linked.html' %}">I know what I am going to do, I am going to leave</a></p>
+#     <p><a href = '../Openq.html/'>'../Openq.html/'</a></p>
+#         <p><a href = '../Openq.html'>'../Openq.html'</a></p>
+#         <p><a href = '../Openq'>'../Openq'</a></p>
+#         <p><a href = 'Openq/'>'/Openq'</a></p>
+
+#     <p><a href = "{% static 'rankinginfo.html' %}">"{% static 'Openq.html' %}"</a></p>
+#     <p><a href = 'RankingSimple_Incentives1/Openq.html'>'RankingSimple_Incentives1/Openq.html'</a></p>
+
+#    <p><a href = "{% 'RankingSimple_Incentives1:Openq' %}">"{% static 'Openq.html' %}"</a></p>

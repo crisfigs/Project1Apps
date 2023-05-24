@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+
+{% endblock %}
+
+
+{{block styles }}
+
+{{ endblock }}
+
+
+
+{% block content %}
+
+
+
+  <div class="card">
+        <div class="card-body">
+<br>
+As we explain in the previous page, alternatives that are upper in the ranking
+            are more likely to be implemented. This also means that alternatives fruther
+            down in teh ranking are less likely to be implemented. For this reason, it is
+            in your best inters to provide your true ranking i.e., your true preferences.
+            In the case that you receive your ranking,the first alternative (top 1st) has a 50% chance
+            of realizing, the second ranked has a 30% and the wrd ranked alternatives has a 20% chance
+            of being implemented. Of course, remeber that you only receive your ranking sometimes as
+            theere is a very small chance that your ranking is overriden and that you end up
+            receiveng the alternative where you watch the video and decide between the options later.
+
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+                      </div>
+    </div>
+
+
+
+<script>
+var slider = document.getElementById("myRange");
+slider.oninput = function() {
+  document.getElementById("emotions_ant").value = this.value;
+}
+
+
+const output = document.getElementById("output");
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `Extent: ${percent}`
+    document.getElementById("emotions_ant").value = `${value}`;
+}
+
+function submitForm(){
+            if (document.getElementById("emotions_ant").value =="") {
+                window.alert("Please answer all the questions.");
+                                        event.preventDefault();}
+             else  {
+            document.getElementById("form").submit();
+            }
+    }
+
+    </script>
+
+
+
+{{endblock}}

@@ -65,13 +65,30 @@ Part 2: Rank each situation
 }
 
 .my_text {
-  font-size: 25px;
-  font-family: "Times New Roman", Times, serif;
-      text-decoration: underline;
+    font-size: 40px;
+    font-family: "Times New Roman", Times, serif;
+    text-decoration: underline;
     text-underline-position: under;
-
+    width: 30vw;
+    height: 10vh;
 }
 
+.thumbnail {
+top:-50px;
+left:-35px;
+display:block;
+z-index:999;
+cursor: pointer;
+-webkit-transition-property: all;
+-webkit-transition-duration: 0.3s;
+-webkit-transition-timing-function: ease;
+}
+
+/*change the number below to scale to the appropriate size*/
+.thumbnail:hover {
+transform: scale(2);
+
+}
 
 </style>
 {{ endblock }}
@@ -79,32 +96,50 @@ Part 2: Rank each situation
 
 {{ block content }}
 <div class="card"><div class="card-body">
- We would like to know how you rank the three alternatives from the most to the least preferred. Your most preferred alternative, the one that you rank 1st, is the one that will be implemented. Please rank the option from the most to the least preferred  by dragging them to the different positions.
-     <p><a href = 'RankingSimple_Incentives1/Openq.html'>Click this to navigate to the Google home page</a></p>
-     <p><a href = 'Openq.html'>Click this to navigate to the Google home page</a></p>
-     <p><a href = '/Openq.html'>Click this to navigate to the Google home page</a></p>
-     <p><a href = './Openq.html'>Click this to navigate to the Google home page</a></p>
-     <p><a href = '../Openq.html'>Click this to navigate to the Google home page</a></p>
+ We would like to know how you <b>rank the three alternatives</b> from the most to the least preferred. To rank an alternative you need to drag it to its respective ranking. Hover over the pictures below to see two examples.
+    <br>
+    <br>
+    <br>
+    <div class="center">
+    <img src="https://www.dropbox.com/s/23gearefyv62vgh/ranking_animation2.gif?raw=1"  class="thumbnail" alt="Delete image" width="350" height="200" />
+        <p>If you rank one option over another it means you  <b>prefer the top</b>  option better.        </div>
+        </p>
+    </div>
 
     <br>
     <br>
     <br>
-        <br>
     <br>
 
-  <div id= "grid" class="grid-container center" style="cursor: move">
-      {{ for choice in CHOICES}}
+
+    <p>It is in your best interest to <b>state your true ranking</b>: higher ranked alternatives are more likely to be
+    selected while lower ranked alternatives are less likely (Read more <a href="{% static 'ranking210.png' %}" target=”_blank”> here </a> about how we calculated
+    these probabilities).
+    Nevertheless, irrespective of your ranking, there is a chance that the computer overrides your ranking
+    and you receive the 'Watch the video first and then choose between A and B.' alternative instead. The latter does
+        not affect your stated ranking.</p>
+    <br>
+    <br>
+    Please rank the options from the most to the least preferred by dragging them to the different positions below.
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id= "grid" class="grid-container center" style="cursor: move">
+        {{ for choice in CHOICES}}
         <div data-id="{{ choice.id }}"  class="grid-item handle highlight card">{{ choice.text }}</div>
-      <!--<div data-id="{{ choice.id }}-empty"  class="grid-item1 handle highlight card "> </div>-->
-      <div data-id="-empty"  class="grid-item1 handle highlight "> </div>
-
-           {{ endfor }}
-  </div>
+        <div data-id="-empty"  class="grid-item1 handle highlight "> </div>
+        {{ endfor }}
+    </div>
 <br>
 
-<div class="child">
-    <h1 style="position:absolute;top: 90px; left: 480px; right: 200px; bottom: 30px" class="my_text">      Your Ranking      </div>
-    <div style="position:absolute;top: 180px; left: 670px; right: 100px; bottom: 30px"><img width="100" height="480" src="{% static 'numbers.png' %}" ></div>
+    <div><h1 style="position:absolute;top: 690px; left: 480px; right: 200px; bottom: 30px;" class="my_text">      Your Ranking      </div>
+        <div style="position:absolute;top: 810px; left: 690px; right: 100px; bottom: 30px"><img width="100" height="480" src="{% static 'numbers.png' %}" ></div>
 
 <!-- <input type="hidden" id="finalRanking" name="finalRanking">-->
     <input id="finalRanking" name="finalRanking">
@@ -126,6 +161,7 @@ Part 2: Rank each situation
 <link href="{% static 'custom.css' %}" rel="stylesheet">
 
 <script>
+
     let el = document.getElementById('grid');
     let sortable = Sortable.create(el, {
         direction: 'horizontal',
@@ -158,6 +194,8 @@ Part 2: Rank each situation
             window.alert("Please rank your options.")
         }
     }
+
+
 </script>
 
 
