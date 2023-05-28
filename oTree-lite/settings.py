@@ -80,6 +80,13 @@ dict(
         cc_code="CCCODE",
         error_code="ECODE",
     ),
+dict(
+        name='BeforeAfter',
+        app_sequence=['BeforeAfter'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

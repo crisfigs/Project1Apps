@@ -2,15 +2,15 @@ from otree.api import *
 import random
 
 doc = """
-Just to share a gif.
+Before/After new design.
 """
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'gifs'
+    NAME_IN_URL = 'BF'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    CHOICES = ['Choose A and then watch the video.', 'Choose B and then watch the video.', 'Watch the video first and then choose between A and B.']
+    CHOICES = ["Before","After"]
     #careful, elem in choices is without "".
     link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
 
@@ -30,30 +30,21 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    finalRanking1 = models.StringField()
-    finalRanking2 = models.StringField(blank=True)
-    finalRanking3 = models.StringField(blank=True)
-    pref1_1 = models.StringField()
-    pref1_2 = models.StringField(blank=True)
-    pref1_3 = models.StringField(blank=True)
     imp = models.StringField()
-    length = models.IntegerField()
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
-    payment= models.IntegerField()
-
+    payment = models.IntegerField()
+    rand = models.IntegerField()
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q_change = models.IntegerField(label="3. After watching the video I can make choice between A and B in:",
+    q_change = models.IntegerField(label="3. After watching the video I can make a choice between A and B in:",
                                    choices=[[0, 'In none of the alternatives.'], [1, 'In all of the alternatives.'], [2, 'In one of the alternatives.']])
     q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
-
-
     task1 = models.StringField(blank=True)
+    timing = models.StringField(blank=True)
 
-    openq = models.LongStringField(label="Explain in the space below other thoughts and feelings associated to watching the video ")
     def make_field(label):
         return models.IntegerField(
             choices=[1, 2, 3, 4, 5],
@@ -81,8 +72,7 @@ class Player(BasePlayer):
             widget=widgets.RadioSelect,
         )
 
-
-
+    ##Questions on emotion and donation behavior
     happy2 = make_field(label="Happy")
     sad2 = make_field(label="Sad")
     fear2 = make_field(label="Fear")
@@ -91,6 +81,23 @@ class Player(BasePlayer):
     compassion2 = make_field(label="Compassion")
     guilt2 = make_field(label="Guilt")
     boredom2 = make_field(label="Boredom")
+    donationq = models.IntegerField(label="1. Are you already a donor for Save the Children?",
+                                        choices=[[1, "Yes"], [0, "No"]])
+    donationqother = models.IntegerField(label="2. Are you already a donor for any other charity?",
+                                             choices=[[1, "Yes"], [0, "No"]])
+    charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating to?",
+                                       choices=[1, 2, 3, 4, 5], widget=widgets.RadioSelectHorizontal)
+    temptationqA = models.IntegerField(label="4. How tempting did the video made Option A (me:£5, charity:£0) seem?", blank=True)
+    temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
+    emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
+    openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
+    random_q = models.IntegerField(label="6a. Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
+
+    ##Beliefs
+    qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?", blank=True)
+
+    ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
     controlq_flute = make_field3(label="...a flute.")
     controlq_airplane = models.IntegerField(
@@ -100,6 +107,7 @@ class Player(BasePlayer):
             label="...a girl on an airplane.",
             widget=widgets.RadioSelect)
 
+    ##Empathy questionaire
     qemp1 = make_field2agree(label="I can easily tell if someone else wants to enter a conversation.")
     qemp3 = make_field2agree(label="I really enjoy caring for other people.")
     qemp4 = make_field2disagree(label="I find it hard to know what to do in a social situation.")
@@ -125,17 +133,12 @@ class Player(BasePlayer):
     qemp38 = make_field2agree(label="I am good at predicting what someone will do.")
     qemp39 = make_field2agree(label="I tend to get emotionally involved with a friend’s problems.")
 
-
+    #Feedback questions
     q_feedback = models.LongStringField(label="This is the end of the survey. "
                                             "In case you have comments, please leave them here.",
                                       blank=True)
     q_feedback_pilot = models.LongStringField(label="If you found any instructions unclear or confusing, please let us know here.",
                                             blank=True)
-    donationq = models.IntegerField(label="1. Are you already a donor for Save the Children?", choices = [[1,"Yes"],[0,"No"]])
-    donationqother = models.IntegerField(label="2. Are you already a donor for any other charity?", choices=[[1, "Yes"], [0, "No"]])
-    charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating?", choices=[1, 2, 3, 4,5],widget=widgets.RadioSelectHorizontal)
-    temptationqA = models.IntegerField(label="4. How tempting did the video made Option A seem?",blank=True)
-    temptationqB = models.IntegerField(label="5. How tempting did the video made Option B seem?",blank=True)
 
 
     def set_error_message(player, value):
@@ -147,7 +150,7 @@ class Player(BasePlayer):
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
         if list_answers != list_correct_answers:
-            Text = 'You did not answer all questions correctly. Please read the instructions again and correct your answers.'
+            Text = 'You did not answer all questions correctly. Please go back to the instructions and revise your answers.'
             return Text
 
 ###PAGES
@@ -160,45 +163,17 @@ class Part2_Instruction_Page(Page):
       return player.set_error_message(value)
 
 
-class Ranking1(Page):
+class TimingDecision(Page):
     form_model = 'player'
-    form_fields = ['finalRanking1','finalRanking2','finalRanking3']
+    form_fields = ['timing']
+
+    def vars_for_template(player: Player):
+        player.rand = random.choices([1,2], weights=(50, 50), k=1)[0]
 
     def before_next_page(player: Player, timeout_happened):
-        li = list(player.finalRanking1.split(","))
-        player.length = len(list(player.finalRanking1.split(",")))
-        if len(li)==1:
-            player.pref1_1 = li[0]
-            #weights=(40, 60)
-            player.imp = random.choices([li[0],"'Watch the video first and then choose between A and B.'"], weights=(40,60), k=1)[0]
-        elif len(li) == 2:
-            player.pref1_1 = li[0]
-            player.pref1_2 = li[1]
-            #weights=(30,30,40)
-            player.imp = random.choices([li[0],li[1], "'Watch the video first and then choose between A and B.'"], weights=(30,30,40), k=1)[0]
-        elif len(li) == 3:
-            player.pref1_1 = li[0]
-            player.pref1_2 = li[1]
-            player.pref1_3 = li[2]
-            player.imp = random.choices([li[0],li[1],li[2], "'Watch the video first and then choose between A and B.'"], weights=(20,20,20,40), k=1)[0]
-        else:
-            player.pref1_1 = "Error"
-            player.imp= "Error"
+        player.imp = random.choices(["Before","After"], weights=(50, 50), k=1)[0]
 
 
-
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        menu = [
-                { "text": C.CHOICES[0], "id": 'Choose A and then watch the video.' },
-                {"text": C.CHOICES[1], "id":'Choose B and then watch the video.'},
-                {"text": C.CHOICES[2], "id": "Watch the video first and then choose between A and B."}
-            ]
-        random.shuffle(menu)
-        return dict(
-            CHOICES = menu
-        )
 
 
 
@@ -217,6 +192,9 @@ class Part3_Intro(Page):
         else:
             pass
 
+class qa(Page):
+    form_model = 'player'
+    form_fields = ['qa']
 
 
 class Video_alert(Page):
@@ -242,9 +220,7 @@ class survey2(Page):
         random.shuffle(e)
         return e
 
-class Openq(Page):
-    form_model = 'player'
-    form_fields = ['openq']
+
 
 class Attention1(Page):
     form_model = 'player'
@@ -282,8 +258,11 @@ class Hypo_choice(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB']
+    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq']
 
+class Openq(Page):
+    form_model = 'player'
+    form_fields = ['openq','emotions_ant']
 class EQ(Page):
     form_model='player'
     form_fields = ["qemp1", "qemp3", "qemp4","qemp8",
@@ -320,5 +299,4 @@ class Back(Page):
         else:
             pass
 
-page_sequence = [Ranking1]
-#page_sequence = [Part2_Instruction_Page, Ranking1, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, qa, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]

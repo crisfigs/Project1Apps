@@ -81,9 +81,9 @@ In this part you will have to make a choice between two options. The options hav
     <br>
             <ul>
                 <li><b>Option A</b>: you keep the &pound5 earned in Part 1 and no donation is made to "Save the Children".</li>
-                <li><b>Option B</b>: you give &pound4 of the &pound5 you earned in Part 1 and &pound8 are donated to "Save the Children". </li>
+                <li><b>Option B</b>: you keep £1 from your earnings in Part 1 and £8 are donated to "Save the Children".</li>
             </ul>
-<br> The charity and you will be paid according to your choice at the end of the survey with a 1 in 5 chance.
+<br> You and the charity will be paid according to your choice at the end of the survey with a 1 in 5 chance.
 <br><br>
 
 In addition, you will see a video. Below, we provide you with a description of the video that you will see:
@@ -129,14 +129,14 @@ In addition, you will see a video. Below, we provide you with a description of t
         <br>
 
   <div id= "grid" class="grid-container center" >
-      {{ for choice in C.CHOICES }}
-  <div data-id="{{ choice }}"  class="grid-item handle highlight card">{{ choice }}</div>
-      {{ endfor }}
+
+  <div data-id="before"  class="grid-item handle highlight card">Before</div>
+  <div data-id="after"  class="grid-item handle highlight card">After</div>
+
       </div>
 
 <br>
         <br>
-        Before you make your choice, we will ask you some questions.
         <br>
 
 
@@ -166,7 +166,7 @@ In addition, you will see a video. Below, we provide you with a description of t
        {{ formfields }}
 
       </div></div>
-      <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+        <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
     <button class="nexttab btn-primary btn next">Next</button>
   </div>
 

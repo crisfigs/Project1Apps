@@ -1,0 +1,66 @@
+{{ block title }}
+Part 2: Timing decision
+{{ endblock }}
+{{block styles }}
+<style>
+.button2 {background-color: #008CBA;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 140px;
+  width: 260px;
+  padding: 30px;
+  font-size: 25px;
+  text-align: center;
+white-space: normal
+}
+
+.grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" style="height:  120%; width: 107%"><div class="card-body" style="height:  120%;width: 300%">
+ <div class=“parent”> Please decide using the buttons below to decide whether you want to make a decision Before or After watching the video.</div>
+        <br>
+        <br>
+        <br>
+        <br>
+    {{if player.rand == 1}}
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px "><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-left: 50px; font-size: 35px;">Before</span> <small>watching the video.</small></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"> <span style="margin-left: 50px; font-size: 35px;">After</span> <small>watching the video.</small></button> </div></div>
+
+    {{elif player.rand == 2}}
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px "><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"> <span style="margin-left: 50px; font-size: 35px;">After</span> <small>watching the video.</small></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-left: 50px; font-size: 35px;">Before</span> <small>watching the video.</small></button> </div></div>
+    {{endif}}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+</div>
+    </div>
+
+{{ endblock }}
