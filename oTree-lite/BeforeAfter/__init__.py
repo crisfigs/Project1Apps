@@ -36,11 +36,13 @@ class Player(BasePlayer):
     payment_number = models.IntegerField()
     payment = models.IntegerField()
     rand = models.IntegerField()
+    rand2 = models.IntegerField()
+
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q_change = models.IntegerField(label="3. After watching the video I can make a choice between A and B in:",
-                                   choices=[[0, 'In none of the alternatives.'], [1, 'In all of the alternatives.'], [2, 'In one of the alternatives.']])
+    q3 = models.IntegerField(label="3. Please state whether the following is True or False. You can choose between options A and B either Before watching the video or After watching the video",
+                                   choices=[[1, 'False'], [2, 'True']])
     q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
@@ -93,10 +95,10 @@ class Player(BasePlayer):
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
     random_q = models.IntegerField(label="6a. Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
     random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
-
+  #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
     ##Beliefs
     qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?", blank=True)
-
+ #change beliefs question. To
     ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
     controlq_flute = make_field3(label="...a flute.")
@@ -145,7 +147,7 @@ class Player(BasePlayer):
         correct_answers = {
                         'q1A': 1,
                         'q1B': 1,
-                        'q_change': 2,
+                        'q3': 2,
                         'q_video': 1}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
@@ -157,7 +159,10 @@ class Player(BasePlayer):
 
 class Part2_Instruction_Page(Page):
   form_model = 'player'
-  form_fields = ['q1A', 'q1B', 'q_change', 'q_video']
+  form_fields = ['q1A', 'q1B', 'q3', 'q_video']
+
+  def vars_for_template(player: Player):
+      player.rand = random.choices([1, 2], weights=(50, 50), k=1)[0]
 
   def error_message(player,value):
       return player.set_error_message(value)
@@ -168,29 +173,23 @@ class TimingDecision(Page):
     form_fields = ['timing']
 
     def vars_for_template(player: Player):
-        player.rand = random.choices([1,2], weights=(50, 50), k=1)[0]
+        player.rand2 = random.choices([1,2], weights=(50, 50), k=1)[0]
 
     def before_next_page(player: Player, timeout_happened):
         player.imp = random.choices(["Before","After"], weights=(50, 50), k=1)[0]
-
-
-
-
 
 
 class Part3_Intro(Page):
     form_model = 'player'
     form_fields = []
 
-    def before_next_page(player: Player, timeout_happened):
-        if player.imp == "'Choose A and then watch the video.'":
-            player.task1 = "A"
-            player.participant.vars["task1"] = "A"
-        elif player.imp == "'Choose B and then watch the video.'":
-            player.task1 = "B"
-            player.participant.vars["task1"] = "B"
-        else:
-            pass
+class Hypo_choice(Page):
+    form_model = 'player'
+    form_fields = ['task1']
+
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.imp == "Before"
 
 class qa(Page):
     form_model = 'player'
@@ -204,13 +203,18 @@ class Part3_Video(Page):
     form_model = 'player'
     form_fields = []
     @staticmethod
-
     def vars_for_template(player):
        link = C.link1
        return dict(
             link = link)
 
+class Hypo_choice2(Page):
+    form_model = 'player'
+    form_fields = ['task1']
 
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.imp == "After"
 
 class survey2(Page):
     form_model = 'player'
@@ -248,13 +252,7 @@ class FailedAttention(Page):
                 errorlink=link
                  )
         pass
-class Hypo_choice(Page):
-    form_model = 'player'
-    form_fields = ['task1']
 
-    @staticmethod
-    def is_displayed(player: Player):
-      return player.imp == "'Watch the video first and then choose between A and B.'"
 
 class Hypo_choiceq(Page):
     form_model = 'player'
@@ -299,4 +297,4 @@ class Back(Page):
         else:
             pass
 
-page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Video_alert, Part3_Video, Hypo_choice, Hypo_choiceq, qa, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video, Hypo_choice2, Hypo_choiceq, qa, survey2, Openq, Attention1, FailedAttention,EQ, Feedback, Back]

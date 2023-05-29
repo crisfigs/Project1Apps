@@ -18,29 +18,46 @@ Part 3 : Instructions
 }
 
 .grid-item {
-  background-color: rgba(55, 197, 112, 0.62);
+background-color: #008CBA;
+  color: white;
   border: 1px solid rgba(0, 0, 0, 0);
+  height: 140px;
+  width: 260px;
   padding: 30px;
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
-      height: 150px;
-  width: 250px;
-
+white-space: normal
 }
+
 </style>
 {{ endblock }}
 
 
 {{ block content }}
 <div class="card" ><div class="card-body">
+    <p>Your preferred timing was:</p>
+    {{if player.timing == "Before"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">Before</span> <small>watching the video.</small></div>
+    </div>
+        {{elif player.timing == "After"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">After</span> <small>watching the video.</small></div>
+    </div>
+    {{endif}}
 
-
-<p>The alternative(s) you preferred the most is(are) the following:</p>
-
-    Following your choices and the randomization, the following option has been selected:
-     <div id= "grid" class="grid-container center" >
-  <div class="grid-item card center"></div>
-      </div>
+    The computer has randomized and selected the following timing for implementation:
+    {{if player.imp == "Before"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">Before</span> <small>watching the video.</small></div>
+    </div>
+    Thus, you will make a decision between options A and B before watching the video.
+        {{elif player.imp == "After"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">After</span> <small>watching the video.</small></div>
+    </div>
+    Thus, you will watch the video and make a decision between options A and B afterwards.
+    {{endif}}
     <br>
 
 
