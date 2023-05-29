@@ -93,11 +93,13 @@ class Player(BasePlayer):
     temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
-    random_q = models.IntegerField(label="6a. Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
-    random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
+    random_q = models.IntegerField(label="6a.CHANGE Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_openq = models.LongStringField(label="6b. CHANGE If you answered yes to the previous question, could you elaborate why?", blank=True)
+
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
     ##Beliefs
-    qa = models.IntegerField(label= "Suppose that there is someone who has provided the same ranking as you have and he/she ends up facing the alternative: 'Watch the video first and then choose between A and B.'. How likely do you think it is that she/he chooses option A?", blank=True)
+    qa = models.IntegerField(label= "", blank=False)
+    qb = models.IntegerField(label="", choices=[[1, "Option A (me:£5, charity:£0)"], [0, "Option B (me:£1, charity:£8)"]], blank=False)
  #change beliefs question. To
     ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
@@ -193,7 +195,10 @@ class Hypo_choice(Page):
 
 class qa(Page):
     form_model = 'player'
-    form_fields = ['qa']
+    form_fields = ['qa','qb']
+  #  @staticmethod
+   # def is_displayed(player: Player):
+    #  return player.imp == "Before" and player.timing == "Before" or player.imp == "After" and player.timing == "After"
 
 
 class Video_alert(Page):
@@ -256,7 +261,7 @@ class FailedAttention(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq']
+    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq' ]
 
 class Openq(Page):
     form_model = 'player'
