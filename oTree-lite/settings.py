@@ -125,4 +125,4 @@ SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
 
-DEBUG = True
+DEBUG = False

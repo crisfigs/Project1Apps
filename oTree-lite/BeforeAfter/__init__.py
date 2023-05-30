@@ -41,9 +41,9 @@ class Player(BasePlayer):
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q3 = models.IntegerField(label="3. Please state whether the following is True or False. You can choose between options A and B either Before watching the video or After watching the video",
+    q3 = models.IntegerField(label="3. Please state whether the following is True or False: 'You can choose between options A and B either Before watching the video or After watching the video'",
                                    choices=[[1, 'False'], [2, 'True']])
-    q_video = models.IntegerField(label="4. Please state whether the following is True or False. The video portrays the struggles of a girl when her city becomes a warzone. ", choices=[[1, 'True'], [0, 'False']])
+    q_video = models.IntegerField(label="4. Please state whether the following is True or False: 'The video portrays the struggles of a girl when her city becomes a warzone.' ", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
 
@@ -262,11 +262,12 @@ class FailedAttention(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq' ]
+    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq']
 
 class Openq(Page):
     form_model = 'player'
     form_fields = ['openq','emotions_ant']
+
 class EQ(Page):
     form_model='player'
     form_fields = ["qemp1", "qemp3", "qemp4","qemp8",
