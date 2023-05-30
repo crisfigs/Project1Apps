@@ -82,7 +82,7 @@ dict(
     ),
 dict(
         name='BeforeAfter',
-        app_sequence=['BeforeAfter'],
+        app_sequence=['RET','BeforeAfter'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",

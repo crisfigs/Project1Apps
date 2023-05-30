@@ -23,16 +23,15 @@
 }
 
 .grid-item {
-  background-color: rgba(55, 197, 112, 0.62);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+background-color: #008CBA;
+  color: white;
   border: 1px solid rgba(0, 0, 0, 0);
+  height: 140px;
+  width: 260px;
   padding: 30px;
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
-      height: 150px;
-  width: 250px;
-
+white-space: normal
 }
 </style>
 {% endblock %}
@@ -116,9 +115,24 @@
         <br>
         <br>
         <br>
-            {{if player.rand == 1}} 1
-             {{elif player.rand == 2}} 2
+            {{if player.rand == 1}}
+            <div id= "grid" class="grid-container center" >
+                <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">Before</span> <small>watching the video.</small></div>
+                <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">After</span> <small>watching the video.</small></div>
+
+            </div>
+
+             {{elif player.rand == 2}}
+            <div id= "grid" class="grid-container center" >
+                <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">After</span> <small>watching the video.</small></div>
+                <div class="grid-item card center"><span style="margin-left: 10px; font-size: 35px;">Before</span> <small>watching the video.</small></div>
+            </div>
             {{endif}}
+        <br>
+        <br>
+        <br>
+        <p> We have randomly selected the "Before" timing alternative to cost 0.10 pence which will be deducted from your final payment in case you select it.</p>
+
         <p>The computer will randomize between your stated preferred timing and the other timing: most of the time you will face your preference but sometimes you may face the opposite timing option. </p>
 <br>
         <br>

@@ -93,14 +93,15 @@ class Player(BasePlayer):
     temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
-    random_q = models.IntegerField(label="6a.CHANGE Sometimes you could be faced with an alternative irrespective of your ranking, namely “Watch the video first and then choose between A and B”. Did the possibility of randomnly facing that alternative affect the way you ranked your alternatives?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
-    random_openq = models.LongStringField(label="6b. CHANGE If you answered yes to the previous question, could you elaborate why?", blank=True)
+    random_q = models.IntegerField(label="6a.[COULD GO?] Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer 'Before' but still sometimes receive 'After', for example). Did this possibility affected your timing choice between 'Before' and 'After'?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_openq = models.LongStringField(label="6b.[COULD GO?] If you answered yes to the previous question, could you elaborate why?", blank=True)
 
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
     ##Beliefs
-    qa = models.IntegerField(label= "", blank=False)
+    qa = models.IntegerField(label= "", blank=False, min=0, max=100)
     qb = models.IntegerField(label="", choices=[[1, "Option A (me:£5, charity:£0)"], [0, "Option B (me:£1, charity:£8)"]], blank=False)
- #change beliefs question. To
+
+
     ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
     controlq_flute = make_field3(label="...a flute.")
@@ -247,7 +248,7 @@ class FailedAttention(Page):
 
         @staticmethod
         def is_displayed(player: Player):
-            return player.sum_correct <= 2 and player.number==1
+            return player.sum_correct <= 2 and player.number == 1
 
 
         def js_vars(player):
@@ -295,10 +296,14 @@ class Back(Page):
 
     def vars_for_template(player):
         #if selected for payment and chose A
-        if player.payment_number == 1 and player.task1 == "A":
-            player.payment = 5
-        elif player.payment_number == 1 and player.task1 == "B":
+        if player.payment_number == 1 and player.task1 == "A" and player.timing == "Before":
+            player.payment = 4.90
+        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "Before":
+            player.payment = 0.90
+        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "After":
             player.payment = 1
+        elif player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
+            player.payment = 5
         else:
             pass
 
