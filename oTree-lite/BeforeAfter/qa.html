@@ -97,7 +97,7 @@ Guess the proportion and get a bonus!
             <p>Which option would you have chose had you not received your preferred timing? (That is, had you received: {{if player.timing == "Before"}} "After" instead. {{elif player.timing == "After"}} "Before" instead. {{endif}} )</p>
             {{form.qb}}
             {{elif player.timing != player.imp}}
-            <p>Which option would you have chosen had you received your preferred timing? (That is: "{{player.timing}}")</p>
+            <p>Which option would you have chosen had you received your preferred timing? (That is, had actually received: "{{player.timing}}")</p>
             {{form.qb}}
             {{endif}}
 
