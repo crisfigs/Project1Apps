@@ -282,8 +282,8 @@ class Feedback(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        #player.payment_number = random.choices([1,0], weights=(20, 80), k=1)[0]
-        player.payment_number = 1
+        player.payment_number = random.choices([1,0], weights=(20, 80), k=1)[0]
+
 
 class Back(Page):
     form_model = 'player'
@@ -306,6 +306,8 @@ class Back(Page):
             player.payment = 1
         elif player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
             player.payment = 5
+        elif player.payment_number == 0 and player.timing == "Before" :
+            player.payment = -0.10
         else:
             pass
 
