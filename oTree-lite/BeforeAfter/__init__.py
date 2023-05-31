@@ -34,7 +34,7 @@ class Player(BasePlayer):
     sum_correct = models.IntegerField()
     number = models.IntegerField()
     payment_number = models.IntegerField()
-    payment = models.IntegerField()
+    payment = models.FloatField()
     rand = models.IntegerField()
     rand2 = models.IntegerField()
 
@@ -93,8 +93,8 @@ class Player(BasePlayer):
     temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
-    random_q = models.IntegerField(label="6a.[COULD GO?] Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer 'Before' but still sometimes receive 'After', for example). Did this possibility affected your timing choice between 'Before' and 'After'?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
-    random_openq = models.LongStringField(label="6b.[COULD GO?] If you answered yes to the previous question, could you elaborate why?", blank=True)
+    random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer 'Before' but still sometimes receive 'After', for example). Did this possibility affected your timing choice between 'Before' and 'After'?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
 
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
     ##Beliefs
@@ -282,7 +282,8 @@ class Feedback(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.payment_number = random.choices([1,0], weights=(20, 80), k=1)[0]
+        #player.payment_number = random.choices([1,0], weights=(20, 80), k=1)[0]
+        player.payment_number = 1
 
 class Back(Page):
     form_model = 'player'

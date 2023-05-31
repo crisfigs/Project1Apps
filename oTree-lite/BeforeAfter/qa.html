@@ -79,13 +79,13 @@ Part 3: Guess the proportion and get a bonus!
             {{if player.timing == player.imp}}
               <p>  From the group of people who chose "{{player.timing}}" but actually received
                 {{if player.timing == "Before"}} "After", how many people out of a 100 do you think chose option A?   </p>
-            Guesses within +-10 from the actually observed proportion get a 0.10 pence bonus.
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{elif player.timing == "After"}} "Before", how many people out of a 100 do you think chose option A?  </p>
-            Guesses within +-10 from the actually observed proportion get a 0.10 pence bonus.
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{endif}}
             {{elif player.timing != player.imp}}
            <p> From the group of people who chose "{{player.timing}}" and actually received "{{player.timing}}", how many people out of a 100 do you think chose option A? </p>
-            Guesses within +-10 from the actually observed proportion get a 0.10 pence bonus.
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
             {{endif}}
 
 <br>
@@ -94,7 +94,7 @@ Part 3: Guess the proportion and get a bonus!
             <br>
             <br>
             {{if player.timing == player.imp}}
-            <p>Which option would you have chose had you not received your preferred timing? (That is, had you received: {{if player.timing == "Before"}} "After" instead. {{elif player.timing == "After"}} "Before" instead. {{endif}} )</p>
+            <p>Which option would you have chosen had you not received your preferred timing? (That is, had you received: {{if player.timing == "Before"}} "After" instead. {{elif player.timing == "After"}} "Before" instead.{{endif}} )</p>
             {{form.qb}}
             {{elif player.timing != player.imp}}
             <p>Which option would you have chosen had you received your preferred timing? (That is, had actually received: "{{player.timing}}")</p>
