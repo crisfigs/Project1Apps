@@ -256,7 +256,7 @@ class InstructionsGame(Page):
     pass
 
 class Game(Page):
-    timeout_seconds = 240
+    timeout_seconds = 120
     live_method = play_game
 
     @staticmethod

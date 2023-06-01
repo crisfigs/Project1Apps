@@ -18,7 +18,7 @@ Part 1: Results
 
 
 
-        {{ if player.num_correct >= 10 }}
+        {{ if player.num_correct >= 8 }}
         <div class="alert alert-secondary" >
         <b> You have earned &pound5! </b>
           <br>
@@ -30,7 +30,7 @@ Part 1: Results
 <div class="center1">{% next_button %}</div>
 
 <br>
-         {{ elif player.num_correct < 10 }}<div class="alert alert-secondary" >
+         {{ elif player.num_correct < 8 }}<div class="alert alert-secondary" >
         <b>You have earned &pound0... </b>
       <br>
             You cannot continue with this survey.

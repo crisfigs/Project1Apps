@@ -72,19 +72,20 @@ Part 3: Guess the proportion and get a bonus!
 
     <div class="card">
         <div class="card-body">
-<p>Some people in this experiment chose to make a decision between option A (me:£5, charity:£0) and B (me:£1, charity:£8)
-    {{if player.timing == "Before"}} "Before" watching the video, just like you. </p>
-            {{elif player.timing == "After"}} "After" watching the video, just like you. </p>
+<p>Some people in this experiment chose to "Watch the video
+
+    {{if player.timing == "After"}} After making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
+    {{elif player.timing == "Before"}} Before making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
             {{endif}}
             {{if player.timing == player.imp}}
-              <p>  From the group of people who chose "{{player.timing}}" but actually received
-                {{if player.timing == "Before"}} "After", how many people out of a 100 do you think chose option A?   </p>
+              <p>  From the group of people who preferred "Watch the video {{player.timing}} making a choice" like you, but actually ended up assigned to
+                {{if player.timing == "Before"}} "Watch the video After making a choice", how many people out of a 100 do you think chose option A?   </p>
             Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
-                {{elif player.timing == "After"}} "Before", how many people out of a 100 do you think chose option A?  </p>
+                {{elif player.timing == "After"}} "Watch the video Before making a choice", how many people out of a 100 do you think chose option A?  </p>
             Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{endif}}
             {{elif player.timing != player.imp}}
-           <p> From the group of people who chose "{{player.timing}}" and actually received "{{player.timing}}", how many people out of a 100 do you think chose option A? </p>
+           <p> From the group of people who chose "Watch the video {{player.timing}} making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
             Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
             {{endif}}
 
@@ -94,10 +95,10 @@ Part 3: Guess the proportion and get a bonus!
             <br>
             <br>
             {{if player.timing == player.imp}}
-            <p>Which option would you have chosen had you not received your preferred timing? (That is, had you received: {{if player.timing == "Before"}} "After" instead. {{elif player.timing == "After"}} "Before" instead.{{endif}} )</p>
+            <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch the video after making a choice" instead. {{elif player.timing == "After"}} "Watch the video before making a choice" instead.{{endif}} )</p>
             {{form.qb}}
             {{elif player.timing != player.imp}}
-            <p>Which option would you have chosen had you received your preferred timing? (That is, had actually received: "{{player.timing}}")</p>
+            <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: "Watch the video {{player.timing}} making a chocie")</p>
             {{form.qb}}
             {{endif}}
 

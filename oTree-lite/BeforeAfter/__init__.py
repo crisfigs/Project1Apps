@@ -41,9 +41,9 @@ class Player(BasePlayer):
     #Comprehension questions
     q1A = models.IntegerField(label="1. Option A pays: ", choices = [[0,'(me: 0, charity: 5)'],[1,'(me: 5, charity: 0)'],[2,'(me: 1, charity: 4)'],[3,'(me: 1, charity: 8)'],[4,'(me: 4, charity: 0)']])
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
-    q3 = models.IntegerField(label="3. Please state whether the following is True or False: 'You can choose between options A and B either Before watching the video or After watching the video'",
-                                   choices=[[1, 'False'], [2, 'True']])
-    q_video = models.IntegerField(label="4. Please state whether the following is True or False: 'The video portrays the struggles of a girl when her city becomes a warzone.' ", choices=[[1, 'True'], [0, 'False']])
+   # q3 = models.IntegerField(label="3. Please state whether the following is True or False: 'You can choose between options A and B either Before watching the video or After watching the video'",
+                                 #  choices=[[1, 'False'], [2, 'True']])
+    q_video = models.IntegerField(label="3. Please state whether the following is True or False: 'The video portrays the struggles of a girl when her city becomes a warzone.' ", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
 
@@ -93,7 +93,7 @@ class Player(BasePlayer):
     temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
-    random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer 'Before' but still sometimes receive 'After', for example). Did this possibility affected your timing choice between 'Before' and 'After'?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the video Before making a choice' but still sometimes be assigned to 'Watch the video After making a choice', for example). Did this possibility affected your timing decision between watching the video before or after making a choice?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
     random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
 
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
@@ -150,7 +150,6 @@ class Player(BasePlayer):
         correct_answers = {
                         'q1A': 1,
                         'q1B': 1,
-                        'q3': 2,
                         'q_video': 1}
         list_answers = list(value.items())[0:]
         list_correct_answers = list(correct_answers.items())
@@ -162,7 +161,7 @@ class Player(BasePlayer):
 
 class Part2_Instruction_Page(Page):
   form_model = 'player'
-  form_fields = ['q1A', 'q1B', 'q3', 'q_video']
+  form_fields = ['q1A', 'q1B', 'q_video']
 
   def vars_for_template(player: Player):
       player.rand = random.choices([1, 2], weights=(50, 50), k=1)[0]
@@ -179,7 +178,10 @@ class TimingDecision(Page):
         player.rand2 = random.choices([1,2], weights=(50, 50), k=1)[0]
 
     def before_next_page(player: Player, timeout_happened):
-        player.imp = random.choices(["Before","After"], weights=(50, 50), k=1)[0]
+        if player.timing == "Before":
+            player.imp = random.choices(["Before","After"], weights=(60, 40), k=1)[0]
+        elif player.timing == "After":
+                player.imp = random.choices(["Before", "After"], weights=(40, 60), k=1)[0]
 
 
 class Part3_Intro(Page):
@@ -192,7 +194,7 @@ class Hypo_choice(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-      return player.imp == "Before"
+      return player.imp == "After"
 
 class qa(Page):
     form_model = 'player'
@@ -220,7 +222,7 @@ class Hypo_choice2(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-      return player.imp == "After"
+      return player.imp == "Before"
 
 class survey2(Page):
     form_model = 'player'
@@ -298,16 +300,16 @@ class Back(Page):
 
     def vars_for_template(player):
         #if selected for payment and chose A
-        if player.payment_number == 1 and player.task1 == "A" and player.timing == "Before":
-            player.payment = 4.90
-        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "Before":
-            player.payment = 0.90
+        if player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
+            player.payment = 5.10
         elif player.payment_number == 1 and player.task1 == "B" and player.timing == "After":
+            player.payment = 1.10
+        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "Before":
             player.payment = 1
-        elif player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
+        elif player.payment_number == 1 and player.task1 == "A" and player.timing == "Before":
             player.payment = 5
-        elif player.payment_number == 0 and player.timing == "Before" :
-            player.payment = -0.10
+        elif player.payment_number == 0 and player.timing == "After":
+            player.payment = 0.10
         else:
             pass
 
