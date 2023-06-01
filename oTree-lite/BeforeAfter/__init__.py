@@ -300,15 +300,15 @@ class Back(Page):
 
     def vars_for_template(player):
         #if selected for payment and chose A
-        if player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
+        if player.payment_number == 1 and player.task1 == "A" and player.timing == "Before":
             player.payment = 5.10
-        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "After":
-            player.payment = 1.10
         elif player.payment_number == 1 and player.task1 == "B" and player.timing == "Before":
+            player.payment = 1.10
+        elif player.payment_number == 1 and player.task1 == "B" and player.timing == "After":
             player.payment = 1
-        elif player.payment_number == 1 and player.task1 == "A" and player.timing == "Before":
+        elif player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
             player.payment = 5
-        elif player.payment_number == 0 and player.timing == "After":
+        elif player.payment_number == 0 and player.timing == "Before":
             player.payment = 0.10
         else:
             pass
