@@ -104,7 +104,7 @@ class Player(BasePlayer):
 
     ##Attention questions video
     controlq_cake = make_field3(label="...a girl blowing some candles.")
-    controlq_flute = make_field3(label="...a flute.")
+    controlq_flute = make_field3(label="...a gas mask.")
     controlq_airplane = models.IntegerField(
             choices=[
                 [1, 'False'],
