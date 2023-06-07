@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{{block styles }}
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+{{ endblock }}
+
+{{ block title }} Part 3: Video Visualization Survey {{ endblock }}
+{{ block content }}
+
+ <div class="card">
+     <div class="card-body">
+
+
+         <p>How did you feel watching the video? </p>
+
+<p>Please evaluate below how intensely you experienced the following emotions.</p>
+<br>
+         <br>
+         <div class=“parent”> <table class="table table-striped">
+    {{ for field in form }}
+        <tr>
+            <th>{{ field.label }}</th>
+            {{ for choice in field }}
+                <td>{{ choice }}</td>
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+             <div class=“child”><div style="position:absolute;left: 360px;top: 100px">Very weak</div> </div>
+             <div class=“child”><div style="position:absolute;left: 370px;top: 120px">emotion.</div> </div>
+             <div class=“child”><div style="position:absolute;left: 490px;top: 120px">Mild</div> </div>
+             <div class=“child”><div style="position:absolute;left: 580px;top: 120px">Moderate</div> </div>
+             <div class=“child”><div style="position:absolute;left: 710px;top: 120px">High</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 100px">Very high</div> </div>
+            <div class=“child”><div style="position:absolute;right: 78px;top: 120px">emotion.</div> </div>
+
+
+         </div>
+
+
+Once you have filled in this survey, please, press "Next" to continue.
+
+     </div></div>
+<br>
+
+  <div class="center">{{ next_button }}</div>
+
+{{ endblock }}

@@ -1,0 +1,75 @@
+{{ block title }}
+Part 3 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+background-color: #008CBA;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 160px;
+  width: 230px;
+  padding:20px;
+  font-size: 25px;
+  text-align: center;
+white-space: normal
+}
+
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+    <p>Your preferred timing was:</p>
+    {{if player.timing == "Before"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">    <span style="margin-left: 15px;font-size: 20px;">Watch video</span> <span style="margin-left: 20px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span></div>
+    </div>
+        {{elif player.timing == "After"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 20px;font-size: 20px;">Watch video</span> <span style="margin-left: 25px; font-size: 35px;">After</span> <small>making a choice.</small></div>
+    </div>
+    {{endif}}
+
+    The computer has randomized and selected the following timing for implementation:
+    {{if player.imp == "Before"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center">    <span style="margin-left: 15px;font-size: 20px;">Watch video</span> <span style="margin-left: 20px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span></div>
+    </div>
+        Thus, you will watch the video before and make a decision between options A and B afterwards.
+        {{elif player.imp == "After"}}
+    <div id= "grid" class="grid-container center" >
+        <div class="grid-item card center"><span style="margin-left: 20px;font-size: 20px;">Watch video</span> <span style="margin-left: 25px; font-size: 35px;">After</span> <small>making a choice.</small></div>
+    </div>
+        Thus, you will watch the video after making a decision between options A and B.
+    {{endif}}
+    <br>
+
+
+    </div>
+    </div>
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+
+{{ endblock }}
+

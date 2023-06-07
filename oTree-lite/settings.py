@@ -87,6 +87,13 @@ dict(
         cc_code="CCCODE",
         error_code="ECODE",
     ),
+dict(
+        name='BeforeAfter_g',
+        app_sequence=['RET','BeforeAfter_grass'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

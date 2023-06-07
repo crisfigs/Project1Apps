@@ -7,12 +7,12 @@ Before/After new design.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'BF'
+    NAME_IN_URL = 'BF_g'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ["Before","After"]
     #careful, elem in choices is without "".
-    link1 = "https://www.dropbox.com/s/hoh8zehqd960dmq/mostshocking2day.mp4?raw=1"
+    link1 = "https://www.dropbox.com/s/iebfy6fzuewtk34/grass.mp4?raw=1"
 
 
 
@@ -43,7 +43,7 @@ class Player(BasePlayer):
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
    # q3 = models.IntegerField(label="3. Please state whether the following is True or False: 'You can choose between options A and B either Before watching the video or After watching the video'",
                                  #  choices=[[1, 'False'], [2, 'True']])
-    q_video = models.IntegerField(label="3. Please state whether the following is True or False: 'The video portrays the struggles of a girl when her city becomes a warzone.' ", choices=[[1, 'True'], [0, 'False']])
+    q_video = models.IntegerField(label="4. Please state whether the following is True or False. 'The video is an excerpt from a promotional video by 'Lawn Solutions Australia.''", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
 
@@ -103,14 +103,14 @@ class Player(BasePlayer):
 
 
     ##Attention questions video
-    controlq_cake = make_field3(label="...a girl blowing some candles.")
-    controlq_flute = make_field3(label="...a gas mask.")
-    controlq_airplane = models.IntegerField(
-            choices=[
-                [1, 'False'],
-                [0, 'True']],
-            label="...a girl on an airplane.",
-            widget=widgets.RadioSelect)
+    controlq_presenter = make_field3(label="...a male presenter.")
+    controlq_drawing = make_field3(label="...a drawing.")
+    controlq_woman = models.IntegerField(
+        choices=[
+            [1, 'False'],
+            [0, 'True']],
+        label="...a woman.",
+        widget=widgets.RadioSelect)
 
     ##Empathy questionaire
     qemp1 = make_field2agree(label="I can easily tell if someone else wants to enter a conversation.")
@@ -239,17 +239,17 @@ class survey2(Page):
 
 class Attention1(Page):
     form_model = 'player'
-    form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+    form_fields = ["controlq_presenter", "controlq_drawing","controlq_woman"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute  + player.controlq_airplane
+        player.sum_correct = player.controlq_presenter + player.controlq_drawing + player.controlq_woman
         player.number = random.choices([1,0], weights=(1, 99), k=1)[0]
 
 
 class FailedAttention(Page):
         form_model = 'player'
-        form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+        form_fields = ["controlq_presenter", "controlq_drawing", "controlq_woman"]
 
         @staticmethod
         def is_displayed(player: Player):

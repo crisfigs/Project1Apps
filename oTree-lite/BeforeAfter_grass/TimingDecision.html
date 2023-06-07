@@ -1,0 +1,67 @@
+{{ block title }}
+Part 2: Timing decision
+{{ endblock }}
+{{block styles }}
+<style>
+.button2 {background-color: #008CBA;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 180px;
+  width: 230px;
+  padding: 30px;
+  font-size: 25px;
+  text-align: center;
+    white-space: normal
+}
+
+.grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" style="height:  100%; width: 107%"><div class="card-body" style="height:  120%;width: 100%">
+ <div class=“parent”> Please decide, using the two buttons below, whether you want to make a decision between option A (me: &pound5, charity: &pound0) and Option B (me: &pound1, charity: &pound8) Before or After watching the video.</div>
+        <br>
+        <br>
+        <br>
+    {{if player.rand2 == 1}}
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px "><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-left: 30px;font-size: 20px;">Watch video</span> <span style="margin-left: 40px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span style="margin-left: 30px;font-size: 20px;">Watch video</span> <span style="margin-left: 50px; font-size: 35px;">After</span> <small>making a choice.</small></button> </div></div>
+
+    {{elif player.rand2 == 2}}
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px "><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span style="margin-left: 30px;font-size: 20px;">Watch video</span> <span style="margin-left: 50px; font-size: 35px;"> After</span> <small>making a choice.</small></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"><span style="margin-left: 30px;font-size: 20px;">Watch video</span> <span style="margin-left: 40px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span></button> </div></div>
+    {{endif}}
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>The computer will randomize between your stated preferred timing and the other timing: most of the time you will face your preference but you may be assigned to the opposite timing option. </p>
+        <p>In addition, note that if you watch the video before (if you select the "Watch video BEFORE making a choice"), &pound0.10 will be added to your final payment.</p>
+        <br>
+        <br>
+        <br>
+
+
+</div>
+    </div>
+
+{{ endblock }}
