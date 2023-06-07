@@ -95,7 +95,7 @@ Part 3: Guess the proportion and get a bonus!
             <br>
             <br>
             {{if player.timing == player.imp}}
-            <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch the video after making a choice" instead. {{elif player.timing == "After"}} "Watch the video before making a choice" instead.{{endif}} )</p>
+            <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch the video After making a choice" instead. {{elif player.timing == "After"}} "Watch the video Before making a choice" instead.{{endif}} )</p>
             {{form.qb}}
             {{elif player.timing != player.imp}}
             <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: "Watch the video {{player.timing}} making a choice")</p>
