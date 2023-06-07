@@ -311,7 +311,9 @@ class Back(Page):
             player.payment = 1
         elif player.payment_number == 1 and player.task1 == "A" and player.timing == "After":
             player.payment = 5
-        elif player.payment_number == 0 and player.timing == "Before":
+        elif player.payment_number == 0 and player.task1 == "A" and player.timing == "Before":
+            player.payment = 0.10
+        elif player.payment_number == 0 and player.task1 == "B" and player.timing == "Before":
             player.payment = 0.10
         else:
             pass
