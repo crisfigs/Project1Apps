@@ -1,0 +1,151 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{{block styles }}
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+
+
+
+{% block title %}
+Part 3: Choice survey
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            {{form.donationq.label}}
+            {{form.donationq}}
+            <br>
+            <br>
+            {{form.donationqother.label}}
+            {{form.donationqother}}
+<br>
+     <table>
+    <tr>
+
+        <th>
+        </th>
+    </tr>
+<tr>
+    <br>
+            {{form.charityq.label}}
+    <br>
+
+    {{ for choice in form.charityq }}
+
+    {{ choice }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    {{ endfor }}
+    <br>
+            Not at all &nbsp &nbsp &nbsp Only a little &nbsp &nbsp To some extent &nbsp &nbsp Rather much &nbsp &nbsp &nbsp &nbsp Very much
+
+</tr>
+             </table>
+    <br>
+    <br>
+
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
+</div>
+
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--label"> {{form.temptationqA.label}}</span>
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings(event)" />
+	</span>
+</label>
+            <output id="output1">change the slider</output>
+            <input   type="hidden" name="temptationqA" id="temptationqA">
+{{ formfield_errors "temptationqA"}}
+
+
+            <br>
+             <br>
+             <br>
+
+            <div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange2" type="range" min="1" max="100" value="50" >
+</div>
+
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--label">{{form.temptationqB.label}}</span>
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings2(event)" />
+	</span>
+</label>
+            <output id="output2">change the slider</output>
+            <input  type="hidden" name="temptationqB" id="temptationqB">
+              {{ formfield_errors "temptationqB"}}
+
+<br>
+            {{form.random_q.label}}
+            {{form.random_q}}
+            <br>
+            <br>
+            {{form.random_openq.label}}
+            {{form.random_openq}}
+<br>
+
+<br>
+                      </div>
+    </div>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+<script>
+var slider = document.getElementById("myRange");
+var slider2 = document.getElementById("myRange2");
+slider.oninput = function() {
+  document.getElementById("temptationqA").value = this.value;
+}
+slider2.oninput = function() {
+  document.getElementById("temptationqB").value = this.value;
+}
+
+const output = document.getElementById("output1");
+const output2 = document.getElementById("output2");
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `tempting: ${percent}`
+    document.getElementById("temptationqA").value = `${value}`;
+
+
+}
+
+const doThings2 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output2.value = `tempting: ${percent}`
+    document.getElementById("temptationqB").value = `${value}`;
+
+}
+
+
+
+function submitForm(){
+            if (document.getElementById("temptationqA").value =="") {
+                window.alert("Please answer question 4.");
+                                        event.preventDefault();}
+            if (document.getElementById("temptationqB").value =="") {
+                window.alert("Please answer question 5.");
+                  event.preventDefault();
+            }
+             else  {
+            document.getElementById("form").submit();
+            }
+    }
+
+    </script>
+
+
+{% endblock %}

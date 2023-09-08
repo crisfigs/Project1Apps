@@ -1,0 +1,121 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Part 3: Guess the proportion and get a bonus!
+{% endblock %}
+
+{{block styles }}
+
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+<style>
+
+   .grid-container1 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto ;
+  padding: 10px;
+        justify-items: center;
+
+}
+      .grid-container2 {
+  display: grid;
+  gap: 20px 20px;
+  grid-template-columns: 250px 250px;
+  padding: 10px;
+        justify-items: center;
+
+}
+            .grid-container3 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto ;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+  background-color: rgba(55, 197, 112, 0.62);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+      height: 150px;
+  width: 250px;
+
+}
+.grid-item1 {
+  background-color: rgba(0,0,0,0);
+  border: 1px rgba(1, 1, 1, 1);
+  padding: 0px;
+    margin: 0px;
+    display:inline-block;
+  font-size: 20px;
+  text-align: center;
+    height: 160px;
+  width: 210px;
+    gap: 20px 20px ;
+
+}
+</style>
+
+{{ endblock }}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+<p>Some people in this experiment chose to "Watch the video
+
+    {{if player.timing == "After"}} After making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
+    {{elif player.timing == "Before"}} Before making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
+            {{endif}}
+            {{if player.timing == player.imp}}
+              <p>  From the group of people who preferred "Watch the video {{player.timing}} making a choice" like you, but actually ended up assigned to
+                {{if player.timing == "Before"}} "Watch the video After making a choice", how many people out of a 100 do you think chose option A?   </p>
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+                {{elif player.timing == "After"}} "Watch the video Before making a choice", how many people out of a 100 do you think chose option A?  </p>
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+                {{endif}}
+            {{elif player.timing != player.imp}}
+           <p> From the group of people who chose "Watch the video {{player.timing}} making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
+            Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+            {{endif}}
+
+<br>
+            <br>
+           <div class="center">Make your guess here (a number from 0-100):  {{form.qa}}</div>
+            <br>
+            <br>
+            {{if player.timing == player.imp}}
+            <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch the video After making a choice" instead. {{elif player.timing == "After"}} "Watch the video Before making a choice" instead.{{endif}} )</p>
+            {{form.qb}}
+            {{elif player.timing != player.imp}}
+            <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: "Watch the video {{player.timing}} making a choice")</p>
+            {{form.qb}}
+            {{endif}}
+
+
+{{ formfield_errors "qa"}}
+
+
+  </div>
+</div>
+<br>
+<div class="center"> {{ next_button }}</div>
+
+
+{% endblock %}
+
+
+
+
+
+

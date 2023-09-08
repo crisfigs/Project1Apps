@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% block scripts%}
+<script>
+
+        let completionlink = js_vars.completionlink;
+        function completed() {
+            console.log("clicking the button")
+            window.location.href =completionlink;
+        }
+
+</script>
+{% endblock %}
+
+{%  block title %}Part 4: End{% endblock %}
+
+
+
+{% block content %}
+
+    {% formfields %}
+Click "Next" to proceed to payment.
+    {% next_button %}
+{% endblock %}
+
+
