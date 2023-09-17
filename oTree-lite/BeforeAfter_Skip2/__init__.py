@@ -7,7 +7,7 @@ Before/After new design.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'Skip'
+    NAME_IN_URL = 'Skip2'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ["Before","After"]
@@ -47,7 +47,6 @@ class Player(BasePlayer):
     q_video = models.IntegerField(label="3. Please state whether the following is True or False: 'The video portrays the struggles of a girl when her city becomes a warzone.' ", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
-    explanation = models.IntegerField(blank=True)
 
     def make_field(label):
         return models.IntegerField(
@@ -181,7 +180,7 @@ class Part2_Instruction_Page(Page):
 
 class TimingDecision(Page):
     form_model = 'player'
-    form_fields = ['timing','explanation']
+    form_fields = ['timing']
 
     def vars_for_template(player: Player):
         player.rand2 = random.choices([1,2], weights=(100, 0), k=1)[0]

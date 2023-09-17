@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{%  block title %} Part 4: Final Survey{% endblock %}
+
+{% block styles %}
+<style>
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+th{
+    top: 0;
+    z-index: 2;
+    position: sticky;
+    background-color: white;
+ }
+
+td{
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+
+/* The scrollable part */
+
+.scrollable {
+  height: 500px;
+  overflow-y: scroll;
+  border-bottom: 1px solid #ddd;
+}
+
+
+div_before_table {
+    overflow:hidden;
+    overflow-y: scroll;
+    height: 50px;
+}
+
+</style>
+{{ endblock }}
+
+{% block content %}
+
+
+ <div class="card">
+     <div class="card-body">
+<p>Below is a list of statements. Please read each statement carefully and rate how strongly you agree or disagree with it by selecting the circle under your answer. There are no right or wrong answers, or trick questions. Please answer each question as honestly as you can.</p>
+
+<p></p>
+<br>
+         <br>
+<div class="div_before_table">
+<div class="scrollable">
+  <table>
+    <tr>
+      <th></th>
+        <th colspan="30"  >Definitely &nbsp &nbsp Slightly &nbsp &nbsp &nbsp Slightly  &nbsp &nbsp &nbsp Definitely
+        <br/>Disagree &nbsp &nbsp Disagree &nbsp &nbsp &nbsp  Agree  &nbsp &nbsp &nbsp &nbsp Agree</th>
+         </tr>
+
+    <tr>
+            {{ for field in form }}
+           <td> {{ field.label }}</td>
+            {{ for choice in field }}
+                <td>{{ choice }}<td></td><td> </td><td> </td><td> </td></td>
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+    <tr>
+  </table>
+
+</div></div>
+</div></div>
+
+    {% next_button %}
+
+{% endblock %}

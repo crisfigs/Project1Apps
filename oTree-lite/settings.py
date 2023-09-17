@@ -95,8 +95,8 @@ dict(
         error_code="ECODE",
     ),
 dict(
-        name='BeforeAfter_SKIP',
-        app_sequence=['BeforeAfter_Skip'],
+        name='BeforeAfter_SKIP2',
+        app_sequence=['BeforeAfter_Skip2'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
