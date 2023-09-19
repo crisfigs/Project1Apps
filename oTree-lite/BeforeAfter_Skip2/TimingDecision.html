@@ -18,8 +18,8 @@ Part 2: Timing decision
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: 1px solid rgba(0, 0, 0, 0);
-  height: 180px;
-  width: 300px;
+  height: 200px;
+  width: 350px;
   padding: 30px;
   font-size: 25px;
   text-align: center;
@@ -33,13 +33,16 @@ Part 2: Timing decision
 
 {{ block content }}
 <div class="card" style="height:  100%; width: 107%"><div class="card-body" style="height:  120%;width: 100%">
- <div class=“parent”> Please decide, using the two buttons below, whether you want to watch the video Before making a decision between option A (me: &pound5, charity: &pound0) and Option B (me: &pound1, charity: &pound8) or whether you want to watch a (different and unrelated) video After making a decision between both options.</div>
-        <br>
+ <div class=“parent”> In addition to making a choice between Option A(me: &pound5, charity: &pound0) and Option B(me: &pound1, charity: &pound8), you will watch a video. You can choose to watch the Save the Children video mentioned previously, before making a choice between Options A and B.
+     Alternatively, you can first make a choice between Options A and B, and then watch a video of similar length about a different, unrelated to charity, topic. Please use the buttons below to make your choice.
+
+
+          <br>
         <br>
         <br>
     {{if player.rand2 == 1}}
-    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-left: 70px;font-size: 20px;">Watch video</span> <span style="margin-left: 75px; font-size: 35px;">Before</span> <span style="margin-left: 55px;font-size: 20px;">making a choice.</span></button></div></div>
-    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-left: 25px;font-size: 20px;">Watch unrelated* video</span> <span style="margin-left: 80px; font-size: 35px;">After</span><span style="margin-left: 40px;font-size: 20px;">making a choice.</span></button> </div></div>
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice.</span></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
 
         <br>
         <br>
@@ -51,17 +54,13 @@ Part 2: Timing decision
         <br>
     <br>
     <br>
-
-          <p> *If you choose the "After" timing option you are asked to watch a video which has the same length but is unrelated to Save the Children
-             and any other charitable motive.</p>
 
 
     {{elif player.rand2 == 2}}
-    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-left: 25px;font-size: 20px;">Watch unrelated* video</span> <span style="margin-left: 80px; font-size: 35px;">After</span><span style="margin-left: 40px;font-size: 20px;">making a choice.</span></button> </div></div>
-    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-left: 70px;font-size: 20px;">Watch video</span> <span style="margin-left: 75px; font-size: 35px;">Before</span> <span style="margin-left: 55px;font-size: 20px;">making a choice.</span></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice.</span></button></div></div>
 
-    <p> *If you choose the "After" timing option you are asked to watch a video which has the same length but is unrelated to Save the Children
-             and any other charitable motive.</p>
+
 
     {{endif}}
 
