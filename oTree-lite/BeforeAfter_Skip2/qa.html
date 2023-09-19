@@ -74,25 +74,25 @@ Part 3: Guess the proportion and get a bonus!
         <div class="card-body">
 <p>Some people in this experiment chose to
 
-            {{if player.timing == "After"}} "Watch an unrelated video After making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
-            {{elif player.timing == "Before"}} "Watch the video Before making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
+            {{if player.timing == "After"}} "Watch an alternative video After making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
+            {{elif player.timing == "Before"}} "Watch the Save the Children video Before making a choice" between option A (me:£5, charity:£0) and B (me:£1, charity:£8), just like you. </p>
             {{endif}}
             {{if player.timing == player.imp}}
                 {{if player.timing == "After"}}
-                    <p>  From the group of people who preferred "Watch an unrelated video After making a choice" like you, but actually ended up assigned to
-                    "Watch the video Before making a choice", how many people out of a 100 do you think chose option A?   </p>
+                    <p>  From the group of people who preferred "Watch an alternative video After making a choice" like you, but actually ended up assigned to
+                    "Watch the Save the Children video Before making a choice", how many people out of a 100 do you think chose option A?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{elif player.timing == "Before"}}
-                    <p>  From the group of people who preferred "Watch the video Before making a choice" like you, but actually ended up assigned to
-                    "Watch an unrelated video After making a choice", how many people out of a 100 do you think chose option A?   </p>
+                    <p>  From the group of people who preferred "Watch the Save the Children video Before making a choice" like you, but actually ended up assigned to
+                    "Watch an alternative video After making a choice", how many people out of a 100 do you think chose option A?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{endif}}
             {{elif player.timing != player.imp}}
               {{if player.timing == "After"}}
-                <p> From the group of people who chose "Watch an unrelated video After making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
+                <p> From the group of people who chose "Watch an alternative video After making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
                 Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
               {{elif player.timing == "Before"}}
-                <p> From the group of people who chose "Watch the video Before making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
+                <p> From the group of people who chose "Watch the Save the Children video Before making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
                 Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
               {{endif}}
             {{endif}}
@@ -103,10 +103,10 @@ Part 3: Guess the proportion and get a bonus!
             <br>
             <br>
             {{if player.timing == player.imp}}
-                <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch an unrelated video After making a choice" instead. {{elif player.timing == "After"}} "Watch the video Before making a choice" instead.{{endif}} )</p>
+                <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch an alternative video After making a choice" instead. {{elif player.timing == "After"}} "Watch the Save the Children video Before making a choice" instead.{{endif}} )</p>
                 {{form.qb}}
             {{elif player.timing != player.imp}}
-                <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: {{if player.timing == "After"}}"Watch an unrelated video After making a choice" instead. {{elif player.timing == "Before"}} "Watch the video Before making a choice" instead.{{endif}} )</p>
+                <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: {{if player.timing == "After"}}"Watch an alternative video After making a choice" instead. {{elif player.timing == "Before"}} "Watch the Save the Children video Before making a choice" instead.{{endif}} )</p>
                 {{form.qb}}
             {{endif}}
 
