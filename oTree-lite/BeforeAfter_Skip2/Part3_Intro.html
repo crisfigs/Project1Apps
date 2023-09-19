@@ -21,8 +21,8 @@ Part 3 : Instructions
 background-color: #008CBA;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0);
-  height: 180px;
-  width: 300px;
+  height: 200px;
+  width: 350px;
   padding:30px;
   font-size: 25px;
   text-align: center;
@@ -40,25 +40,30 @@ white-space: normal
     {{if player.timing == "Before"}}
     <div id= "grid" class="grid-container center" >
        <div class="grid-item card center">
-           <span style="margin-left: 20px;font-size: 20px;">Watch video</span> <span style="margin-left: 20px; font-size: 35px;">Before</span> <span style="margin-left: 20px;font-size: 20px;">making a choice.</span></div>
-    </div>
+           <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 10px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span>      </div>
+       </div></div>
     {{elif player.timing == "After"}}
      <div id= "grid" class="grid-container center" >
-       <div class="grid-item card center"><span  style="margin-left: 20px;font-size: 20px;">Watch unrelated* video</span> <span style="margin-left: 20px; font-size: 35px;">After</span><span style="margin-left: 20px;font-size: 20px;">making a choice.</span></div>
+       <div class="grid-item card center"><span  style="margin-top:10px;margin-left:15px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 10px; font-size: 35px;">After</span><span style="margin-left: 10px;font-size: 20px;">making a choice.</span>
+       </div></div>
+
      </div>
     {{endif}}
 
     The computer has randomized and selected the following timing for implementation:
     {{if player.imp == "Before"}}
     <div id= "grid" class="grid-container center" >
-       <div class="grid-item card center"> <span style="margin-left: 20px;font-size: 20px;">Watch video</span> <span style="margin-left: 20px; font-size: 35px;">Before</span> <span style="margin-left: 20px;font-size: 20px;">making a choice.</span></div>
+       <div class="grid-item card center">
+           <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 10px; font-size: 35px;">Before</span> <span style="margin-left: 10px;font-size: 20px;">making a choice.</span>      </div>
     </div>
-        Thus, you will watch the video before and make a decision between options A and B afterwards.
+        Thus, you will watch the Save the Children video before and make a decision between options A and B afterwards.
     {{elif player.imp == "After"}}
      <div id= "grid" class="grid-container center" >
-       <div class="grid-item card center"><span  style="margin-left: 20px;font-size: 20px;">Watch unrelated* video</span> <span style="margin-left: 20px; font-size: 35px;">After</span><span style="margin-left: 20px;font-size: 20px;">making a choice.</span></div>
-     </div>
-        Thus, you will watch an unrelated video after making a decision between options A and B.
+       <div class="grid-item card center">
+           <span  style="margin-top:10px;margin-left:15px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 10px; font-size: 35px;">After</span><span style="margin-left: 10px;font-size: 20px;">making a choice.</span>
+
+       </div> </div>
+        Thus, you will watch an alternative video after making a decision between options A and B.
     {{endif}}
     <br>
 
