@@ -94,7 +94,7 @@ class Player(BasePlayer):
     temptationqB = models.IntegerField(label="5. How tempting did the video made Option B (me:£1, charity:£8) seem?", blank=True)
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?", blank=True)
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video ")
-    random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the Save the Children video Before making a choice' but still sometimes be assigned to 'Watch an alternative video After making a choice', for example). Did this possibility affect your decision between watching the video before or after making a choice?", choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+    random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the Save the Children video Before making a choice' but still sometimes be assigned to 'Watch an alternative video After making a choice', for example). Did this possibility affect your decision between watching the video before or after making a choice?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
     random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
 
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
