@@ -100,6 +100,13 @@ dict(
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
+    ),
+dict(
+        name='BeforeAfter_SKIP_SP',
+        app_sequence=['BeforeAfter_Skip_SocialPressure'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
     )
 ]
 
