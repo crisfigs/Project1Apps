@@ -257,7 +257,7 @@ class Hypo_choice2(Page):
     def is_displayed(player: Player):
       return player.imp == "Before"
 
-class Justification(Page):
+class justification(Page):
     form_model = 'player'
     form_fields = ['justifyq']
 
@@ -370,4 +370,4 @@ class Back(Page):
         else:
             pass
 
-page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2, Hypo_choice2, Justification , Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2, Hypo_choice2, justification , Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]
