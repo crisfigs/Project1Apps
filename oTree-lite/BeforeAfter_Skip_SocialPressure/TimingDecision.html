@@ -3,17 +3,7 @@ Part 2: Timing decision
 {{ endblock }}
 {{block styles }}
 <style>
-.buttonlink {
-  background: none!important;
-  border: none;
-  padding: 0!important;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
+
     .button2 {background-color: #008CBA;
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -26,7 +16,25 @@ Part 2: Timing decision
     white-space: normal
 }
 
-
+.column {
+  float: left;
+  width: 70%;
+  padding: 20px;
+}
+.column2 {
+  float: left;
+  width: 30%;
+  padding: 0px;
+}
+.arrow {
+font-size: 25px;
+color: black;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 </style>
 {{ endblock }}
 
@@ -35,20 +43,34 @@ Part 2: Timing decision
 <div class="card" style="height:  100%; width: 107%"><div class="card-body" style="height:  120%;width: 100%">
  <div class=“parent”> Before making a choice between Option A(me: £5, charity: £0) and Option B(me: £1, charity: £8), you need to choose between the following two options:
        <br>
-        <br>
-     {{if player.rand2 == 1}}
-<ul>
-  <li> You can first watch the video recorded by a staff member of Save the Children and then make a choice between Option A and Option B. In addition, Save the Children requires a justification for your choice (between options A and B) so you will also be asked to give a reason for your choice which will be sent along with the respective payment to Save the Children. If this is the option that you prefer, please click on the "Watch Save the Children video Before making a choice (and sending a reason)." button.</li>
-   <br>
-  <li>You can first make a choice between Option A and Option B and then watch a video of similar length about a different topic, unrelated to Save the Children.  If this is the option that you prefer, please click on the "Watch alternative video After making a choice" button.</li>
+       <br>
 
-</ul>
+ {{if player.rand2 == 1}}
+     <div class="row">
+         <div class="column" >
+             <ul>
+                 <li> You can first watch the video recorded by a staff member of Save the Children and then make a choice between Option A and Option B. In addition, Save the Children requires a justification for your choice (between options A and B) so you will also be asked to give a reason for your choice which will be sent along with the respective payment to Save the Children.</li>
+             </ul>
+         </div>
+         <div class="column2">
+             <p> <span class="arrow">&#8594;</span>If this is the option that you prefer, please click on the <i>"Watch Save the Children video Before making a choice (and sending a reason)."</i> button.</p>
+         </div>
+     </div>
+     <div class="row">
+         <div class="column" style="">
+             <ul>
+                 <li>You can first make a choice between Option A and Option B and then watch a video of similar length about a different topic, unrelated to Save the Children.</li>
+             </ul>
+         </div>
+         <div class="column2" style="">
+             <p> <span class="arrow">&#8594;</span> If this is the option that you prefer, please click on the <i>"Watch alternative video After making a choice"</i> button.</p>
+         </div>
+     </div>
 
-          <br>
         <br>
         <br>
-    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:350px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice</span><span style="margin-left: 45px;font-size: 20px;">(and sending a reason).</span></button></div></div>
-    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:350px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
+    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:400px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice</span><span style="margin-left: 45px;font-size: 20px;">(and sending a reason).</span></button></div></div>
+    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:400px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
 
         <br>
         <br>
@@ -57,30 +79,51 @@ Part 2: Timing decision
         <br>
         <br>
         <br>
-        <br>
-    <br>
-    <br>
-
-
-    {{elif player.rand2 == 2}}
-     <ul>
-         <li>You can first make a choice between Option A and Option B and then watch a video of similar length about a different topic, unrelated to Save the Children.  If this is the option that you prefer, please click on the "Watch alternative video After making a choice" button.</li>
-
-  <li> You can first watch the video recorded by a staff member of Save the Children and then make a choice between Option A and Option B. In addition, you will also be asked to give a reason for your choice (between options A and B) which will be sent along with the respective payment to Save the Children. If this is the option that you prefer, please click on the "Watch Save the Children video Before making a choice (and sending a reason)." button.</li>
-
-
-</ul>
-
-          <br>
-        <br>
-        <br>
-    <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:150px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
-    <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:350px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice</span><span style="margin-left: 45px;font-size: 20px;">(and sending a reason).</span></button></div></div>
 
 
 
-    {{endif}}
+ {{elif player.rand2 == 2}}
+     <div class="row">
+        <div class="column" style="">
+            <ul>
+                <li>You can first make a choice between Option A and Option B and then watch a video of similar length about a different topic, unrelated to Save the Children.</li>
+            </ul>
+        </div>
+        <div class="column2" style="">
+            <p> <span class="arrow">&#8594;</span> If this is the option that you prefer, please click on the <i>"Watch alternative video After making a choice"</i> button.</p>
+        </div>
+     </div>
 
+     <div class="row">
+         <div class="column" >
+             <ul>
+                 <li> You can first watch the video recorded by a staff member of Save the Children and then make a choice between Option A and Option B. In addition, Save the Children requires a justification for your choice (between options A and B) so you will also be asked to give a reason for your choice which will be sent along with the respective payment to Save the Children.</li>
+             </ul>
+         </div>
+         <div class="column2">
+             <p> <span class="arrow">&#8594;</span>If this is the option that you prefer, please click on the <i>"Watch Save the Children video Before making a choice (and sending a reason)."</i> button.</p>
+         </div>
+     </div>
+
+        <br>
+        <br>
+        <div class=“child”><div style="position:absolute;left:600px;right: 0px;bottom: 0px;top:400px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:10px;margin-left: 35px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 100px; font-size: 35px;">After</span><span style="margin-left: 60px;font-size: 20px;">making a choice.</span></button> </div></div>
+        <div class=“child”><div style="position:absolute;left:150px;right: 0px;bottom: 0px;top:400px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 10px;font-size: 20px;">Watch Save the Children video</span> <span style="margin-left: 90px; font-size: 35px;">Before</span> <span style="margin-left: 65px;font-size: 20px;">making a choice</span><span style="margin-left: 45px;font-size: 20px;">(and sending a reason).</span></button></div></div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+ {{endif}}
+        <br>
         <br>
         <p>The computer will randomize between your stated preferred timing and the other timing: most of the time you will face your preference but you may be assigned to the opposite timing option. </p>
         <p>In addition, note that if you watch the video before (if you select the "Watch Save the Children video Before making a choice (and sending a reason)."), &pound0.10 will be added to your final payment.</p>
