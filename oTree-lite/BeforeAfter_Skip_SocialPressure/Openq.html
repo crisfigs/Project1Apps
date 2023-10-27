@@ -20,6 +20,7 @@
 
   <div class="card">
         <div class="card-body">
+            Please answer all of the following questions:
 <br>
 
 <div type="hidden" class="slidecontainer">
@@ -40,7 +41,8 @@
             <br>
                  {{form.openq.label}}
                <div id="openq" >{{form.openq}}</div>
-
+<br>
+            <br>
 <div type="hidden" class="slidecontainer">
   <input type="hidden" id="myRange1" type="range" min="1" max="100" value="50" >
 </div>
@@ -134,12 +136,17 @@
                     window.alert("Please answer question 1.");
                                             event.preventDefault();}
                 if (document.getElementById("pressureStC_ant").value =="") {
-                    window.alert("Please answer question 2.");
+                    window.alert("Please answer question 3.");
                     event.preventDefault();
                 }
                 if (document.getElementById("pressureGrass_ant").value =="") {
-                    window.alert("Please answer question 3.");
+                    window.alert("Please answer question 4.");
                    event.preventDefault();
+
+                }
+                if (document.getElementById("openq").value =="") {
+                    window.alert("Please answer question 2.");
+                    event.preventDefault();
                 }
                 else  {
                 document.getElementById("form").submit();
