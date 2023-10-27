@@ -80,19 +80,19 @@ Part 3: Guess the proportion and get a bonus!
             {{if player.timing == player.imp}}
                 {{if player.timing == "After"}}
                     <p>  From the group of people who preferred "Watch an alternative video After making a choice" like you, but actually ended up assigned to
-                    "Watch the Save the Children video Before making a choice (and sending a reason).", how many people out of a 100 do you think chose option A?   </p>
+                    "Watch the Save the Children video Before making a choice (and sending a reason).", how many people out of a 100 do you think chose option A (me:£5, charity:£0) ?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{elif player.timing == "Before"}}
                     <p>  From the group of people who preferred "Watch the Save the Children video Before making a choice (and sending a reason)." like you, but actually ended up assigned to
-                    "Watch an alternative video After making a choice", how many people out of a 100 do you think chose option A?   </p>
+                    "Watch an alternative video After making a choice", how many people out of a 100 do you think chose option A (me:£5, charity:£0) ?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{endif}}
             {{elif player.timing != player.imp}}
               {{if player.timing == "After"}}
-                <p> From the group of people who chose "Watch an alternative video After making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
+                <p> From the group of people who chose "Watch an alternative video After making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A (me:£5, charity:£0) ? </p>
                 Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
               {{elif player.timing == "Before"}}
-                <p> From the group of people who chose "Watch the Save the Children video Before making a choice (and sending a reason)." like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A? </p>
+                <p> From the group of people who chose "Watch the Save the Children video Before making a choice (and sending a reason)." like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A (me:£5, charity:£0) ? </p>
                 Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
               {{endif}}
             {{endif}}
