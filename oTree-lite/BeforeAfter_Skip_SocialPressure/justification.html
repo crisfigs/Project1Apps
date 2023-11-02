@@ -18,20 +18,18 @@
 
 
 
-  <div class="card">
+  <div class="card" style="height:  150%; position: relative; top:-100px">
         <div class="card-body">
 <br>
 
-{{if player.task1 == "A"}} Using the space below, please explain to Save the Children (we will send this to them) why you decided to choose Option A (me:£5, charity:£0).
-
-            <i>It is very important that you give and informative answer with the actual reason(s) behind your choice and not a random answer.</i>
+{{if player.task1 == "A"}}
+          Using the space below, please explain to Save the Children why you decided to choose Option A (me:£5, charity:£0). Your explanation will be forwarded to Save the Children.</i>
             <br>
             <br>
             <div id="openq" >{{form.justifyq}}</div>
             <br>
             <br>
-  {{elif player.task1 == "B"}} Using the space below, please explain to Save the Children (we will send this to them) why you decided to choose Option B (me:£1, charity:£8).
-<i>It is very important that you give and informative answer with the actual reason(s) behind your choice and not a random answer.</i>
+  {{elif player.task1 == "B"}} Using the space below, please explain to Save the Children why you decided to choose Option B (me:£1, charity:£8). Your explanation will be forwarded to Save the Children.</i>
             <br>
             <br>
             <div id="openq" >{{form.justifyq}}</div>
