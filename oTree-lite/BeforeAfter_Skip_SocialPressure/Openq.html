@@ -73,6 +73,21 @@
             <output id="output2">change the slider</output>
             <input   type="hidden" name="pressureGrass_ant" id="pressureGrass_ant">
 
+<br><br>
+
+ <div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange3" type="range" min="1" max="100" value="50" >
+</div>
+
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--label"> {{form.pressureJust_ant.label}}</span>
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings3(event)" />
+	</span>
+</label>
+            <output id="output3">change the slider</output>
+            <input   type="hidden" name="pressureJust_ant" id="pressureJust_ant">
+
 
 
           </div>
@@ -88,6 +103,7 @@
     var slider = document.getElementById("myRange");
     var slider2 = document.getElementById("myRange1");
     var slider3 = document.getElementById("myRange2");
+    var slider4 = document.getElementById("myRange3");
 
     slider.oninput = function() {
   document.getElementById("emotions_ant").value = this.value;
@@ -98,10 +114,13 @@
     slider3.oninput = function() {
   document.getElementById("pressureGrass_ant").value = this.value;
     }
-
+    slider4.oninput = function() {
+  document.getElementById("pressureJust_ant").value = this.value;
+    }
     const output = document.getElementById("output");
     const output1 = document.getElementById("output1");
     const output2 = document.getElementById("output2");
+    const output3 = document.getElementById("output3");
 
     const doThings = (event) => {
 	const { value, min, max, step, parentElement: parent } = event.target
@@ -131,6 +150,15 @@
     document.getElementById("pressureGrass_ant").value = `${value}`;
 
 }
+   const doThings3 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output2.value = `Extent: ${percent}`
+    document.getElementById("pressureJust_ant").value = `${value}`;
+
+}
 
     function submitForm(){
                 if (document.getElementById("emotions_ant").value =="") {
@@ -142,6 +170,11 @@
                 }
                 if (document.getElementById("pressureGrass_ant").value =="") {
                     window.alert("Please answer question 4.");
+                   event.preventDefault();
+
+                }
+                if (document.getElementById("pressureJust_ant").value =="") {
+                    window.alert("Please answer question 5.");
                    event.preventDefault();
 
                 }

@@ -74,22 +74,22 @@ Part 3: Guess the proportion and get a bonus!
         <div class="card-body">
 <p>Some people in this experiment chose to
 
-            {{if player.timing == "After"}} "Watch an alternative video after making a choice", just like you. </p>
+            {{if player.timing == "After"}} "Watch an alternative video after making a choice, without explanation", just like you. </p>
             {{elif player.timing == "Before"}} "Watch the request video before making a choice, and provide explanation.", just like you. </p>
             {{endif}}
             {{if player.timing == player.imp}}
                 {{if player.timing == "After"}}
-                    <p>  From the group of people who preferred "Watch an alternative video after making a choice" like you, but actually ended up assigned to
+                    <p>  From the group of people who preferred "Watch an alternative video after making a choice, without explanation" like you, but actually ended up assigned to
                     "Watch the request video before making a choice, and provide explanation.", how many people out of a 100 do you think chose option A (me:£5, charity:£0) ?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{elif player.timing == "Before"}}
                     <p>  From the group of people who preferred "Watch the request video before making a choice, and provide explanation." like you, but actually ended up assigned to
-                    "Watch an alternative video after making a choice", how many people out of a 100 do you think chose option A (me:£5, charity:£0) ?   </p>
+                    "Watch an alternative video after making a choice, without explanation", how many people out of a 100 do you think chose option A (me:£5, charity:£0) ?   </p>
                     Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
                 {{endif}}
             {{elif player.timing != player.imp}}
               {{if player.timing == "After"}}
-                <p> From the group of people who chose "Watch an alternative video after making a choice" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A (me:£5, charity:£0) ? </p>
+                <p> From the group of people who chose "Watch an alternative video after making a choice, without explanation" like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A (me:£5, charity:£0) ? </p>
                 Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
               {{elif player.timing == "Before"}}
                 <p> From the group of people who chose "Watch the request video before making a choice, and provide explanation." like you, yet who were actually assigned to that timing option, how many people out of a 100 do you think chose option A (me:£5, charity:£0) ? </p>
@@ -103,10 +103,10 @@ Part 3: Guess the proportion and get a bonus!
             <br>
             <br>
             {{if player.timing == player.imp}}
-                <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch an alternative video after making a choice" instead. {{elif player.timing == "After"}} "Watch the request video before making a choice, and provide explanation." instead.{{endif}} )</p>
+                <p>Which option would you have chosen had you not been assigned to your preferred timing? (That is, had you been assigned to: {{if player.timing == "Before"}}"Watch an alternative video after making a choice, without explanation" instead. {{elif player.timing == "After"}} "Watch the request video before making a choice, and provide explanation." instead.{{endif}} )</p>
                 {{form.qb}}
             {{elif player.timing != player.imp}}
-                <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had actually been assigned to: {{if player.timing == "After"}}"Watch an alternative video after making a choice" instead. {{elif player.timing == "Before"}} "Watch the request video before making a choice, and provide explanation." instead.{{endif}} )</p>
+                <p>Which option would you have chosen had you been assigned to your preferred timing? (That is, had you actually been assigned to: {{if player.timing == "After"}}"Watch an alternative video after making a choice, without explanation" instead. {{elif player.timing == "Before"}} "Watch the request video before making a choice, and provide explanation." instead.{{endif}} )</p>
                 {{form.qb}}
             {{endif}}
 
