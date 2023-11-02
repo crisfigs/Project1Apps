@@ -97,7 +97,7 @@ class Player(BasePlayer):
     pressureGrass_ant = models.IntegerField(label="4. To what extent did you anticipate pressure to donate (choose option B) in the `Watch alternative video after making a choice, without explanation' option?")
 
 
-    pressureJust_ant = models.IntegerField(label="5. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the request video before making a choice, and provide explanation' due to having to provide a justification?")
+    pressureJust_ant = models.IntegerField(label="5. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the request video before making a choice, and provide explanation' due to having to provide an explanation?")
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video.")
     justifyq = models.LongStringField(label="")
     random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the request video before making a choice, and provide explanation' but still sometimes be assigned to 'Watch an alternative video after making a choice, without explanation.', for example). Did this possibility affect your decision between watching the video before or after making a choice?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
