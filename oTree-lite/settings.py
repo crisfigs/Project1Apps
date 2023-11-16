@@ -107,6 +107,13 @@ dict(
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
+    ),
+dict(
+        name='BeforeAfter_SKIP_Control',
+        app_sequence=['BeforeAfter_Skip_Control'],
+        num_demo_participants=2,
+        cc_code="CCCODE",
+        error_code="ECODE",
     )
 ]
 

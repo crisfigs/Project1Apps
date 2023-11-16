@@ -1,0 +1,113 @@
+{{ block title }}
+<p><span style="font-size: smaller; position: relative; top:-50px; left: -80px">Part 2: Timing decision </span></p>
+{{ endblock }}
+{{block styles }}
+<style>
+body {
+   transform: scale(0.9);
+   transform-origin: 0 0;
+   // add prefixed versions too.
+}
+    .button2 {background-color: #008CBA;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 200px;
+  width: 350px;
+  padding: 30px;
+  font-size: 25px;
+  text-align: center;
+    white-space: normal
+}
+
+.column {
+  float: left;
+  width: 70%;
+  padding: 20px;
+}
+
+[data-ribbon]:after {
+  content: attr(data-ribbon);
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  padding: 2px 25px;
+  background:
+    linear-gradient(to top right, gold 49%, transparent 50%) right/20px 100% no-repeat,
+    linear-gradient(to top left, gold 49%, transparent 50%) left/20px 100% no-repeat,
+    linear-gradient(gold, gold) center/calc(100% - 40px) 100% no-repeat;
+  color: #fff;
+  transform: rotate(45deg) translate(26%, -60%);
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" style="height:  100%; width: 135%; position: relative; top:-55px; left: -80px"><div class="card-body" style="height:  120%;width: 100%">
+ <div class=“parent”> Before making a choice between Option A(me: £5, charity: £0) and Option B(me: £1, charity: £8), you need to choose between the following two options:
+       <br>
+       <br>
+
+ {{if player.rand2 == 1}}
+
+             <ul>
+                 <li> Watch the wave video before making a choice. If you choose this option, &pound0.10 will be added to your final payment.</li>
+                 <li> Watch an alternative video of similar length unrelated to waves or charity, after you have made your choice.</li>
+
+             </ul>
+        <br>
+
+
+     Use the buttons below to make your choice:
+         <br>
+        <br>
+        <div class=“child”><div style="position:absolute;left:250px;right: 0px;bottom: 0px;top:220px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:20px;margin-left: 28px;font-size: 25px;">Watch alternative video</span> <span style="margin-left: 30px; font-size: 25px;">after making a choice.</span></button> </div></div>
+        <div class=“child”><div style="position:absolute;left:700px;right: 0px;bottom: 0px;top:220px"><button data-ribbon="+ &pound 0.10" name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:23px;margin-left: 30px;font-size: 25px;">Watch the wave video</span> <span style="margin-left: 20px; font-size: 25px;">before making a choice.</span></button></div></div>
+
+     <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+ {{elif player.rand2 == 2}}
+
+             <ul>
+                <li> Watch a video of similar length unrelated to Save the Children, after you have made your choice. No explanation of your choice is required.</li>
+                 <li> Watch the request video of Save the Children before making a choice. In addition, you provide a short explanation of your choice, which we will forward to Save the Children.  </li>
+
+             </ul>
+        <br>
+
+
+     Use the buttons below to make your choice:
+         <br>
+        <br>
+    <div class=“child”><div style="position:absolute;left:800px;right: 0px;bottom: 0px;top:220px"><button name="timing" id="timing" value="After" class="button2 card btn btn-outline-primary"><span  style="margin-top:15px;margin-left: 50px;font-size: 20px;">Watch alternative video</span> <span style="margin-left: 55px; font-size: 20px;">after making a choice,</span></span><span style="margin-left: 55px;font-size: 20px;">without explanation.</span></button> </div></div>
+         <div class=“child”><div style="position:absolute;left:300px;right: 0px;bottom: 0px;top:220px"><button name="timing" id="timing" value="Before" class="button2 card btn btn-outline-primary"> <span style="margin-top:10px;margin-left: 30px;font-size: 20px;">Watch the request video</span> <span style="margin-left: 35px; font-size: 20px;">before making a choice,</span><span style="margin-left: 30px;font-size: 20px;">and provide explanation.</span></button></div></div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+ {{endif}}
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>The computer will randomize between your stated preferred timing and the other timing: most of the time you will face your preference but you may be assigned to the opposite timing option. </p>
+</div>
+    </div>
+
+{{ endblock }}

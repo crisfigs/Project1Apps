@@ -7,12 +7,12 @@ Before/After new design.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'SP'
+    NAME_IN_URL = 'Skip-Control'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CHOICES = ["Before","After"]
     #careful, elem in choices is without "".
-    link1 = "https://www.dropbox.com/scl/fi/frjwsn6jex5jmkmy20sga/gemma.MOV?rlkey=1epeintyq89v47zx7qm90v3qp&raw=1"
+    link1 = "https://www.dropbox.com/scl/fi/2whh3prl49hu98ofjnyxp/HowWavesWork.mp4?rlkey=hppqavmangdnt9ttj43931iug&raw=1"
     link2 = "https://www.dropbox.com/s/iebfy6fzuewtk34/grass.mp4?raw=1"
 
 
@@ -44,7 +44,7 @@ class Player(BasePlayer):
     q1B = models.IntegerField(label="2. Option B pays: ", choices = [[0,'(me: 0, charity: 8)'],[1,'(me: 1, charity: 8)'],[2,'(me: 0, charity: 5)'],[3,'(me: 4, charity: 0)'],[4,'(me: 1, charity: 4)']])
    # q3 = models.IntegerField(label="3. Please state whether the following is True or False: 'You can choose between options A and B either Before watching the video or After watching the video'",
                                  #  choices=[[1, 'False'], [2, 'True']])
-    q_video = models.IntegerField(label="3. Please state whether the following is True or False: 'The video shows a staff member at Save the Children asking for donations.' ", choices=[[1, 'True'], [0, 'False']])
+    q_video = models.IntegerField(label="3. Please state whether the following is True or False: 'The video examines the different types of waves.' ", choices=[[1, 'True'], [0, 'False']])
     task1 = models.StringField(blank=True)
     timing = models.StringField(blank=True)
 
@@ -90,14 +90,15 @@ class Player(BasePlayer):
                                              choices=[[1, "Yes"], [0, "No"]])
     charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating to?",
                                        choices=[1, 2, 3, 4, 5], widget=widgets.RadioSelectHorizontal)
-    temptationqA = models.IntegerField(label="4. How much pressure for choosing Option A (me:£5, charity:£0) did the video generate?", blank=True)
-    temptationqB = models.IntegerField(label="5. How much pressure for choosing Option B (me:£1, charity:£8) did the video generate?", blank=True)
-    emotions_ant = models.IntegerField(label="1. To what extent did you anticipate these emotions before watching the video?")
-    pressureStC_ant = models.IntegerField(label="3. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the request video before making a choice, and provide explanation' option?")
-    pressureGrass_ant = models.IntegerField(label="4. To what extent did you anticipate pressure to donate (choose option B) in the `Watch alternative video after making a choice, without explanation' option?")
+    pressure_donate = models.IntegerField(label="4. How pressured to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?", blank=True)
+    temptation_donate = models.IntegerField(label="5. How tempted to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?", blank=True)
 
 
-    pressureJust_ant = models.IntegerField(label="5. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the request video before making a choice, and provide explanation' due to having to provide an explanation?")
+    emotions_ant = models.IntegerField(label="1. To what extent did you anticipate the previous emotions before watching the video?")
+    pressureBefore_ant = models.IntegerField(label="3. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the wave video before making a choice' option?")
+    pressureAfter_ant = models.IntegerField(label="4. To what extent did you anticipate pressure to donate (choose option B) in the `Watch alternative video after making a choice' option?")
+
+
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video.")
     justifyq = models.LongStringField(label="")
     random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the request video before making a choice, and provide explanation' but still sometimes be assigned to 'Watch an alternative video after making a choice, without explanation.', for example). Did this possibility affect your decision between watching the video before or after making a choice?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
@@ -259,14 +260,6 @@ class Hypo_choice2(Page):
     def is_displayed(player: Player):
       return player.imp == "Before"
 
-class justification(Page):
-    form_model = 'player'
-    form_fields = ['justifyq']
-
-    @staticmethod
-    def is_displayed(player: Player):
-      return player.imp == "Before"
-
 class survey2(Page):
     form_model = 'player'
 
@@ -321,11 +314,11 @@ class FailedAttention(Page):
 
 class Hypo_choiceq(Page):
     form_model = 'player'
-    form_fields = ['donationq','donationqother','charityq','temptationqA','temptationqB','random_q','random_openq']
+    form_fields = ['donationq','donationqother','charityq','pressure_donate','temptation_donate','random_q','random_openq']
 
 class Openq(Page):
     form_model = 'player'
-    form_fields = ['openq','emotions_ant','pressureStC_ant', 'pressureGrass_ant', 'pressureJust_ant']
+    form_fields = ['openq','emotions_ant','pressureBefore_ant', 'pressureAfter_ant']
 
 class EQ(Page):
     form_model='player'
@@ -372,4 +365,4 @@ class Back(Page):
         else:
             pass
 
-page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2, Hypo_choice2, justification , Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2, Hypo_choice2 , Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]

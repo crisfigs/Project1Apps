@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% block scripts%}
+<script>
+
+        let completionlink = js_vars.completionlink;
+        function completed() {
+            console.log("clicking the button")
+            window.location.href =completionlink;
+        }
+
+</script>
+{% endblock %}
+
+{%  block title %}Payment{% endblock %}
+
+{% block content %}
+
+
+{{if player.payment_number == 1 and player.task1 == "A" and player.timing == "After"}} You have been selected for payment. You chose Option A thus, you get &pound{{player.payment}} and Save the Children will get &pound0. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{elif player.payment_number == 1 and player.task1 == "A" and player.timing == "Before"}} You have been selected for payment. You chose Option A and chose the "Before" timing thus, you get &pound{{player.payment}} and Save the Children will get &pound0. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{elif player.payment_number == 1 and player.task1 == "B" and player.timing == "After"}} You have been selected for payment. You chose Option B thus, you get &pound{{player.payment}} and Save the Children will get &pound8. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{elif player.payment_number == 1 and player.task1 == "B" and player.timing == "Before"}} You have been selected for payment. You chose Option B  and chose the "Before" timing thus, you get &pound{{player.payment}} and Save the Children will get &pound8. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{elif player.payment_number == 0 and player.timing == "Before" }} You have not been selected for payment of the option bonus. You chose the "Before" timing and thus 10 pence will be added to your total earnings. In addition, you might still earn the "guess the proportion" bonus: we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{elif player.payment_number == 0 and player.timing == "After"}} You have not been selected for payment of the option bonus. Although, you might still earn the "guess the proportion" bonus: we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
+{{endif}}
+<br>
+<br>
+<button type="button" class="btn btn-primary btn-right btn-lg" onclick="completed()" > Back to Prolific </button>
+
+{% endblock %}
+
+
