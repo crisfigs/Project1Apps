@@ -2,9 +2,11 @@
 {% load staticfiles otree_tags %}
 
 
-{% block title %}
-
+{%block title%}
+Part 3: Anticipation survey
 {% endblock %}
+
+
 
 
 {{block styles }}
@@ -16,14 +18,15 @@
 
 {% block content %}
 
-
+ Please answer all the following questions:
+<br>
+<br>
 
   <div class="card">
 
         <div class="card-body">
- Please answer all the following questions:
-<br>
-<br>
+
+
 <div type="hidden" class="slidecontainer">
   <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
 </div>
@@ -75,8 +78,34 @@
             <input   type="hidden" name="pressureAfter_ant" id="pressureAfter_ant">
 
 <br><br>
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange3" type="range" min="1" max="100" value="50" >
+</div>
 
+<p> {{form.temptationBefore_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings3(event)" />
+	</span>
+</label>
+            <output id="output3">change the slider</output>
+            <input   type="hidden" name="temptationBefore_ant" id="temptationBefore_ant">
 
+<br><br>
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange4" type="range" min="1" max="100" value="50" >
+</div>
+
+<p> {{form.temptationAfter_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings4(event)" />
+	</span>
+</label>
+            <output id="output4">change the slider</output>
+            <input   type="hidden" name="temptationAfter_ant" id="temptationAfter_ant">
+
+<br><br>
           </div>
     </div>
             <br>
@@ -88,23 +117,34 @@
 
 <script>
     var slider = document.getElementById("myRange");
-    var slider2 = document.getElementById("myRange1");
-    var slider3 = document.getElementById("myRange2");
+    var slider1 = document.getElementById("myRange1");
+    var slider2 = document.getElementById("myRange2");
+    var slider3 = document.getElementById("myRange3");
+    var slider4 = document.getElementById("myRange4");
 
 
     slider.oninput = function() {
   document.getElementById("emotions_ant").value = this.value;
 }
-    slider2.oninput = function() {
+    slider1.oninput = function() {
   document.getElementById("pressurebefore_ant").value = this.value;
 }
-    slider3.oninput = function() {
+    slider2.oninput = function() {
   document.getElementById("pressureAfter_ant").value = this.value;
     }
+    slider3.oninput = function() {
+  document.getElementById("temptationBefore_ant").value = this.value;
+    }
+    slider4.oninput = function() {
+  document.getElementById("temptationAfter_ant").value = this.value;
+    }
+
 
     const output = document.getElementById("output");
     const output1 = document.getElementById("output1");
     const output2 = document.getElementById("output2");
+    const output3 = document.getElementById("output3");
+    const output4 = document.getElementById("output4");
 
     const doThings = (event) => {
 	const { value, min, max, step, parentElement: parent } = event.target
@@ -135,6 +175,27 @@
 
 }
 
+    const doThings3 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output2.value = `Extent: ${percent}`
+    document.getElementById("temptationBefore_ant").value = `${value}`;
+
+}
+
+    const doThings4 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output2.value = `Extent: ${percent}`
+    document.getElementById("temptationAfter_ant").value = `${value}`;
+
+}
+
+
 
     function submitForm(){
                 if (document.getElementById("emotions_ant").value =="") {
@@ -146,6 +207,14 @@
                 }
                 if (document.getElementById("pressureAfter_ant").value =="") {
                     window.alert("Please answer question 4.");
+                   event.preventDefault();
+                }
+                if (document.getElementById("temptationBefore_ant").value =="") {
+                    window.alert("Please answer question 5.");
+                   event.preventDefault();
+                }
+                if (document.getElementById("temptationAfter_ant").value =="") {
+                    window.alert("Please answer question 6.");
                    event.preventDefault();
                 }
                 if (document.getElementById("openq").value =="") {

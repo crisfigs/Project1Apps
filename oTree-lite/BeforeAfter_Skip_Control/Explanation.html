@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{%block title%}
+Part 3: Choice survey
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+  <div class="card" style="height:  150%; position: relative; top:00px">
+        <div class="card-body">
+<br>
+
+{{if player.task1 == "A" and player.timing == "Before"}}
+          Using the space below, could you explain to us why you chose 'Watch the wave video before making a choice' and Option A (me:£5, charity:£0)? </i>
+            <br>
+            <br>
+            <div id="explanationq" >{{form.explanationq}}</div>
+            <br>
+            <br>
+
+{{elif player.task1 == "A" and player.timing == "After"}}
+          Using the space below, could you explain to us why you chose 'Watch alternative video after making a choice' and Option A (me:£5, charity:£0)? </i>
+            <br>
+            <br>
+            <div id="explanationq" >{{form.explanationq}}</div>
+            <br>
+            <br>
+{{elif player.task1 == "B" and player.timing == "Before"}}
+          Using the space below, could you explain to us why you chose 'Watch the wave video before making a choice' and Option B (me:£1, charity:£8)? </i>
+            <br>
+            <br>
+            <div id="explanationq" >{{form.explanationq}}</div>
+            <br>
+            <br>
+
+{{elif player.task1 == "B" and player.timing == "After"}}
+          Using the space below, could you explain to us why you chose 'Watch alternative video after making a choice' and Option B (me:£1, charity:£8)? </i>
+            <br>
+            <br>
+            <div id="explanationq" >{{form.explanationq}}</div>
+            <br>
+            <br>
+{{endif}}
+        </div>
+  </div>
+            <br>
+            <br>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+
+
+{{endblock}}

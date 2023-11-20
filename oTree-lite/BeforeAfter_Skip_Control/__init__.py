@@ -97,10 +97,13 @@ class Player(BasePlayer):
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate the previous emotions before watching the video?")
     pressureBefore_ant = models.IntegerField(label="3. To what extent did you anticipate pressure to donate (choose option B) in the `Watch the wave video before making a choice' option?")
     pressureAfter_ant = models.IntegerField(label="4. To what extent did you anticipate pressure to donate (choose option B) in the `Watch alternative video after making a choice' option?")
+    temptationBefore_ant = models.IntegerField(label="5. To what extent did you anticipate temptation to donate (choose option B) in the `Watch the wave video before making a choice' option?")
+    temptationAfter_ant = models.IntegerField(label="6. To what extent did you anticipate temptation to donate (choose option B) in the `Watch alternative video after making a choice' option?")
 
 
     openq = models.LongStringField(label="2. Explain in the space below other thoughts and feelings associated to watching the video.")
     justifyq = models.LongStringField(label="")
+    explanationq = models.LongStringField(label="")
     random_q = models.IntegerField(label="6a. Sometimes you could be faced with the opposite timing alternative to your preference (you could prefer to 'Watch the request video before making a choice, and provide explanation' but still sometimes be assigned to 'Watch an alternative video after making a choice, without explanation.', for example). Did this possibility affect your decision between watching the video before or after making a choice?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
     random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
 
@@ -111,13 +114,13 @@ class Player(BasePlayer):
 
 
     ##Attention questions video
-    controlq_cake = make_field3(label="... a woman called Gemma who introduced herself as the Head of Fundraising at Save the Children.")
-    controlq_flute = make_field3(label="...the staff member stating that children 'should never die from preventable causes.'")
-    controlq_airplane = models.IntegerField(
+    controlq1 = make_field3(label="... three types of ocean waves.")
+    controlq2 = make_field3(label="...a surfer surfing down a wave.")
+    controlq3 = models.IntegerField(
             choices=[
                 [1, 'False'],
                 [0, 'True']],
-            label="...children playing and smiling.",
+            label="...children building sand castles on a beach.",
             widget=widgets.RadioSelect)
     controlq_presenter = make_field3(label="...a male presenter.")
     controlq_drawing = make_field3(label="...a drawing.")
@@ -272,11 +275,11 @@ class survey2(Page):
 
 class Attention1(Page):
     form_model = 'player'
-    form_fields = ["controlq_cake", "controlq_flute","controlq_airplane"]
+    form_fields = ["controlq1", "controlq2","controlq3"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.sum_correct = player.controlq_cake + player.controlq_flute + player.controlq_airplane
+        player.sum_correct = player.controlq1+ player.controlq2 + player.controlq3
         player.number = random.choices([1,0], weights=(1, 99), k=1)[0]
     @staticmethod
     def is_displayed(player: Player):
@@ -311,6 +314,9 @@ class FailedAttention(Page):
                  )
         pass
 
+class Explanation(Page):
+    form_model = 'player'
+    form_fields = ['explanationq']
 
 class Hypo_choiceq(Page):
     form_model = 'player'
@@ -318,7 +324,7 @@ class Hypo_choiceq(Page):
 
 class Openq(Page):
     form_model = 'player'
-    form_fields = ['openq','emotions_ant','pressureBefore_ant', 'pressureAfter_ant']
+    form_fields = ['openq','emotions_ant','pressureBefore_ant', 'pressureAfter_ant', 'temptationBefore_ant','temptationAfter_ant']
 
 class EQ(Page):
     form_model='player'
@@ -365,4 +371,4 @@ class Back(Page):
         else:
             pass
 
-page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2, Hypo_choice2 , Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]
+page_sequence = [Part2_Instruction_Page, TimingDecision, Part3_Intro, Hypo_choice, Video_alert, Part3_Video,Part3_Video2,  Hypo_choice2 , Explanation, Hypo_choiceq, qa, survey2, Openq, Attention1,Attention2, FailedAttention,EQ, Feedback, Back]
