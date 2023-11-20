@@ -127,7 +127,7 @@ Part 3: Anticipation survey
   document.getElementById("emotions_ant").value = this.value;
 }
     slider1.oninput = function() {
-  document.getElementById("pressurebefore_ant").value = this.value;
+  document.getElementById("pressureBefore_ant").value = this.value;
 }
     slider2.oninput = function() {
   document.getElementById("pressureAfter_ant").value = this.value;
@@ -180,7 +180,7 @@ Part 3: Anticipation survey
 	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
 	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
 	parent.style.setProperty('--p', percent)
-    output2.value = `Extent: ${percent}`
+    output3.value = `Extent: ${percent}`
     document.getElementById("temptationBefore_ant").value = `${value}`;
 
 }
@@ -190,7 +190,7 @@ Part 3: Anticipation survey
 	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
 	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
 	parent.style.setProperty('--p', percent)
-    output2.value = `Extent: ${percent}`
+    output4.value = `Extent: ${percent}`
     document.getElementById("temptationAfter_ant").value = `${value}`;
 
 }
