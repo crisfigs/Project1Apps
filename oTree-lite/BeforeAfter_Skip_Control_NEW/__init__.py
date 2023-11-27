@@ -171,7 +171,7 @@ class Part2_Instruction_Page(Page):
   form_model = 'player'
   form_fields = ['q1A', 'q1B']
 
-  def vars_for_template(player: Player):
+  def before_next_page(player: Player, timeout_happened):
       player.rand = random.choices([1, 2], weights=(50, 50), k=1)[0]
 
   def error_message(player,value):
@@ -182,8 +182,6 @@ class VideoChoice(Page):
     form_model = 'player'
     form_fields = ['prefvideo']
 
-    def vars_for_template(player: Player):
-        player.rand2 = random.choices([1,2], weights=(50, 50), k=1)[0]
 
     def before_next_page(player: Player, timeout_happened):
         if player.prefvideo == "Treatment":
