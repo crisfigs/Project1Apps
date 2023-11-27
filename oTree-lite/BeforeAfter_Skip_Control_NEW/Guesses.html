@@ -1,0 +1,97 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Part 3: Guess the proportion and get a bonus!
+{% endblock %}
+
+{{block styles }}
+
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+<style>
+
+   .grid-container1 {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto ;
+  padding: 10px;
+        justify-items: center;
+
+}
+      .grid-container2 {
+  display: grid;
+  gap: 20px 20px;
+  grid-template-columns: 250px 250px;
+  padding: 10px;
+        justify-items: center;
+
+}
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+</style>
+
+{{ endblock }}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+<p>Some people in this experiment chose to
+
+            {{if player.prefvideo == "Alternative"}} "Watch alternative video", just like you. </p>
+            {{elif player.prefvideo == "Treatment"}} "Watch wave video", just like you. </p>
+            {{endif}}
+            {{if player.prefvideo == player.impvideo}}
+                {{if player.prefvideo == "Alternative"}}
+                    <p>  From the group of people who preferred "Watch alternative video" like you, but actually ended up watching the wave video, how many people out of a 100 do you think chose to donate, i.e., chose option B (me:£1, charity:£8)?   </p>
+                    Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+                {{elif player.prefvideo == "Treatment"}}
+                    <p>  From the group of people who preferred "Watch wave video" like you, but actually ended up watching
+                    the alternative video, how many people out of a 100 do you think chose to donate, i.e., chose option B (me:£1, charity:£8)?   </p>
+                    Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+                {{endif}}
+            {{elif player.prefvideo != player.impvideo}}
+              {{if player.prefvideo == "Alternative"}}
+                <p> From the group of people who chose "Watch alternative video" like you, yet who actually ended up watching that video, how many people out of a 100 do you think chose to donate, i.e., chose option B (me:£1, charity:£8)?  </p>
+                Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+              {{elif player.prefvideo == "Treatment"}}
+                <p> From the group of people who chose "Watch wave video" like you, yet who actually ended up watching that video, how many people out of a 100 do you think chose to donate, i.e., chose option B (me:£1, charity:£8)?  </p>
+                Guesses within +-10 from the actually observed proportion get a 10 pence bonus.
+              {{endif}}
+            {{endif}}
+
+<br>
+            <br>
+           <div class="center">Make your guess here (a number from 0-100):  {{form.qa}}</div>
+            <br>
+            <br>
+            {{if player.prefvideo == player.impvideo}}
+                <p> Which option would you have chosen had you not been assigned to your preferred video? (That is, had you been assigned to: {{if player.prefvideo == "Treatment"}}"Watch alternative video" instead. {{elif player.prefvideo == "Alternative"}} "Watch wave video" instead.{{endif}} )</p>
+                {{form.qb}}
+            {{elif player.prefvideo != player.impvideo}}
+                <p>Which option would you have chosen had you been assigned to your preferred video? (That is, had you actually been assigned to: {{if player.prefvideo == "Alternative"}}"Watch alternative video" instead. {{elif player.prefvideo == "Treatment"}} "Watch wave video" instead.{{endif}} )</p>
+                {{form.qb}}
+            {{endif}}
+
+
+{{ formfield_errors "qa"}}
+
+
+  </div>
+</div>
+<br>
+<div class="center"> {{ next_button }}</div>
+
+
+{% endblock %}
+
+
+
+
+
+

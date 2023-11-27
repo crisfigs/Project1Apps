@@ -1,0 +1,88 @@
+{{ block title }}
+<p><span style="font-size: smaller; position: relative; top:-50px; left: -80px">Part 2: Video decision </span></p>
+{{ endblock }}
+{{block styles }}
+<style>
+body {
+   transform: scale(0.9);
+   transform-origin: 0 0;
+}
+    .button2 {background-color: #008CBA;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 175px;
+  width: 275px;
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+    white-space: normal
+}
+
+
+
+[data-ribbon]:after {
+  content: attr(data-ribbon);
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  padding: 2px 25px;
+  background:
+    linear-gradient(to top right, gold 49%, transparent 50%) right/20px 100% no-repeat,
+    linear-gradient(to top left, gold 49%, transparent 50%) left/20px 100% no-repeat,
+    linear-gradient(gold, gold) center/calc(100% - 40px) 100% no-repeat;
+  color: #fff;
+  transform: rotate(45deg) translate(26%, -60%);
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" style="height:  100%; width: 135%; position: relative; top:-55px; left: -80px"><div class="card-body" style="height:  120%;width: 100%">
+ <div class=“parent”> Before making a choice between Option A (me: £5, charity: £0) and Option B(me: £1, charity: £8), you will see one of two videos:
+       <br>
+       <br>
+
+
+
+
+             <ul>
+                 <li> <b>Wave Video:</b> it explains how waves are formed, the types of waves that exist and how different factors affect the behaviour of water in the ocean.</li>
+                 <li> <b>Alternative Video:</b> An alternative video of similar length that is also unrelated to the charity.</li>
+
+             </ul>
+        <br>
+
+
+You can use the buttons below to select the video you’d like to watch. Note that you are most likely to see your preferred video, but in minority of cases the computer will instead select your non-preferred video.
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+      {{if player.rand2 == 1}}
+        <div class=“child”><div style="position:absolute;left:250px;right: 0px;bottom: 0px;top:260px"><button name="prefvideo" id="prefvideo" value="Alternative" class="button2 card btn btn-outline-primary"><span  style="margin-top:20px;margin-left: 20px;font-size: 25px;">Watch alternative</span><span  style="margin-top:5px;margin-left: 85px;font-size: 25px;">video</span></button> </div></div>
+        <div class=“child”><div style="position:absolute;left:700px;right: 0px;bottom: 0px;top:260px"><button name="prefvideo" id="prefvideo" value="Treatment" class="button2 card btn btn-outline-primary"> <span style="margin-top:23px;margin-left: 55px;font-size: 25px;">Watch wave</span><span  style="margin-top:5px;margin-left: 95px;font-size: 25px;">video</span></button></div></div>
+      {{elif player.rand2 == 2}}
+        <div class=“child”><div style="position:absolute;left:700px;right: 0px;bottom: 0px;top:260px"><button name="prefvideo" id="prefvideo" value="Treatment" class="button2 card btn btn-outline-primary"> <span style="margin-top:23px;margin-left: 55px;font-size: 25px;">Watch wave</span><span  style="margin-top:5px;margin-left: 95px;font-size: 25px;">video</span></button></div></div>
+        <div class=“child”><div style="position:absolute;left:250px;right: 0px;bottom: 0px;top:260px"><button name="prefvideo" id="prefvideo" value="Alternative" class="button2 card btn btn-outline-primary"><span  style="margin-top:20px;margin-left: 20px;font-size: 25px;">Watch alternative</span><span  style="margin-top:5px;margin-left: 85px;font-size: 25px;">video</span></button> </div></div>
+     {{endif}}
+     <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <br>
+        <br>
+</div>
+    </div>
+
+{{ endblock }}

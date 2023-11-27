@@ -1,0 +1,103 @@
+{{ block title }}
+Part 3 : Instructions
+{{ endblock }}
+
+{{block styles }}
+<style>
+   .grid-container {
+  display: grid;
+  gap: 20px 0px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+        justify-items: center;
+
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.grid-item {
+background-color: #008CBA;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 150px;
+  width: 270px;
+  padding:57px;
+  font-size: 25px;
+  text-align: center;
+white-space: normal
+}
+
+.grid-item2 {
+background-color: #008CBA;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 150px;
+  width: 270px;
+  padding:60px;
+  font-size: 25px;
+  text-align: center;
+white-space: normal
+}
+</style>
+{{ endblock }}
+
+
+{{ block content }}
+<div class="card" ><div class="card-body">
+    <p>Your preferred option was:</p>
+    {{if player.prefvideo == "Treatment"}}
+    <div id= "grid" class="grid-container center" >
+       <div class="grid-item card center">
+           <span style="margin-top:-20px;margin-left: -3px;font-size: 25px;">Watch wave video</span>
+       </div>
+    </div>
+
+    {{elif player.prefvideo == "Alternative"}}
+     <div id= "grid" class="grid-container center" >
+       <div class="grid-item2 card center">
+        <span  style="margin-top:-25px;margin-left: -46px; margin-right:-45px;font-size: 25px;">Watch alternative video</span>
+
+       </div>
+     </div>
+
+    {{endif}}
+<br>
+<br>
+    The computer has randomized and selected the following video:
+    {{if player.impvideo == "Treatment"}}
+    <br>
+    <br>
+    <div id= "grid" class="grid-container center" >
+       <div class="grid-item card center">
+           <span style="margin-top:-20px;margin-left: -3px;font-size: 25px;">Watch wave video</span>
+       </div>
+    </div>
+    <br>
+
+        Thus, you will watch the wave video and make a decision between options A and B afterwards.
+    {{elif player.impvideo == "Alternative"}}
+     <div id= "grid" class="grid-container center" >
+       <div class="grid-item2 card center">
+        <span  style="margin-top:-25px;margin-left: -46px; margin-right:-45px;font-size: 25px;">Watch alternative video</span>
+       </div>
+     </div>
+        <br>
+        Thus, you will watch an alternative video and make a decision between options A and B afterwards.
+
+         {{endif}}
+    <br>
+
+    </div></div>
+
+
+
+
+<p>
+<div style="text-align:center" >{% next_button %}</div>
+
+</p>
+
+{{ endblock }}
+

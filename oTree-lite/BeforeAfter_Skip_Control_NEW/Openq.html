@@ -1,0 +1,233 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{%block title%}
+Part 3: Anticipation survey
+{% endblock %}
+
+
+
+
+{{block styles }}
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+
+
+{% block content %}
+
+ Please answer all the following questions:
+<br>
+<br>
+
+  <div class="card">
+
+        <div class="card-body">
+
+
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
+</div>
+
+	<p> {{form.emotions_ant.label}}</p>
+
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings(event)" />
+	</span>
+</label>
+            <output id="output">change the slider</output>
+            <input   type="hidden" name="emotions_ant" id="emotions_ant">
+
+
+<br>
+            <br>
+                 {{form.openq.label}}
+               <div id="openq" >{{form.openq}}</div>
+<br>
+            <br>
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange1" type="range" min="1" max="100" value="50" >
+</div>
+
+	<p> {{form.pressureBefore_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings1(event)" />
+	</span>
+</label>
+            <output id="output1">change the slider</output>
+            <input   type="hidden" name="pressureBefore_ant" id="pressureBefore_ant">
+
+
+<br><br>
+
+ <div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange2" type="range" min="1" max="100" value="50" >
+</div>
+
+<p> {{form.pressureAfter_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings2(event)" />
+	</span>
+</label>
+            <output id="output2">change the slider</output>
+            <input   type="hidden" name="pressureAfter_ant" id="pressureAfter_ant">
+
+<br><br>
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange3" type="range" min="1" max="100" value="50" >
+</div>
+
+<p> {{form.temptationBefore_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings3(event)" />
+	</span>
+</label>
+            <output id="output3">change the slider</output>
+            <input   type="hidden" name="temptationBefore_ant" id="temptationBefore_ant">
+
+<br><br>
+<div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange4" type="range" min="1" max="100" value="50" >
+</div>
+
+<p> {{form.temptationAfter_ant.label}}</p>
+<label class="heat-slider heat-slider--v">
+	<span class="heat-slider--input">
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings4(event)" />
+	</span>
+</label>
+            <output id="output4">change the slider</output>
+            <input   type="hidden" name="temptationAfter_ant" id="temptationAfter_ant">
+
+<br><br>
+          </div>
+    </div>
+            <br>
+            <br>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+
+
+
+<script>
+    var slider = document.getElementById("myRange");
+    var slider1 = document.getElementById("myRange1");
+    var slider2 = document.getElementById("myRange2");
+    var slider3 = document.getElementById("myRange3");
+    var slider4 = document.getElementById("myRange4");
+
+
+    slider.oninput = function() {
+  document.getElementById("emotions_ant").value = this.value;
+}
+    slider1.oninput = function() {
+  document.getElementById("pressureBefore_ant").value = this.value;
+}
+    slider2.oninput = function() {
+  document.getElementById("pressureAfter_ant").value = this.value;
+    }
+    slider3.oninput = function() {
+  document.getElementById("temptationBefore_ant").value = this.value;
+    }
+    slider4.oninput = function() {
+  document.getElementById("temptationAfter_ant").value = this.value;
+    }
+
+
+    const output = document.getElementById("output");
+    const output1 = document.getElementById("output1");
+    const output2 = document.getElementById("output2");
+    const output3 = document.getElementById("output3");
+    const output4 = document.getElementById("output4");
+
+    const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `Extent: ${percent}`
+    document.getElementById("emotions_ant").value = `${value}`;
+}
+
+    const doThings1 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output1.value = `Extent: ${percent}`
+    document.getElementById("pressureBefore_ant").value = `${value}`;
+
+}
+
+    const doThings2 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output2.value = `Extent: ${percent}`
+    document.getElementById("pressureAfter_ant").value = `${value}`;
+
+}
+
+    const doThings3 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output3.value = `Extent: ${percent}`
+    document.getElementById("temptationBefore_ant").value = `${value}`;
+
+}
+
+    const doThings4 = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+    output4.value = `Extent: ${percent}`
+    document.getElementById("temptationAfter_ant").value = `${value}`;
+
+}
+
+
+
+    function submitForm(){
+                if (document.getElementById("emotions_ant").value =="") {
+                    window.alert("Please answer question 1.");
+                                            event.preventDefault();}
+                if (document.getElementById("pressureBefore_ant").value =="") {
+                    window.alert("Please answer question 3.");
+                    event.preventDefault();
+                }
+                if (document.getElementById("pressureAfter_ant").value =="") {
+                    window.alert("Please answer question 4.");
+                   event.preventDefault();
+                }
+                if (document.getElementById("temptationBefore_ant").value =="") {
+                    window.alert("Please answer question 5.");
+                   event.preventDefault();
+                }
+                if (document.getElementById("temptationAfter_ant").value =="") {
+                    window.alert("Please answer question 6.");
+                   event.preventDefault();
+                }
+                if (document.getElementById("openq").value =="") {
+                    window.alert("Please answer question 2.");
+                    event.preventDefault();
+                }
+                else  {
+                document.getElementById("form").submit();
+                }
+        }
+
+</script>
+
+
+
+{{endblock}}
