@@ -109,8 +109,8 @@ dict(
         error_code="ECODE",
     ),
 dict(
-        name='BeforeAfter_SKIP_Control_NEW',
-        app_sequence=['RET','BeforeAfter_Skip_Control_NEW'],
+        name='VideoChoice_Control',
+        app_sequence=['RET','VideoChoice_Control'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
