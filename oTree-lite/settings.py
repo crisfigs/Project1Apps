@@ -110,7 +110,7 @@ dict(
     ),
 dict(
         name='BeforeAfter_SKIP_Control_NEW',
-        app_sequence=['BeforeAfter_Skip_Control_NEW'],
+        app_sequence=['RET','BeforeAfter_Skip_Control_NEW'],
         num_demo_participants=2,
         cc_code="CCCODE",
         error_code="ECODE",
