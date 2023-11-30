@@ -20,7 +20,7 @@
 {{if player.payment_number == 1 and player.task1 == "A" }} You have been selected for payment. You chose Option A thus, you get &pound{{player.payment}} and Save the Children will get &pound0. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
 {{elif player.payment_number == 1 and player.task1 == "B" }} You have been selected for payment. You chose Option B , you get &pound{{player.payment}} and Save the Children will get &pound0. In addition, we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
 {{elif player.payment_number == 0 and player.task1 == "A" }} You have not been selected for payment of the option bonus. Although, you might still earn the "guess the proportion" bonus: we will check whether your guess was accurate enough (+-10 of actual number) and we will award the bonus accordingly after everybody has completed the experiment.
-{elif player.payment_number == 0 and player.task1 == "B"}} You have not been selected for payment of the option bonus.
+{{elif player.payment_number == 0 and player.task1 == "B"}} You have not been selected for payment of the option bonus.
 {{endif}}
 <br>
 <br>
