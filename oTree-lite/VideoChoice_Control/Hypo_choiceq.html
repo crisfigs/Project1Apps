@@ -48,20 +48,21 @@ Part 3: Choice survey
              </table>
     <br>
     <br>
-
-<div type="hidden" class="slidecontainer">
-  <input type="hidden" id="myRange" type="range" min="1" max="100" value="50" >
+            <div type="hidden" class="slidecontainer">
+  <input type="hidden" id="myRange1" type="range" min="1" max="100" value="50" >
 </div>
 
 	<p> {{form.pressure_donate.label}}</p>
-<label class="heat-slider heat-slider--v">
 
+<label class="heat-slider heat-slider--v">
 	<span class="heat-slider--input">
-		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings(event)" />
+		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings1(event)" />
 	</span>
 </label>
             <output id="output1">change the slider</output>
-            <input   type="hidden" name="pressure_donate" id="pressure_donate ">
+            <input  type="hidden" name="pressure_donate" id="pressure_donate">
+
+
 
 
             <br>
@@ -79,8 +80,8 @@ Part 3: Choice survey
 		<input id = "d" type="range" value="22" min="0" max="100" oninput="doThings2(event)" />
 	</span>
 </label>
-            <output id="output2">change the slider</output>
-            <input  type="hidden" name="temptation_donate" id="temptation_donate">
+            <output  id="output2">change the slider</output>
+            <input type="hidden" name="temptation_donate" id="temptation_donate">
 
 <br>
             {{form.random_q.label}}
@@ -97,37 +98,32 @@ Part 3: Choice survey
 <div class="center" onclick="submitForm()"> {{ next_button }}</div>
 
 <script>
-var slider = document.getElementById("myRange");
-var slider2 = document.getElementById("myRange2");
-slider.oninput = function() {
-  document.getElementById("pressure_donate").value = this.value;
-}
-slider2.oninput = function() {
-  document.getElementById("temptation_donate").value = this.value;
-}
+    var slider1 = document.getElementById("myRange1");
+    var slider2 = document.getElementById("myRange2");
 
-const output = document.getElementById("output1");
-const output2 = document.getElementById("output2");
+    slider1.oninput = function() {
+    document.getElementById("pressure_donate").value = this.value;}
+    slider2.oninput = function() {
+    document.getElementById("temptation_donate").value = this.value;}
 
-const doThings = (event) => {
-	const { value, min, max, step, parentElement: parent } = event.target
-	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
-	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
-	parent.style.setProperty('--p', percent)
-	output.value = `Pressure to donate: ${percent}`
-    document.getElementById("pressure_donate").value = `${value}`;
+    const output1 = document.getElementById("output1");
+    const output2 = document.getElementById("output2");
 
+    const doThings1 = (event) => {
+	    const { value, min, max, step, parentElement: parent } = event.target
+	    const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	    const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	    parent.style.setProperty('--p', percent)
+	    output1.value = `Pressure to donate: ${percent}`
+        document.getElementById("pressure_donate").value = `${value}`;}
 
-}
-
-const doThings2 = (event) => {
-	const { value, min, max, step, parentElement: parent } = event.target
-	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
-	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
-	parent.style.setProperty('--p', percent)
-    output2.value = `Temptation to donate: ${percent}`
-    document.getElementById("temptation_donate").value = `${value}`;
-
+    const doThings2 = (event) => {
+	    const { value, min, max, step, parentElement: parent } = event.target
+	    const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	    const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	    parent.style.setProperty('--p', percent)
+        output2.value = `Temptation to donate: ${percent}`
+        document.getElementById("temptation_donate").value = `${value}`;
 }
 
 
@@ -135,7 +131,8 @@ const doThings2 = (event) => {
 function submitForm(){
             if (document.getElementById("pressure_donate").value =="") {
                 window.alert("Please answer question 4.");
-                                        event.preventDefault();}
+                                        event.preventDefault();
+            }
             if (document.getElementById("temptation_donate").value =="") {
                 window.alert("Please answer question 5.");
                   event.preventDefault();

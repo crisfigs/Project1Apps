@@ -81,8 +81,8 @@ class Player(BasePlayer):
                                              choices=[[1, "Yes"], [0, "No"]])
     charityq = models.IntegerField(label="3. Do you think Save the Children is a charity worth donating to?",
                                        choices=[1, 2, 3, 4, 5], widget=widgets.RadioSelectHorizontal)
-    pressure_donate = models.IntegerField(label="4. How (socially) pressured to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?", blank=True)
-    temptation_donate = models.IntegerField(label="5. How tempted to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?", blank=True)
+    pressure_donate = models.IntegerField(label="4. How (socially) pressured to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?")
+    temptation_donate = models.IntegerField(label="5. How tempted to donate (choosing Option B (me:£1, charity:£8)) did you feel due to the video?")
 
 
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate the previous emotions before watching the video?")
