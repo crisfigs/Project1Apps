@@ -7,11 +7,11 @@ Control. Timing decision eliminated. No price for any button. Only choice of vid
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'VideoChoice_Control'
+    NAME_IN_URL = 'VideoChoice_PressureNoJ'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     #careful, elem in choices is without "".
-    link1 = "https://www.dropbox.com/scl/fi/2whh3prl49hu98ofjnyxp/HowWavesWork.mp4?rlkey=hppqavmangdnt9ttj43931iug&raw=1"
+    link1 = "https://www.dropbox.com/scl/fi/frjwsn6jex5jmkmy20sga/gemma.MOV?rlkey=1epeintyq89v47zx7qm90v3qp&raw=1"
     link2 = "https://www.dropbox.com/s/iebfy6fzuewtk34/grass.mp4?raw=1"
 
 class Subsession(BaseSubsession):
@@ -86,9 +86,9 @@ class Player(BasePlayer):
 
 
     emotions_ant = models.IntegerField(label="1. To what extent did you anticipate the previous emotions before watching the video?")
-    pressureTreatment_ant = models.IntegerField(label="3. To what extent did you anticipate pressure to donate (choose option B) in the `Watch wave video' option?")
+    pressureTreatment_ant = models.IntegerField(label="3. To what extent did you anticipate pressure to donate (choose option B) in the `Watch charity video' option?")
     pressureAlternative_ant = models.IntegerField(label="4. To what extent did you anticipate pressure to donate (choose option B) in the `Watch alternative video' option?")
-    temptationTreatment_ant = models.IntegerField(label="5. To what extent did you anticipate temptation to donate (choose option B) in the `Watch wave video' option?")
+    temptationTreatment_ant = models.IntegerField(label="5. To what extent did you anticipate temptation to donate (choose option B) in the `Watch charity video' option?")
     temptationAlternative_ant = models.IntegerField(label="6. To what extent did you anticipate temptation to donate (choose option B) in the `Watch alternative video' option?")
 
 
@@ -96,7 +96,8 @@ class Player(BasePlayer):
     justifyq = models.LongStringField(label="")
     explanationqvideo = models.LongStringField(label="")
     explanationqchoice = models.LongStringField(label="")
-    random_q = models.IntegerField(label="6a. Sometimes you could be faced with your non-preferred video (you could prefer to 'Watch wave video' but still sometimes be assigned to 'Watch alternative video', for example). Did this possibility affect your decision when making a choice between the videos?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
+
+    random_q = models.IntegerField(label="6a. Sometimes you could be faced with your non-preferred video (you could prefer to 'Watch charity video' but still sometimes be assigned to 'Watch alternative video', for example). Did this possibility affect your decision when making a choice between the videos?",  choices=[[1, "Yes"], [0, "No"], [2, "Unsure"]])
     random_openq = models.LongStringField(label="6b. If you answered yes to the previous question, could you elaborate why?", blank=True)
 
   #add a question on SAtisfaction with the timing decision and one for the satisfaction with the choice.
@@ -106,13 +107,13 @@ class Player(BasePlayer):
 
 
     ##Attention questions video
-    controlq1 = make_field3(label="... three types of ocean waves.")
-    controlq2 = make_field3(label="...a surfer surfing down a wave.")
+    controlq1 = make_field3(label="... a woman called Gemma who introduced herself as the Head of Fundraising at Save the Children.")
+    controlq2 = make_field3(label="...the staff member stating that children 'should never die from preventable causes.'")
     controlq3 = models.IntegerField(
             choices=[
                 [1, 'False'],
                 [0, 'True']],
-            label="...children building sand castles on a beach.",
+            label="...children playing and smiling.",
             widget=widgets.RadioSelect)
     controlq_presenter = make_field3(label="...a male presenter.")
     controlq_drawing = make_field3(label="...a drawing.")
@@ -122,6 +123,7 @@ class Player(BasePlayer):
             [0, 'True']],
         label="...a woman.",
         widget=widgets.RadioSelect)
+
     ##Empathy questionaire
     qemp1 = make_field2agree(label="I can easily tell if someone else wants to enter a conversation.")
     qemp3 = make_field2agree(label="I really enjoy caring for other people.")
@@ -230,7 +232,7 @@ class OptionChoice(Page):
 
 class Explanation(Page):
     form_model = 'player'
-    form_fields = ['explanationqvideo','explanationqchoice']
+    form_fields = ['explanationqvideo', 'explanationqchoice']
 
 class Hypo_choiceq(Page):
     form_model = 'player'

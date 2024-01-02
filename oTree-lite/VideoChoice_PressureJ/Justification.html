@@ -1,0 +1,79 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+
+{% endblock %}
+
+
+{{block styles }}
+<link href="{% static 'heatmap.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+
+
+{% block content %}
+
+
+
+  <div class="card" style="height:  150%; position: relative; top:-100px">
+        <div class="card-body">
+<br>
+
+{{if player.task1 == "A"}}
+          Using the space below, please explain to Save the Children why you decided to choose Option A (me:£5, charity:£0). Your explanation will be forwarded to Save the Children.</i>
+            <br>
+            <br>
+            <div id="openq" >{{form.justifyq}}</div>
+            <br>
+            <br>
+  {{elif player.task1 == "B"}} Using the space below, please explain to Save the Children why you decided to choose Option B (me:£1, charity:£8). Your explanation will be forwarded to Save the Children.</i>
+            <br>
+            <br>
+            <div id="openq" >{{form.justifyq}}</div>
+            <br>
+            <br>
+{{endif}}
+        </div>
+  </div>
+            <br>
+            <br>
+<div class="center" onclick="submitForm()"> {{ next_button }}</div>
+
+
+
+
+<script>
+var slider = document.getElementById("myRange");
+slider.oninput = function() {
+  document.getElementById("emotions_ant").value = this.value;
+}
+
+
+const output = document.getElementById("output");
+
+const doThings = (event) => {
+	const { value, min, max, step, parentElement: parent } = event.target
+	const decimals = step && step.includes('.') ? step.split('.')[1] : 1
+	const percent = `${((value - min)/(max - min) * 100).toFixed(decimals)}%`
+	parent.style.setProperty('--p', percent)
+	output.value = `Extent: ${percent}`
+    document.getElementById("emotions_ant").value = `${value}`;
+}
+
+function submitForm(){
+            if (document.getElementById("emotions_ant").value =="") {
+                window.alert("Please answer all the questions.");
+                                        event.preventDefault();}
+             else  {
+            document.getElementById("form").submit();
+            }
+    }
+
+    </script>
+
+
+
+{{endblock}}

@@ -2,6 +2,7 @@ from otree import settings
 from otree.api import *
 import time
 from .image_utils import encode_image
+import random
 
 doc = """
 Real Effort Task by Chris
@@ -28,7 +29,7 @@ class Player(BasePlayer):
     num_correct = models.IntegerField(initial=0)
     num_failed = models.IntegerField(initial=0)
     prolific_id = models.StringField()
-
+    treatnumber = models.IntegerField()
 
     def set_error_message(player, value):
         correct_answers = {
@@ -283,7 +284,18 @@ class ResultsGame(Page):
         return dict(
             errorlink=link
         )
-
+    @staticmethod
+    def app_after_this_page(player, upcoming_apps):
+        print('upcoming_apps is', upcoming_apps[0],upcoming_apps[1],upcoming_apps[2],upcoming_apps[3])
+        player.treatnumber = random.choices([1,2,3,4], weights=(2/7, 2/7, 2/7, 1/7), k=1)[0]
+        if player.treatnumber == 1:
+            return 'VideoChoice_Control'
+        elif player.treatnumber == 2:
+            return 'VideoChoice_Emotional'
+        elif player.treatnumber == 3:
+            return 'VideoChoice_PressureNoJ'
+        elif player.treatnumber == 4:
+            return 'VideoChoice_PressureJ'
 
 
 
