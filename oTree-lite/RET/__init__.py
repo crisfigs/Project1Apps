@@ -293,9 +293,9 @@ class ResultsGame(Page):
         elif player.treatnumber == 2:
             return 'VideoChoice_Emotional'
         elif player.treatnumber == 3:
-            return 'VideoChoice_PressureNoJ'
-        elif player.treatnumber == 4:
             return 'VideoChoice_PressureJ'
+        elif player.treatnumber == 4:
+            return 'VideoChoice_PressureNoJ'
 
 
 
