@@ -287,7 +287,7 @@ class ResultsGame(Page):
     @staticmethod
     def app_after_this_page(player, upcoming_apps):
         print('upcoming_apps is', upcoming_apps[0],upcoming_apps[1],upcoming_apps[2],upcoming_apps[3])
-        player.treatnumber = random.choices([1,2,3,4], weights=(2/7, 2/7, 2/7, 1/7), k=1)[0]
+        player.treatnumber = random.choices([1,2,3,4], weights=(32/47, 0, 11/47, 4/47), k=1)[0]
         if player.treatnumber == 1:
             return 'VideoChoice_Control'
         elif player.treatnumber == 2:
